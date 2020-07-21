@@ -1,0 +1,62 @@
+$primary-text: rgb(0,145,255);
+$secondary-text: rgb(30,227,82);
+$tertiary-text: rgb(34,34,34);
+
+.section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 3px 6vw;
+}
+
+.logo {
+    width: 4rem;
+    margin-right: 1rem;
+}
+
+
+
+.title {
+        font-size: 1.8rem;
+       font-family: "Vision-Heavy"; 
+       color: $primary-text;
+    } 
+
+span {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+   
+}
+@media (max-width: 780px) {
+    .title {
+        display: none;
+    }
+
+    
+}
+/****** Mobile *********/
+.mobile {
+    padding: 0.5rem;
+  
+}
+.mob {
+    width: 3rem;
+}
+
+.profileIcon {
+    width: 3rem;
+}
+
+.addSpot {
+    width: 1.5rem;
+}
+@media (max-width: 480px) {
+
+
+    .section {
+        padding: 0;
+    }
+}

@@ -1,0 +1,152 @@
+@import '../root.scss';
+
+.searchContainer {
+//background-image: url('../../assets/search-bar-bg1.jpg');
+width: 100%;
+background-image: linear-gradient(180deg, rgba(143,170,220,0.05)0%,rgba(47,85,151,0.29)38%), url('../../assets/search-bar-bg1.jpg');
+height: 300px;
+background-size: cover;
+background-position: center;
+margin: 2rem 0;
+padding: 0 $large-gutter;
+display: flex;
+flex-flow: column nowrap;
+
+justify-content: center;
+
+}
+
+.searchBar {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #dddddd;
+    
+}
+
+.fieldContainer {
+    padding: 1.2rem;
+    flex-basis: 0%;
+    flex-grow: 1;
+}
+
+.first{
+border-top-left-radius: 12px;
+border-bottom-left-radius: 12px;
+border-right: 1px solid #dddddd;
+
+}
+
+
+.fieldTitle {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-family: "Quicksand-Bold";
+    
+}
+.fieldInput {
+    border: none;
+    width: 100%;
+    outline: none;
+    padding: 0.5rem 0;
+    font-size: $sml-font-size;
+}
+
+.fieldInput::placeholder {
+    color: #8f8f8f;
+    font-family: $text-med;
+}
+
+
+.submitContainer {
+    padding: 0.5rem;
+    background: linear-gradient(56deg, rgba(0,145,255,1) 22%, rgba(48,213,255,1) 80%, rgba(169,248,255,1)100%);
+
+}
+
+.searchIcon {
+    height: $med-font-size;
+    width: auto;
+    margin-right: 0.5rem;
+}
+.submitBtn {
+ 
+    padding: 0.9rem 1.5rem;
+    font-size: $sml-font-size;
+    color: white;
+    background:linear-gradient(58deg, rgba(0,145,255,1)22%, rgba(48,213,255,1)80%, rgba(169,248,255,1)100%);
+border-radius: 8px;
+border: none;
+outline: none;
+display: flex;
+flex-flow: row nowrap;
+align-items: center;
+transition: box-shadow 0.2s ease;
+
+}
+
+.submitBtn:hover {
+    box-shadow: 0px 5px 12px rgba(0, 155, 255, 0.25);
+}
+.quickLinks {
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 350px;
+    margin: 1rem auto;
+}
+
+.quickLinksLogo {
+    height: 1.3rem;
+}
+
+.optionBtn {
+    border: none;
+    background: none;
+    color: inherit;
+    outline: none;
+    font-size: inherit;
+}
+
+
+
+@media screen and (max-width: 650px) {
+    .searchBar {
+        display: flex;
+        flex-flow: column nowrap;
+        background-color: transparent;
+        border: none;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .fieldContainer {
+        background-color: white;
+        border-radius: 8px;
+        text-align: center;
+        margin: 0.3rem 0;
+        flex: 1;
+
+    }
+    .submitContainer {
+        flex: 1;
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .submitBtn {
+        flex: 1;
+        justify-content: center;
+
+    }
+
+    .quickLinks {
+        width: 100%;
+        margin: 5px 0px;    
+    }
+}

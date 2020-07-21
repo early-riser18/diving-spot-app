@@ -1,0 +1,47 @@
+$primary-text: rgb(0,145,255);
+$secondary-text: #1ee352;
+$tertiary-text: rgb(34,34,34);
+
+$big-font-size: 2.5rem;
+$medbig-font-size: 2rem;
+$med-font-size: 1.2rem;
+$sml-font-size: 1rem;
+
+$text-bold: 'Quicksand-SemiBold';
+$text-med: 'Quicksand-Medium';
+$text-light: "Quicksand";
+$large-gutter: 6vw;
+$small-gutter: 0;
+
+h1, h2 {
+    font-family: "Vision-Heavy";
+    color: $primary-text;
+    font-size:$big-font-size;
+    letter-spacing: -2px;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+h2 {
+font-size: $medbig-font-size;
+}
+
+h3 {
+    font-size: $med-font-size;
+    font-family: $text-med;
+    color: rgb(34,34,34);
+}
+h4 {
+    font-size: $sml-font-size;
+    font-family: $text-light;
+    color: rgb(64, 64, 64);
+}
+
+p {
+    font-size: $sml-font-size;
+    font-family: $text-med;
+}
+.subtitle {
+    font-size: $med-font-size;
+    margin: 1rem 0;
+}

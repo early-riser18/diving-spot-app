@@ -1,0 +1,26 @@
+$primary-text: rgb(0,145,255);
+$secondary-text: rgb(30,227,82);
+$tertiary-text: rgb(34,34,34);
+
+.section {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 3px 1vw;
+}
+
+.logo {
+    width: 4rem;
+    margin-right: 0 1rem;
+}
+
+
+.searchIcon {
+    width: 2rem;
+}
+
+.profileIcon {
+    width: 3rem;
+}
