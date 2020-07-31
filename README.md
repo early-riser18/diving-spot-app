@@ -21,3 +21,12 @@ Anyone can add, edit and comment the diving spots on the platform.
 The second version will include a feature enabling to share what fauna and flora was seen during the dive. We envision to generate useful data, over time, that can be used by marine research centers.
 
 The final version (for now) will include a pairing engine that helps connect divers together so they can dive safely. The rule is: Never ever dive alone
+
+------ ACCESS ------
+
+The current version of the website is already accessible at: 
+HOME -> https://master.d3iuqejqvw6pr6.amplifyapp.com 
+SEARCH -> https://master.d3iuqejqvw6pr6.amplifyapp.com/search 
+SPOT PAGE -> https://master.d3iuqejqvw6pr6.amplifyapp.com/result 
+
+To this date, only the design and structure have been done. No logic is yet present. Do expect a very boring but good-looking website.
