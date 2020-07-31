@@ -1,0 +1,81 @@
+@import '../root.scss';
+
+.resultContainer{
+    border-bottom: rgb(235, 235, 235) 1px solid;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+.resultImgList {
+    width: 18rem;
+    overflow: hidden;
+    border-radius: 8px;
+    
+}
+.carouselImg {
+    height: 180px;
+}
+.prev, .next {
+    box-sizing: content-box;
+    display: inline-block; font-size: $sml-font-size;
+    position: absolute;
+    color: #333; background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 2rem;
+    z-index: 1;
+  
+}
+
+
+.description {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    margin-left: 1rem;
+    flex: 1;
+    line-height: 1.5;
+}
+
+.keyWordLevelRating {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    & span {
+        color: $secondary-text;
+        align-self: flex-start;
+    }
+}
+
+.keyWordLevelOnly {
+    display: inline-flex;
+}
+.starRating {
+    height: 1rem;
+}
+
+
+@media screen and (max-width: 780px) {
+    .resultContainer{
+        flex-flow: column nowrap;
+        padding: 2rem 0;
+
+    }
+
+    .resultImgList {
+        width: 100%;
+        height: 100%;
+    }
+    .carouselImg {
+        height: 100%;
+    }
+
+    .description {
+        margin: 1rem 0 0 0;
+    }
+
+
+}

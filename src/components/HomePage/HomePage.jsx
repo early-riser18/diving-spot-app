@@ -1,11 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from '../Button/Button';
-import { Header } from '../Header/Header';
 import { HomeSearchBar } from '../HomeSearchBar/HomeSearchBar'
 import styles from './HomePage.module.scss';
 import { SpotList } from '../SpotList/SpotList';
-import { Footer } from '../Footer/Footer';
 export class HomePage extends React.Component {
 
     render() {

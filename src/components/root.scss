@@ -1,5 +1,5 @@
 $primary-text: rgb(0,145,255);
-$secondary-text: #1ee352;
+$secondary-text: rgb(30, 227, 82);
 $tertiary-text: rgb(34,34,34);
 
 $big-font-size: 2.5rem;
@@ -11,7 +11,11 @@ $text-bold: 'Quicksand-SemiBold';
 $text-med: 'Quicksand-Medium';
 $text-light: "Quicksand";
 $large-gutter: 6vw;
-$small-gutter: 0;
+$small-gutter: 2vw;
+
+$easy-rating: rgb(0, 176, 80);
+$medium-rating:rgb(255, 192, 0);
+$hard-rating:rgb(0,112,192);
 
 h1, h2 {
     font-family: "Vision-Heavy";
@@ -19,7 +23,8 @@ h1, h2 {
     font-size:$big-font-size;
     letter-spacing: -2px;
     margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 h2 {
@@ -37,6 +42,11 @@ h4 {
     color: rgb(64, 64, 64);
 }
 
+h5 {
+    font-size: $sml-font-size;
+    font-family: $text-bold;
+    color: $primary-text;
+}
 p {
     font-size: $sml-font-size;
     font-family: $text-med;
@@ -44,4 +54,23 @@ p {
 .subtitle {
     font-size: $med-font-size;
     margin: 1rem 0;
+}
+
+.easy {
+    color: $easy-rating;
+    
+}
+.medium {
+    color:  $medium-rating;
+}
+.hard {
+    color: $hard-rating;
+}
+
+.ratingStar{
+    height: 1.1rem;
+}
+
+.unavailable {
+    color: rgb(155, 154, 154);
 }

@@ -38,29 +38,17 @@ transition: all .2s ease-in-out;
     display: inline-flex;
     
 }
-.easy {
-    color: rgb(0, 176, 80);
-}
-.medium {
-    color: rgb(255, 192, 0);
-}
-.hard {
-    color: rgb(0,112,192);
-}
+
 
 .rating{
     display: inline-flex;
 }
 
-.ratingStar{
-    height: 1.1rem;
-}
+
 .ratingText {
     color: $secondary-text;
 }
-.unavailable {
-    color: rgb(155, 154, 154);
-}
+
 
 
 @media screen and (max-width: 480px) {

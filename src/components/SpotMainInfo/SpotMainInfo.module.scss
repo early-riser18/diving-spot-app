@@ -1,0 +1,87 @@
+@import '../root.scss';
+
+.bold {
+    font-family: $text-bold;
+}
+
+.wrapper {
+    border-bottom: rgb(221, 221, 221) 1px solid;
+ padding-bottom: 1rem;
+}
+
+.header {
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+    h2 {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+}
+
+.subheader {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    line-height: 1.5;
+    & :nth-child(1) {
+        display: inline-flex;
+    }
+}
+
+
+
+.imgAccess {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    margin: 1rem 0;
+
+}
+.tempPlace {
+    flex: 1;
+      }
+  
+.accessInfo {
+flex: 0 0 17rem;
+margin-left: 3rem;
+line-height: 1.3;
+h5 {
+    margin-bottom: 0.5rem;
+}
+& :nth-child(2), & :nth-child(4)   {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+}
+.ratingKeyWordLevel {
+    display: inline-flex;
+}
+.starRating {
+    height: 1rem;
+}
+.rating {
+    color: $secondary-text;
+    font-family: $text-bold;
+}
+.keyWordLevelOnly {
+    display: inline-flex;
+    white-space: pre-wrap;
+}
+
+@media screen and (max-width: 600px) {
+.imgAccess {
+    flex-flow: column nowrap;
+}
+.accessInfo {
+    flex: 0;
+    margin: 1.5rem 0.5rem;
+}
+.ratingKeyWordLevel {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0rem 0.5rem;
+
+}
+}

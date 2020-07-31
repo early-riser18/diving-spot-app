@@ -1,0 +1,39 @@
+@import '../root.scss';
+
+.wrapper {
+  display: flex;
+  margin: 2rem 0;
+    h2{
+        margin-top: 0rem;
+    }
+}
+
+.description {
+    flex: 1 1 20rem;
+    margin-right: 2rem;
+    border-bottom: 1px solid rgb(221, 221, 221);
+
+}
+.satView {
+    flex: 0 0 15rem;
+    img{
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        flex-flow: column nowrap;
+    }
+
+    .description {
+        margin: 2rem 0;
+        border: none;
+    }
+    .satView {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgb(221, 221, 221);
+
+    }
+}

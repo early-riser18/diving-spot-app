@@ -1,12 +1,9 @@
-$primary-text: rgb(0,145,255);
-$secondary-text: rgb(30,227,82);
-$tertiary-text: rgb(34,34,34);
-$med-font-size: 1rem;
+@import '../root.scss';
 .btn {
     padding: 3px;
-    font-size: $med-font-size;
+    font-size: $sml-font-size;
     cursor: pointer;
-  
+  white-space: nowrap;
 }
 
 .primary {
@@ -16,7 +13,6 @@ $med-font-size: 1rem;
     border: 1px solid #DDDDDD;
     transition: box-shadow 0.2s ease;
     padding: 0.8rem 1rem;
-    margin: 1rem;
     
 }
 .primary:hover {
@@ -31,7 +27,6 @@ $med-font-size: 1rem;
     border: none;
     transition: box-shadow 0.2s ease;
 
-    margin: 1rem;
     padding: 0.8rem 1rem;
 
     
@@ -45,4 +40,12 @@ $med-font-size: 1rem;
     background-color: transparent;
     border: none;
     padding: 0;
+
+}
+
+.fourth {
+    background: none;
+    text-decoration: underline;
+    font-family: $text-light;
+    border: none;
 }

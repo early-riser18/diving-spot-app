@@ -1,0 +1,19 @@
+@import '../root.scss';
+
+.header {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline ;
+    margin-bottom: 2rem;
+  h2{
+    margin-top: 0;
+  } 
+    
+}
+
+.commentList {
+
+    & > :not(:last-child) {
+
+    }
+}

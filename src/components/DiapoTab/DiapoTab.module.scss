@@ -1,0 +1,61 @@
+@import '../root.scss';
+
+.wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    max-height: 21rem;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.mainPic {
+    flex: 1 1.5 33rem;
+    overflow: hidden;
+    border-radius: 8px;
+    img {
+        width: 100%;
+    }
+}
+
+.sidePic {
+    flex: 1 1 20rem;
+    margin-left: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    & :first-child {
+        margin-bottom: 1rem;
+    }
+ 
+    img {
+        height: 100%;
+        min-height: 6rem;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+
+
+    }
+}
+.btnWrapper {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: $sml-font-size;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgb(64, 64, 64);
+    transition: all 0.2s ease;
+ &:hover {
+    transform: scale(1.05);
+ }
+}
+
+
+@media screen and (max-width: 900px) {
+    .sidePic {
+        display: none;
+    }
+}

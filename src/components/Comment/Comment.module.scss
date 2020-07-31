@@ -1,0 +1,76 @@
+@import "../root.scss";
+
+.wrapper {
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.authorTitle {
+  flex: 0 1 30rem;
+  display: flex;
+  flex-direction: row;
+  padding-right: 2rem;
+}
+
+.authorPic {
+  border-radius: 50%;
+  width: 6rem;
+}
+
+.titleStar {
+  margin-left: 2rem;
+  flex: 1;
+  line-height: 1.5;
+
+  & > div {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    p {
+      color: $secondary-text;
+    }
+  }
+  p {
+    font-family: $text-bold;
+  }
+}
+
+.details {
+  flex: 1 1 40rem;
+  & > div {
+    display: flex;
+    flex-flow: row wrap;
+    ul {
+      flex: 1;
+      margin-bottom: 1.5rem; 
+      margin-right: 1rem;
+      line-height: 1;
+      font-size: $sml-font-size;
+      font-family: $text-med;
+
+      li {
+          display: flex;
+          margin-bottom: 0.6rem;
+          align-items: center;
+          min-width: 200px;
+      }
+    }
+  }
+}
+
+.commentIcon {
+    width: 1rem; margin-right: 0.6rem;
+}
+
+@media screen and (max-width: 810px) {
+.wrapper {
+ flex-flow: column nowrap;   
+}
+.authorTitle {
+    flex: 0;
+    margin-bottom: 2rem;
+}
+.details {
+    flex: 0;
+}
+}

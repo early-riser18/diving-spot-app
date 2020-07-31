@@ -6,18 +6,37 @@ import { HomePage } from '../HomePage/HomePage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { SearchMenu } from '../SearchMenu/SearchMenu';
 import { Error } from '../Error/Error';
+import { SpotPage } from '../SpotPage/SpotPage';
+import '../root.scss';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isHome: true,
+      isHome: false,
       isMobile: false,
       locationDetected: true
     };
+  this.whatSize = this.whatSize.bind(this);
   };
 
+  whatSize(){
+    let wid = window.innerWidth;
+    console.log(wid);
+    if (wid > 500 && this.state.isMobile === true){
+      this.setState({isMobile: false});
+    } else if(wid <= 500 && this.state.isMobile === false){
+      this.setState({isMobile: true});
+    }
+  }
+
+  componentDidMount(){
+    window.addEventListener("resize", this.whatSize);
+  }
+
+  componentDidUpdate(){
+  }
 
   render() {
 
@@ -31,6 +50,7 @@ class App extends React.Component {
               <HomePage {...props} locationDetected={this.state.locationDetected} />}
               exact />
             <Route path='/search' component={SearchMenu} />
+            <Route path='/result' component={SpotPage} />
             <Route component={Error} />
 
           </Switch>

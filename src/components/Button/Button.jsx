@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from "./Button.module.scss";
 
-export class Button extends React.Component { 
+ export class Button extends React.Component { 
 
 variantStyle(variant){
     return `styles.${variant}`;
