@@ -33,6 +33,26 @@
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAddqyJJRGL9vCNBS8IARse91gKkEhMgYM",
+    authDomain: "diving-app-eaabe.firebaseapp.com",
+    databaseURL: "https://diving-app-eaabe.firebaseio.com",
+    projectId: "diving-app-eaabe",
+    storageBucket: "diving-app-eaabe.appspot.com",
+    messagingSenderId: "718395383991",
+    appId: "1:718395383991:web:77d202820d7e514eb0ad32",
+    measurementId: "G-Q1XRD1F5JD"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
   </body>
   <script defer >
    /* window.onscroll = function() {

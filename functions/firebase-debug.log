@@ -1,0 +1,66 @@
+[debug] [2020-08-27T15:38:18.758Z] ----------------------------------------------------------------------
+[debug] [2020-08-27T15:38:18.765Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\justi\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js functions:shell
+[debug] [2020-08-27T15:38:18.766Z] CLI Version:   8.9.2
+[debug] [2020-08-27T15:38:18.766Z] Platform:      win32
+[debug] [2020-08-27T15:38:18.767Z] Node Version:  v12.18.0
+[debug] [2020-08-27T15:38:18.769Z] Time:          Thu Aug 27 2020 17:38:18 GMT+0200 (Central European Summer Time)
+[debug] [2020-08-27T15:38:18.770Z] ----------------------------------------------------------------------
+[debug] [2020-08-27T15:38:18.771Z] 
+[debug] [2020-08-27T15:38:18.808Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-08-27T15:38:18.811Z] > authorizing via signed-in user
+[debug] [2020-08-27T15:38:18.812Z] [iam] checking project diving-app-eaabe for permissions ["firebase.projects.get"]
+[debug] [2020-08-27T15:38:18.827Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/diving-app-eaabe:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-08-27T15:38:19.618Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Thu, 27 Aug 2020 15:38:18 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=590","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  Your requested "node" version "10" doesn't match your global version "12" {"metadata":{"emulator":{"name":"functions"},"message":"Your requested \"node\" version \"10\" doesn't match your global version \"12\""}}
+[debug] [2020-08-27T15:38:21.727Z] defaultcredentials: writing to file C:\Users\justi\AppData\Roaming\firebase\justin_warambourg_gmail.com_application_default_credentials.json
+[debug] [2020-08-27T15:38:21.732Z] DEBUG: Setting GAC to C:\Users\justi\AppData\Roaming\firebase\justin_warambourg_gmail.com_application_default_credentials.json
+[debug] [2020-08-27T15:38:21.784Z] [functions] Watching "C:\Users\justi\Documents\Not backed-up\web-dev\react-projects\diving-spot-app\functions" for Cloud Functions...
+[debug] [2020-08-27T15:38:21.868Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-08-27T15:38:21.869Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-08-27T15:38:21.870Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-08-27T15:38:21.872Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: Assigning socketPath: \\?\pipe\C:\Users\justi\Documents\Not backed-up\web-dev\react-projects\diving-spot-app\functions\16736
+[debug] [2020-08-27T15:38:21.873Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: BUSY
+[debug] [2020-08-27T15:38:22.674Z] Functions emulator received unknown request at path /
+[debug] [2020-08-27T15:38:23.474Z] DEBUG: [runtime-status] [16736] Functions runtime initialized. {"cwd":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions","node_version":"12.18.0"}
+[debug] [2020-08-27T15:38:23.478Z] DEBUG: [runtime-status] [16736] Disabled runtime features: undefined
+[debug] [2020-08-27T15:38:23.504Z] DEBUG: [runtime-status] [16736] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.511Z] DEBUG: [runtime-status] [16736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.516Z] DEBUG: [runtime-status] [16736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.523Z] DEBUG: [runtime-status] [16736] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-08-27T15:38:23.528Z] DEBUG: [runtime-status] [16736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.771Z] DEBUG: [runtime-status] [16736] Checked functions.config() {"config":{}}
+[debug] [2020-08-27T15:38:23.772Z] DEBUG: [runtime-status] [16736] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2020-08-27T15:38:23.776Z] DEBUG: [runtime-status] [16736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.782Z] DEBUG: [runtime-status] [16736] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.785Z] DEBUG: [runtime-status] [16736] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:38:23.786Z] DEBUG: [runtime-status] [16736] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2020-08-27T15:38:24.493Z] [functions[app]] http function initialized (http://localhost:5000/diving-app-eaabe/us-central1/app).
+[info] i  functions: Loaded functions: app 
+[warn] !  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub 
+[debug] [2020-08-27T15:38:24.512Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: IDLE
+[debug] [2020-08-27T15:39:41.702Z] DEBUG: File C:\Users\justi\Documents\Not backed-up\web-dev\react-projects\diving-spot-app\functions\index.js changed, reloading triggers
+[debug] [2020-08-27T15:39:42.712Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-08-27T15:39:42.713Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: FINISHING
+[debug] [2020-08-27T15:39:42.776Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-08-27T15:39:42.777Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-08-27T15:39:42.777Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-08-27T15:39:42.778Z] DEBUG: [worker-~diagnostic~-389c28e8-7315-44b1-911d-af3146d06d48]: Assigning socketPath: \\?\pipe\C:\Users\justi\Documents\Not backed-up\web-dev\react-projects\diving-spot-app\functions\21344
+[debug] [2020-08-27T15:39:42.779Z] DEBUG: [worker-~diagnostic~-389c28e8-7315-44b1-911d-af3146d06d48]: BUSY
+[debug] [2020-08-27T15:39:42.786Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: exited
+[debug] [2020-08-27T15:39:42.787Z] DEBUG: [worker-~diagnostic~-8f81a79a-041b-472f-a26c-4757b3b80372]: FINISHED
+[debug] [2020-08-27T15:39:44.060Z] DEBUG: [runtime-status] [21344] Functions runtime initialized. {"cwd":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions","node_version":"12.18.0"}
+[debug] [2020-08-27T15:39:44.063Z] DEBUG: [runtime-status] [21344] Disabled runtime features: undefined
+[debug] [2020-08-27T15:39:44.069Z] DEBUG: [runtime-status] [21344] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.075Z] DEBUG: [runtime-status] [21344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.077Z] DEBUG: [runtime-status] [21344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.081Z] DEBUG: [runtime-status] [21344] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-08-27T15:39:44.083Z] DEBUG: [runtime-status] [21344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.190Z] DEBUG: [runtime-status] [21344] Checked functions.config() {"config":{}}
+[debug] [2020-08-27T15:39:44.190Z] DEBUG: [runtime-status] [21344] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}}
+[debug] [2020-08-27T15:39:44.191Z] DEBUG: [runtime-status] [21344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.194Z] DEBUG: [runtime-status] [21344] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.196Z] DEBUG: [runtime-status] [21344] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.11.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-functions\\lib\\index.js"}
+[debug] [2020-08-27T15:39:44.197Z] DEBUG: [runtime-status] [21344] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.13.0","resolution":"C:\\Users\\justi\\Documents\\Not backed-up\\web-dev\\react-projects\\diving-spot-app\\functions\\node_modules\\firebase-admin\\lib\\index.js"}}
+[debug] [2020-08-27T15:39:44.520Z] DEBUG: [worker-~diagnostic~-389c28e8-7315-44b1-911d-af3146d06d48]: IDLE
+[debug] [2020-08-27T15:39:51.123Z] Functions emulator received unknown request at path /
