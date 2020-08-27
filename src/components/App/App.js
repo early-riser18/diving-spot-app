@@ -16,11 +16,20 @@ class App extends React.Component {
     this.state = {
       isHome: false,
       isMobile: false,
-      locationDetected: true
+      locationDetected: true,
+      apiResponse: ''
     };
   this.whatSize = this.whatSize.bind(this);
   };
-
+ 
+  callAPI() {
+    fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+}
+componentWillMount() {
+  this.callAPI();
+}
   whatSize(){
     let wid = window.innerWidth;
     console.log(wid);
@@ -52,8 +61,9 @@ class App extends React.Component {
             <Route path='/search' component={SearchMenu} />
             <Route path='/result' component={SpotPage} />
             <Route component={Error} />
-
           </Switch>
+          <p>;{this.state.apiResponse}</p>
+
         </main>
         <Footer />
       </div>

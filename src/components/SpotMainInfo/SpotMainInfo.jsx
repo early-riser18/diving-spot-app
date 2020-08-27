@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 import starFull from '../../assets/starFull.svg';
 import { DiapoTab } from '../DiapoTab/DiapoTab';
 import renderLevel from '../../util/renderLevel';
-
+    
 
 
 export class SpotMainInfo extends React.Component {
