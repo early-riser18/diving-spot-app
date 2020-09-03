@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from './HomeSearchBar.module.scss';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
 
 export class HomeSearchBar extends React.Component {
     render() {
@@ -21,7 +23,10 @@ export class HomeSearchBar extends React.Component {
                                 <input className={styles.fieldInput} type='text' id='keyWordQuery' placeholder="Récif, Grotte, Épave..." ></input>
                             </label>
                         </div>
-                        <div className={styles.submitContainer}><button className={styles.submitBtn} type='submit' ><img className={styles.searchIcon} src={require('../../assets/search-icon-white.png') } />Rechercher</button>
+                        <div className={styles.submitContainer}>
+                            <Link to={'/result'}>
+                            <button className={styles.submitBtn} type='submit' ><img className={styles.searchIcon} src={require('../../assets/search-icon-white.png') } />Rechercher</button>
+                            </Link>
                         </div>
                     </div>
                 </form>

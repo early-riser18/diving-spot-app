@@ -13,7 +13,10 @@ export default class CommentList extends Component {
                     <Button variant='secondary' text='Ajouter un avis' /> 
                 </div>
                 <div className={styles.commentList}>
-                    {this.props.spot.comments.map(x => <Comment info={x} />)}
+                    {this.props.spot.comments ? 
+                    this.props.spot.comments.map(x => <Comment info={x} />) 
+                    : ''} 
+                    
                 </div>
             </div>
         )

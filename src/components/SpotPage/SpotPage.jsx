@@ -4,6 +4,7 @@ import { SpotMainInfo } from '../SpotMainInfo/SpotMainInfo';
 import Diaporama from '../Diaporama/Diaporama';
 import SpotDescription from '../SpotDescription/SpotDescription';
 import CommentList from '../CommentList/CommentList';
+import FetchSpotData from '../../util/FetchSpotData';
 // Will have states returned from the database
 
 // Compo sattelite view fix
@@ -15,7 +16,7 @@ export class SpotPage extends React.Component {
         this.state = {
             spot: {
                 // NEED TO FIGURE OUT HOW TO PRESERVE LINEBREAK FROM JSON TO STRING
-                name: 'Calanques de Samena',
+                title: 'Calanques de Samena',
                 author: 'Vincent B.',
                 lastUpdated: '05/07/2020',
                 rating: 4.8,
@@ -23,8 +24,11 @@ export class SpotPage extends React.Component {
                 keywords: ['0 et 20m', 'Récif', 'Poissoneux'],
                 level: 'Facile',
                 accessPoint: 'Départ à l’eau à 30m au sud de la capitainerie du port de Marseille Accès à pied en 5 minutes',
-                closestStreet: 'Rue de la capitainerie,<br /> Marseille, 13000, France',
-                closestParking: "Possibilité de se garer à un parking Lidl à proximité",
+                street: 'Rue de la capitainerie',
+                postalCode: '13000',
+                city: 'Marseille',
+                country: 'France',
+                parking: "Possibilité de se garer à un parking Lidl à proximité",
                 description: 'Ce lieu de plongée est splendide. Il est habrité entre le port et la digue ce qui permet d’apprécier les algues et les poissons. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> <br/>Praesent at euismod sem, dictum dapibus ligula. Proin fringilla iaculis lorem, vel bibendum sapien gravida sit amet. Pellentesque vehicula pulvinar odio, in cursus dui semper ac.<br/><br/>Fusce nec laoreet arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
                 image: [
                     <img key="1" src={require('../../assets/spotImg1png.jpg')} alt='' />,
@@ -32,6 +36,7 @@ export class SpotPage extends React.Component {
                     <img key="3" src={require('../../assets/spotImg3.jpg')} alt='' />
                 ],
                 comments: [
+                    /*
                     {
                         author: 'Vincent B.',
                         profilePic: '',
@@ -53,7 +58,7 @@ export class SpotPage extends React.Component {
                         cons: ["Trop d'algues", 'Du courant'],
                         comment: 'Dans l’ensemble, ce spot est vraiment top, j’ai beaucoup aimé les écrevisses et les poulpes qui viennent se faufiler entre mes pieds. Les étoiles sont de toutes les couleurs, j’en ai même ramené deux à la maison pour ma maman.'
 
-                    }
+                    } */
                 ]
             },
             diapoIndex: 1,
@@ -65,6 +70,13 @@ export class SpotPage extends React.Component {
         this.showSlide = this.showSlide.bind(this);
         this.handleDiapoClose = this.handleDiapoClose.bind(this);
         this.handleDiapoOpen = this.handleDiapoOpen.bind(this);
+        this.initializeSpot = this.initializeSpot.bind(this);
+    }
+
+    initializeSpot(spotID){
+        FetchSpotData.search(spotID).then(spotData => {
+this.setState({spot: spotData});
+        });
     }
 
     plusSlide() {
@@ -105,6 +117,9 @@ export class SpotPage extends React.Component {
         console.log('updated index ' + this.state.diapoIndex);
     }
 
+    UNSAFE_componentWillMount(){
+        this.initializeSpot('-MGF4T4XER4_TOud1dsP');
+    }
 
     render() {
         return (

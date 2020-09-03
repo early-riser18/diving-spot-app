@@ -43,6 +43,6 @@ export class SpotList extends React.Component {
     }
 
     componentWillUnmount() {
-        console.log('Im gone');
+       
     }
 }
