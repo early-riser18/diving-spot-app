@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import styles from "./AddSpot.module.scss";
 import ReCAPTCHA from "react-google-recaptcha";
-import {AddSpotForm} from '../AddSpotForm/AddSpotForm';
+import { AddSpotForm } from '../AddSpotForm/AddSpotForm';
+import myAPI from '../../util/myAPI';
 
 export class AddSpot extends React.Component {
     constructor(props) {
@@ -25,35 +26,18 @@ export class AddSpot extends React.Component {
     formSubmit(event) {
         const form = document.getElementById('addSpotForm');
         event.preventDefault();  // Stop the form from submitting since we’re handling that with AJAX.
-
         let data = this.formToJSON(form.elements); // Call our function to get the form data.
         delete data.submit; // Remove the submit
-        console.log("data", data);
-        console.log("Object values data", Object.values(data));
 
-        // Use `JSON.stringify()` to make the output valid, human-readable JSON.
-        console.log(JSON.stringify(data, null, "  "));
-
-        console.log(this.props.userInfo);
         if (this.validateForm(data) === true) {
-
-            console.log('calling API');
             this.appendAuxInfo(data, this.props.userInfo);
-            let dataAsJSON = JSON.stringify(data, null, "  ");
-
-
-            fetch("http://localhost:5001/diving-app-eaabe/us-central1/app/write", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: dataAsJSON
-            })
+            let dataAsJSON = JSON.stringify(data, null, "  ");// turns it into a JSON string
+            myAPI.postNewSpot(dataAsJSON);
         }
     }
 
     validateForm(formVal) {
-    // Used to check if all fields have been filled in 
+        // Used to check if all fields have been filled in 
         for (let i = 0; i < Object.values(formVal).length; i++) {
             if (Object.values(formVal)[i] === '') {
                 alert(`${Object.keys(formVal)[i]} must be filled out`);
@@ -64,10 +48,10 @@ export class AddSpot extends React.Component {
     }
 
     appendAuxInfo(formVal, userInf) {
-        
-     /*   for (let i = 0; i < Object.values(userInf).length; i++) {
-            formVal[Object.keys(userInf)[i]] = Object.values(userInf)[i];
-        } */
+
+        /*   for (let i = 0; i < Object.values(userInf).length; i++) {
+               formVal[Object.keys(userInf)[i]] = Object.values(userInf)[i];
+           } */
 
         // Used to add user info required + default publishing status
         formVal['author'] = this.props.userInfo.displayName;
@@ -86,11 +70,9 @@ export class AddSpot extends React.Component {
     render() {
         console.log();
         return (
-        <div>
-
-
-         <AddSpotForm formSubmit={this.formSubmit} />  
-        </div>     
+            <div>
+                <AddSpotForm formSubmit={this.formSubmit} />
+            </div>
         )
     }
 }

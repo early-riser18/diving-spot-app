@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SearchMenu.module.scss'
 import MapIcon from '../../assets/map-icon.svg';
 import Close from '../../assets/close-icon.svg';
-import Map from '../util/Map';
+import Map from '../../util/Map';
 import SearchResultList from '../SearchResultList/SearchResultList';
 
 export class SearchMenu extends React.Component {

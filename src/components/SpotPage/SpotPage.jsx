@@ -4,7 +4,7 @@ import { SpotMainInfo } from '../SpotMainInfo/SpotMainInfo';
 import Diaporama from '../Diaporama/Diaporama';
 import SpotDescription from '../SpotDescription/SpotDescription';
 import CommentList from '../CommentList/CommentList';
-import FetchSpotData from '../../util/FetchSpotData';
+import myAPI from '../../util/myAPI';
 // Will have states returned from the database
 
 // Compo sattelite view fix
@@ -36,7 +36,7 @@ export class SpotPage extends React.Component {
                     <img key="3" src={require('../../assets/spotImg3.jpg')} alt='' />
                 ],
                 comments: [
-                    /*
+                    
                     {
                         author: 'Vincent B.',
                         profilePic: '',
@@ -58,7 +58,7 @@ export class SpotPage extends React.Component {
                         cons: ["Trop d'algues", 'Du courant'],
                         comment: 'Dans l’ensemble, ce spot est vraiment top, j’ai beaucoup aimé les écrevisses et les poulpes qui viennent se faufiler entre mes pieds. Les étoiles sont de toutes les couleurs, j’en ai même ramené deux à la maison pour ma maman.'
 
-                    } */
+                    } 
                 ]
             },
             diapoIndex: 1,
@@ -74,7 +74,7 @@ export class SpotPage extends React.Component {
     }
 
     initializeSpot(spotID){
-        FetchSpotData.search(spotID).then(spotData => {
+        myAPI.fetchSpot(spotID).then(spotData => {
 this.setState({spot: spotData});
         });
     }
@@ -118,7 +118,7 @@ this.setState({spot: spotData});
     }
 
     UNSAFE_componentWillMount(){
-        this.initializeSpot('-MGF4T4XER4_TOud1dsP');
+        this.initializeSpot('-MGUqK14TDdazWXVYry4');
     }
 
     render() {

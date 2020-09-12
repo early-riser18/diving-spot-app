@@ -94,7 +94,7 @@ componentWillMount() {
               exact />
             <Route path='/search' component={SearchMenu} />
             <Route path='/result' component={SpotPage} />
-            <Route path='/add-a-new-spot' render={(props) =>
+            <Route path='/add-spot' render={(props) =>
               <AddSpot {...props} userInfo={this.state.user} />} />
 
             <Route component={Error} />

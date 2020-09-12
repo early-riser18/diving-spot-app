@@ -10,10 +10,15 @@ export default class SpotDescription extends Component {
                     <h2>Description du spot</h2>
                     <p> {spot.description}</p>
                 </div>
+
+
+
                 <div className={styles.satView}>
                     <img src={require('../../assets/satelliteView1.jpg')} alt='' />
                 </div>
+                <div className="red">
 
+                </div>
             </div>
         )
     }
