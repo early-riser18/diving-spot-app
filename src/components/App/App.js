@@ -20,7 +20,7 @@ class App extends React.Component {
       locationDetected: true,
       apiResponse: '',
       user: {
-        displayName: 'Anonymous',
+        displayName: 'Anonyme',
         fname: 'undefined',
         lname: 'undefined',
         uid: 'undefined',
@@ -33,37 +33,7 @@ class App extends React.Component {
   this.whatSize = this.whatSize.bind(this);
   };
  
-  callAPI() {
-   /*fetch("http://localhost:5001/diving-app-eaabe/us-central1/app/read")
-    .then(res => res.text())
-    .then(res => {
-      console.log(res);
-      this.setState({ apiResponse: res })
-      }) 
-
-      fetch("http://localhost:5001/diving-app-eaabe/us-central1/app/write", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username: 'max'})
-      }) */
-     
-
-        
-
-}
-componentWillMount() {
-  this.callAPI();
-  /*let data = {
-    username: "bob",
-    age: 7
-  };
-  data = JSON.stringify(data);
-  console.log(data);
-  data = JSON.parse(data);
-  console.log(data) */
-}
+ 
   whatSize(){
     let wid = window.innerWidth;
     console.log(wid);
@@ -82,9 +52,10 @@ componentWillMount() {
   }
 
   render() {
-
+// To ally server and client side routing, please refer to https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually
     return (
       <div>
+        
         <Header isMobile={this.state.isMobile}
           isHome={this.state.isHome} />
         <main>

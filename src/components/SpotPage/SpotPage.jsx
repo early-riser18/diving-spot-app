@@ -118,7 +118,7 @@ this.setState({spot: spotData});
     }
 
     UNSAFE_componentWillMount(){
-        this.initializeSpot('-MGUqK14TDdazWXVYry4');
+        this.initializeSpot('-MHCMh3xYn1ayEQw5v4R');
     }
 
     render() {

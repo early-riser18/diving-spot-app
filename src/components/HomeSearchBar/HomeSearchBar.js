@@ -24,7 +24,7 @@ export class HomeSearchBar extends React.Component {
                             </label>
                         </div>
                         <div className={styles.submitContainer}>
-                            <Link to={'/result'}>
+                            <Link to={'/search'}>
                             <button className={styles.submitBtn} type='submit' ><img className={styles.searchIcon} src={require('../../assets/search-icon-white.png') } />Rechercher</button>
                             </Link>
                         </div>

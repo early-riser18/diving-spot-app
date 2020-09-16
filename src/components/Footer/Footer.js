@@ -10,10 +10,11 @@ export class Footer extends React.Component {
             <footer className={styles.footerContainer}>
 
                 <ul className={styles.list1}>
-                    <li>Accueil</li>
-                    <li>Ajouter un spot</li>
+                    <Link to={'/'}><li>Accueil</li></Link>
+                    <Link to={'/add-spot'}> <li>Ajouter un spot</li></Link>
                     <li>Mon Profil</li>
                     <li>Nous contacter</li>
+                    <Link to={'/result'}><li>Test spot page</li></Link>
                 </ul>
 
                 <ul className={styles.list2}>

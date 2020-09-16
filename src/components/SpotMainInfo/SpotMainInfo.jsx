@@ -49,8 +49,7 @@ translateLevel(level){
                 <div className={styles.imgAccess}>
                     <div className={styles.tempPlace}> <DiapoTab onClickOpen={this.props.onClickOpen} /></div>
                     <div className={styles.accessInfo}>
-                        <h5>Accès au spot</h5>
-                        <p>{spot.accessPoint}<br/><br/>Accès à pied en X minutes</p>
+                        
                         <h5>Rue la plus proche</h5>
                         <p>{spot.street},<br />{spot.city}, {spot.postalCode}, {spot.country}</p>
                         <h5>Parking publique le plus proche</h5>

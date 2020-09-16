@@ -7,8 +7,15 @@ export default class SpotDescription extends Component {
         return (
             <div className={styles.wrapper}>
                 <div className={styles.description}>
+                    <div>
                     <h2>Description du spot</h2>
                     <p> {spot.description}</p>
+                    </div>
+                    <div>
+                    <h5>Accès au spot</h5>
+                        <p>{spot.accessPoint}<br/><br/>Accès à pied en X minutes</p>
+
+                    </div>
                 </div>
 
 

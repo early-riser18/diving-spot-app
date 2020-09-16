@@ -1,136 +1,204 @@
-@import '../root.scss';
+@import "../root.scss";
 .container {
-    margin: $small-gutter;
-    box-sizing: border-box;
+  margin: $small-gutter;
+  box-sizing: border-box;
 }
 .formContainer {
-    h3{
-        font-family: $text-bold;
-    }
-    display: flex;
-    flex-flow: row wrap;
-    & > :nth-child(1), & > :nth-child(2) {
-        flex-basis: 50%;
-        max-width: 32rem;
-        padding-right:3em;
-    }
+  h3 {
+    font-family: $text-bold;
+  }
+  display: flex;
+  flex-flow: row wrap;
+  & > :nth-child(1),
+  & > :nth-child(2) {
+    flex-basis: 50%;
+    max-width: 32rem;
+    padding-right: 3em;
+  }
 }
 
 .label {
-    display: inline-flex;
-    font-size: $sml-font-size;
-    font-family: $text-med;
-    color: rgb(64, 64, 64);
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
+  display: inline-flex;
+  font-size: $sml-font-size;
+  font-family: $text-med;
+  color: rgb(64, 64, 64);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.inputField, .textarea {
-    border-radius: 4px;
-    width: 100%;
-    max-width: 25rem;
-    background-color: white;
-    border: 1px solid rgb(217, 217, 217);
-    height: 2rem;
-    padding: 0.5rem;
-    font-size: $sml-font-size;
-    font-family: $text-med;
-    color: rgb(64, 64, 64);
-
+.inputField,
+.textarea {
+  border-radius: 4px;
+  width: 100%;
+  max-width: 25rem;
+  background-color: white;
+  border: 1px solid rgb(217, 217, 217);
+  height: 2rem;
+  padding: 0.5rem;
+  font-size: $sml-font-size;
+  font-family: $text-med;
+  color: rgb(64, 64, 64);
+  &::placeholder {
+    color:  rgb(179, 179, 179);
+  }
+// Removes side arrow on num field
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 .textarea {
-    min-height: 4rem;
-    min-width: 25rem;
+  min-height: 7rem;
+  min-width: 25rem;
+  line-height: 1.4;
 }
 
 .inputSplit1 {
-    display: flex;
-    flex-flow: row nowrap;
- label {
+  display: flex;
+  flex-flow: row nowrap;
+  label {
     margin-top: 0.3rem;
- }    
-    & > :first-child {
-        margin-right: 1rem;
-    }
+  }
+  & > :first-child {
+    margin-right: 1rem;
+  }
 }
 
 .inputSplit2 {
-    display: flex;
-    flex-flow: row nowrap;
-    max-width: 25rem;
-    div {
-        flex: 1;
-    }
-   
-    & > :first-child {
-        margin-right: 1rem;
-        flex-basis: 25%;
-    }
+  display: flex;
+  flex-flow: row nowrap;
+  max-width: 25rem;
+  div {
+    flex: 1;
+  }
+
+  & > :first-child {
+    margin-right: 1rem;
+    flex-basis: 25%;
+  }
 }
 
 .caption {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    font-family: $text-light;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  font-family: $text-light;
 }
 
 .levelSelector {
-    display: flex;
-    flex-flow: row wrap;
-    max-width: 25rem;
-    justify-content: space-between;
-
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 25rem;
+  justify-content: space-between;
 }
 
 // Radio Button
-.radio {display: block; padding: 0rem; }
-.radio input {display: none; text-align: center}
-.radio span {border: 1px solid #ccc; width: 8rem; height: 2.5rem;  overflow: hidden; line-height: 1; display: flex; justify-content: center; border-radius: 4px; font-size:  $sml-font-size}
-.radio input:checked + span {color: white}
-.radio span:hover {cursor: pointer;}
+.radio {
+  display: block;
+  padding: 0rem;
+}
+.radio input {
+  display: none;
+  text-align: center;
+}
+.radio span {
+  border: 1px solid #ccc;
+  width: 8rem;
+  height: 2.5rem;
+  overflow: hidden;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: $sml-font-size;
+}
+.radio input:checked + span {
+  color: white;
+}
+.radio span:hover {
+  cursor: pointer;
+}
 
 .easy {
-    span {color: $easy-rating;}
-    input:checked + span {background: $easy-rating; }
+  span {
+    color: $easy-rating;
+  }
+  input:checked + span {
+    background: $easy-rating;
+  }
 }
 
 .medium {
-    span {color: $medium-rating;}
-    input:checked + span {background: $medium-rating; }
-
+  span {
+    color: $medium-rating;
+  }
+  input:checked + span {
+    background: $medium-rating;
+  }
 }
 .hard {
-    span {color: $hard-rating;}
-    input:checked + span {background: $hard-rating;}
-
+  span {
+    color: $hard-rating;
+  }
+  input:checked + span {
+    background: $hard-rating;
+  }
 }
 
 .keywords {
-    max-width: 25rem;
+  max-width: 25rem;
 
-    h4 {
-        font-family: $text-bold;
+  h4 {
+    font-family: $text-bold;
+  }
+  label {
+    margin: 0.5rem 0;
+  }
+  input {
+    margin-right: 0.4rem;
+  }
+  & > label {
+    margin: 1.3rem 0;
+  }
+  & > div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin-bottom: 1.3rem;
 
-    }
-     label {
-        margin: 0.5rem 0 ;
-    }
-    input {
-        margin-right: 0.4rem;
-    }
-    & > label {
-        margin: 1.3rem 0 ;
-
-    }
     & > div {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-        align-items: baseline;
-        margin-bottom: 1.3rem;
-
-        & > div {
-            margin-right: 1.8rem;
-        }
+      margin-right: 1.8rem;
     }
+  }
+}
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  
+}
+
+.submitContainer {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 2rem 0;
+  flex: 1;
+  align-items: flex-start;
+  button {
+    margin: 1rem 0;
+    padding: 0.9rem 1.5rem;
+    font-size: $sml-font-size;
+    color: white;
+    background: linear-gradient(
+      58deg,
+      rgba(0, 145, 255, 1) 22%,
+      rgba(48, 213, 255, 1) 80%,
+      rgba(169, 248, 255, 1) 100%
+    );
+    border-radius: 8px;
+    border: none;
+  }
 }
