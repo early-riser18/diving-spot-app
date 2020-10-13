@@ -16,18 +16,18 @@ const myAPI = {
 
   async postNewSpot(spotInfo, spotImg) {
     let a = spotInfo;
-    // const response = await fetch(`${apiEndPoint}/writeInfo`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: spotInfo,
-    // });
-    // const jsonResponse = await response.json();
-    // console.log("jsonresponse", jsonResponse);
-    // if (jsonResponse) {
-    //   return jsonResponse;
-    // }
+    const response = await fetch(`${apiEndPoint}/writeInfo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: spotInfo,
+    });
+    const jsonResponse = await response.json();
+    console.log("jsonresponse", jsonResponse);
+    if (jsonResponse) {
+      return jsonResponse;
+    }
     console.log('ImgObj Sent to API ', spotImg);
     await fetch(`${apiEndPoint}/writeImg`, {
       method: "POST",

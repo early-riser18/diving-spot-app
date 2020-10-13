@@ -51,19 +51,19 @@ class App extends React.Component {
   componentDidUpdate(){
     // console.log('mount towards: ',window.location.pathname, ' state is: ', this.state.isHome);
 
-    // if (window.location.pathname === '/' && this.state.isHome === false) {
-    //   this.setState({isHome: true});
-    // } else if (window.location.pathname !== '/' && this.state.isHome === true){
-    //   this.setState({isHome: false});
-    // }
+   
+
   }
-
-
  
 
   render() {
 // To ally server and client side routing, please refer to https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually
-  
+  if (window.location.pathname === '/' && this.state.isHome === false) {
+      this.setState({isHome: true});
+    } else if (window.location.pathname !== '/' && this.state.isHome === true){
+      this.setState({isHome: false});
+    }
+  console.log(window.location.pathname);
 return (
       <div>
         
@@ -74,6 +74,7 @@ return (
             <Route path='/' render={(props) =>
               <HomePage {...props} locationDetected={this.state.locationDetected} />}
               exact />
+              
             <Route path='/search' component={SearchMenu} />
             <Route path='/result' component={SpotPage} />
             <Route path='/add-spot' render={(props) =>

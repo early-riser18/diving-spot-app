@@ -16,7 +16,9 @@
     justify-content: space-between;
     margin-right: 2rem;
     border-bottom: 1px solid rgb(221, 221, 221);
-
+    div {
+        margin: 0.7rem 0;
+    }
 }
 .satView {
     flex: 0 0 15rem;
@@ -29,6 +31,7 @@
 @media screen and (max-width: 600px) {
     .wrapper {
         flex-flow: column nowrap;
+        margin-top: 0;
     }
 
     .description {

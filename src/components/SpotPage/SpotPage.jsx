@@ -19,10 +19,23 @@ export class SpotPage extends React.Component {
                 title: 'Calanques de Samena',
                 author: 'Vincent B.',
                 lastUpdated: '05/07/2020',
+                dateCreated: "13/9/2020",
                 rating: 4.8,
                 totalRating: 117,
-                keywords: ['0 et 20m', 'Récif', 'Poissoneux'],
-                level: 'Facile',
+                keywords: {
+                    adaptedFor: 'scubaDiving',
+                    caracteristics: {
+                        fishy: false,
+                        reef: true,
+                        shipwreck: false,
+                        wall: true
+                    },
+                    depth: '0 to 9m',
+                    recommendedAccess: 'foot'
+                },
+                latitude: "4.232292",
+                longitude: "34.2032",
+                level: 'medium',
                 accessPoint: 'Départ à l’eau à 30m au sud de la capitainerie du port de Marseille Accès à pied en 5 minutes',
                 street: 'Rue de la capitainerie',
                 postalCode: '13000',

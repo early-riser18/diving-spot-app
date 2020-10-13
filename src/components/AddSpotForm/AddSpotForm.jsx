@@ -57,7 +57,7 @@ export class AddSpotForm extends React.Component {
 
                 <form className={styles.formContainer} autoComplete='on' id='addSpotForm' >
 
-                    {/* <div>
+                    <div>
                         <h3>A propos du spot</h3>
                         <div>
                             <label className={styles.label} for="title">Nom du spot</label><br />
@@ -85,19 +85,19 @@ export class AddSpotForm extends React.Component {
                                 <h4>Profondeur moyenne</h4>
                                 <div>
                                     <div>
-                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth0' value='0 to 19m' defaultChecked />
+                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth0' value='0 to 9m' defaultChecked />
                                         <label className={styles.label} for="depth">0 à 9m</label>
                                     </div>
                                     <div>
-                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth0' value='0 to 19m' />
+                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth1' value='10 to 19m' />
                                         <label className={styles.label} for="depth">10 à 19m</label>
                                     </div>
                                     <div>
-                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth1' value='20 to 39m' />
+                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth2' value='20 to 39m' />
                                         <label className={styles.label} for="depth">20 à 39m</label>
                                     </div>
                                     <div>
-                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth2' value='40m and more' />
+                                        <input className={styles.inputRadio} type='radio' name='depth' id='depth3' value='40m and more' />
                                         <label className={styles.label} for="depth">40m et plus</label>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ export class AddSpotForm extends React.Component {
 
 
 
-                    </div> */}
+                    </div>
                     <div className={styles.imageContainer}>
                         <label className={styles.label} for="image" >Photo(s) du spot <HintBox icon={this.state.hintIcon} text={this.state.hintText.image} /></label>
                         <p className={styles.caption}>Jusqu’à 10 photos. Max 1MB</p>

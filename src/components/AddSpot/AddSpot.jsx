@@ -69,8 +69,8 @@ export class AddSpot extends React.Component {
         event.preventDefault();  // Stop the form from submitting since we’re handling that with AJAX.
         let data = this.formToJSON(form.elements); // Call our function to get the form data.
 
-        // if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
-            // this.appendAuxInfo(data);
+        if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
+            this.appendAuxInfo(data);
             let dataAsJSON = JSON.stringify(data, null, "  ");// turns it into a JSON string
             let spotImgFileForJSON = {};
         
@@ -91,7 +91,7 @@ export class AddSpot extends React.Component {
             let spotImgFileAsJSON = JSON.stringify(spotImgFileForJSON, null, "  ")
             console.log('DATA sent to API', dataAsJSON);
             myAPI.postNewSpot(dataAsJSON, spotImgFileAsJSON);
-        // }
+        }
      }
 
     validateForm(formVal) {

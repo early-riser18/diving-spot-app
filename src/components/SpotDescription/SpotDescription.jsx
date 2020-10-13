@@ -13,8 +13,12 @@ export default class SpotDescription extends Component {
                     </div>
                     <div>
                     <h5>Accès au spot</h5>
-                        <p>{spot.accessPoint}<br/><br/>Accès à pied en X minutes</p>
+                        <p>{spot.accessPoint}</p>
 
+                    </div>
+                    <div>
+                        <h5>Coordonées géographiques</h5>
+                        <p>Longitude: {spot.longitude}  Latitude: {spot.latitude}</p>
                     </div>
                 </div>
 

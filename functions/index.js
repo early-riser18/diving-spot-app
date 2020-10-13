@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const cors = require("cors");
+const { response } = require("express");
 app.use(cors({ origin: true }));
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -54,23 +55,24 @@ app.post("/writeInfo", (req, res) => {
   updates["spot-list/" + newPostKey] = req.body;
   console.log(updates);
   db.ref().update(updates);
+ 
   res.end();
 });
 
 
 
 app.post("/writeImg", (req, res) => {
-  console.log('Req body ', req.body);
-const uploadTask = firebase.storage().ref(`images/${Object.keys(req.body)[0]}`).put(Object.values(req.body)[0]);
-uploadTask.on(
-  "state_changed",
-  snapshot => {},
-  error => {
-    console.log(error);
-  },
-  () => {
-    storage.ref('images').child(Object.keys(req.body)[0]).getDownloadURL().then(url => console.log('Uploaded URL: ',url));
-  });
+//   console.log('Req body ', req.body);
+// const uploadTask = firebase.storage().ref(`images/${Object.keys(req.body)[0]}`).put(Object.values(req.body)[0]);
+// uploadTask.on(
+//   "state_changed",
+//   snapshot => {},
+//   error => {
+//     console.log(error);
+//   },
+//   () => {
+//     storage.ref('images').child(Object.keys(req.body)[0]).getDownloadURL().then(url => console.log('Uploaded URL: ',url));
+//   });
 
   // var storageRef = firebase.storage().ref();
   // var testImgRef = storageRef.child('TestImg.png');
