@@ -4,13 +4,39 @@ import ReCAPTCHA from "react-google-recaptcha";
 import styles from "./AddSpotForm.module.scss";
 import Map from '../../util/Map';
 import ImgUploader from '../ImgUploader/ImgUploader';
-
+import HintBox from '../HintBox/HintBox';
 
 export class AddSpotForm extends React.Component {
     constructor(props) {
+
         super(props);
-        this.state = { accessByFoot: true };
+        let hintLevel = <div>Débutant = zone sans danger (haut fond, grottes, filet, transit de bateau) et conditions idéales souvent au rendez-vous (bonne visibilité, pas de courant, zone peu exposée à la houle, mise à l’eau facile).<br /><br />
+        Intermédiaire = une bonne connaissance du milieu marin et des techniques d’apnée permettant sont requise car les conditions ne sont pas toujours idéales. <br /><br />
+        Avancé = Zone pouvant présenter des dangers d’origines humain et nécessitant d’être vigilant à tout moment, zone exposé aux aléas du climat.
+                </div>;
+
+        let hintDescription = <div>Ajoute ici tous les éléments pouvant être utile à savoir pour les futurs plongeurs mais aussi les points d’intérêt du spot.</div>
+
+        let hintAccessOption = <div>Comment est-ce que tu recommendes de se rendre à la zone du spot?</div>
+        let hintImage = <div>Ajoute des photos qui donneront envie à d'autres plongeurs de visiter ce spot</div>
+        let hintFootAccess = <div>Indique le chemin à suivre afin de se rendre jusqu’à la mise à l’eau (sentiers, distance, point particulier pour se repérer)</div>;
+        let hintBoatAccess = <div>Indique le port le plus adapté/proche pour se rendre au spot, la direction à suivre, distance à parcourir et si possible les Amers ou une position par rapport à un point remarquable (ex: au Sud-Ouest de la pointe du cap…)</div>
+        this.state = {
+            accessByFoot: true,
+            hintIcon: require('../../assets/hintIcon.png'),
+            hintText: {
+                level: hintLevel,
+                description: hintDescription,
+                spotAccess: hintAccessOption,
+                image: hintImage,
+                footAccess: hintFootAccess,
+                boatAccess: hintBoatAccess
+
+            }        };
         this.accessByFoot = this.accessByFoot.bind(this);
+
+
+
     }
 
     accessByFoot() {
@@ -20,6 +46,9 @@ export class AddSpotForm extends React.Component {
             this.setState({ accessByFoot: true });
         }
     };
+
+ 
+
     render() {
 
         return (
@@ -28,27 +57,31 @@ export class AddSpotForm extends React.Component {
 
                 <form className={styles.formContainer} autoComplete='on' id='addSpotForm' >
 
-                    <div>
+                    {/* <div>
                         <h3>A propos du spot</h3>
                         <div>
                             <label className={styles.label} for="title">Nom du spot</label><br />
                             <input className={styles.inputField} type='text' name='title' required />
                         </div>
                         <div>
-                            <label className={styles.label} for="level">Niveau recommendé[i]</label>
+                            <label className={styles.label} for="level">Niveau recommendé
+                            <HintBox icon={this.state.hintIcon} text={this.state.hintText.level}/>
+                            </label>
+
                             <div className={styles.levelSelector}>
                                 <label className={`${styles.radio} ${styles.easy}`}><input type="radio" name="level" value="easy" defaultChecked /><span>Débutant</span></label>
-                                <label className={`${styles.radio} ${styles.medium}`}><input type="radio" name="level" value="medium" /><span>Intérmediaire</span></label>
+                                <label className={`${styles.radio} ${styles.medium}`}><input type="radio" name="level" value="medium" /><span>Intermédiaire</span></label>
                                 <label className={`${styles.radio} ${styles.hard}`}><input type="radio" name="level" value="hard" /><span>Avancé</span></label>
 
                             </div>
                             <div>
-                                <label className={styles.label} for="description">Description détaillé du spot[i]</label><br />
-                                <textarea className={styles.textarea} type='text' name='description' placeholder="Plage à la sortie, zone ombragée, mise à l’eau facile, tombants, grottes, tunnels, épaves, organisme vivant remarquable…" />
+                                <label className={styles.label} for="description">Description détaillé du spot
+                                <HintBox icon={this.state.hintIcon} text={this.state.hintText.description}/></label><br />
+                                <textarea className={styles.textarea} type='text' name='description' placeholder="Ex: Plage à la sortie, zone ombragée, mise à l’eau facile, tombants, grottes, tunnels, épaves, organisme vivant remarquable…" />
 
                             </div>
                             <div className={styles.keywords}>
-                                <label className={styles.label} for="keywords">Catégories[i] </label><br />
+                                <h4>Catégories </h4 ><br />
                                 <h4>Profondeur moyenne</h4>
                                 <div>
                                     <div>
@@ -91,7 +124,7 @@ export class AddSpotForm extends React.Component {
                                 </div>
 
 
-                                <h4>Accès recommendé</h4>
+                                <label className={styles.label}>Accès recommendé <HintBox icon={this.state.hintIcon} text={this.state.hintText.spotAccess}/></label>
                                 <div>
                                     <div>
                                         <input className={styles.inputRadio} type='radio' name='recommendedAccess' id='recommendedAccess0' value='foot' defaultChecked onChange={this.accessByFoot} />
@@ -160,28 +193,29 @@ export class AddSpotForm extends React.Component {
                             <input className={styles.inputField} type='text' name='country' />
                         </div>
                         <div>
-                            <label className={styles.label} for="accessPoint">Accès au spot [i]</label><br />
-                            <textarea className={styles.textarea} type='text' name='accessPoint' placeholder={this.state.accessByFoot ? 
-                            "Suivre le chemin débutant à gauche pendant 300m; Pour trouver la grotte sous-marine, longer la côte jusqu’à une faille puis la suivre jusqu'au…" :
-                            "A la sortie du port, mettre cap direction Sud-Ouest et se positionner grâce aux Amers suivants… "} />
+                            <label className={styles.label} for="accessPoint">Accès au spot <HintBox icon={this.state.hintIcon} text={this.state.accessByFoot ? this.state.hintText.footAccess : this.state.hintText.boatAccess}/></label><br />
+                            <textarea className={styles.textarea} type='text' name='accessPoint' placeholder={this.state.accessByFoot ?
+                                "Ex: Suivre le chemin débutant à gauche pendant 300m; Pour trouver la grotte sous-marine, longer la côte jusqu’à une faille puis la suivre jusqu'au…" :
+                                "À la sortie du port, mettre cap direction Sud-Ouest et se positionner grâce aux Amers suivants… "} />
                         </div>
                         <div>
-                            <label className={styles.label} for="parking">{this.state.accessByFoot ? 'Parking' : 'Port'} le plus proche[i]</label><br />
-                            <textarea className={styles.textarea} type='text' name='parking' placeholder={this.state.accessByFoot ? 
-                            "Vous pouvez vous garer dans la rue de Paris qui est gratuite ou au parking de la Mairie payant mais plus proche du départ du sentier…" :
-                            "Vous pouvez louer un bateau depuis le port de Cassis situé à 2km du spot…"} />
+                            <label className={styles.label} for="parking">{this.state.accessByFoot ? 'Parking' : 'Port'} le plus proche </label><br />
+                            <textarea className={styles.textarea} type='text' name='parking' placeholder={this.state.accessByFoot ?
+                                "Ex: Vous pouvez vous garer dans la rue de Paris qui est gratuite ou au parking de la Mairie payant mais plus proche du départ du sentier…" :
+                                "Ex: Vous pouvez louer un bateau depuis le port de Cassis situé à 2km du spot…"} />
                         </div>
 
 
 
-                    </div>
+                    </div> */}
                     <div className={styles.imageContainer}>
-                        <label className={styles.label} for="image">Photo(s) du spot[i]</label><br />
-                        <ImgUploader />
+                        <label className={styles.label} for="image" >Photo(s) du spot <HintBox icon={this.state.hintIcon} text={this.state.hintText.image} /></label>
+                        <p className={styles.caption}>Jusqu’à 10 photos. Max 1MB</p>
+                        <ImgUploader currentImgUploaded={this.props.currentImgUploaded} imgURLUpload={this.props.imgURLUpload} imgURLDelete={this.props.imgURLDelete}/>
                     </div>
                     <div className={styles.submitContainer}>
                         <p className={styles.caption}>En continuant, vous accepetez notre Politique de Confidentialité ainsi que nos Conditions d'Utilisations.</p>
-                        <button  type='submit' name='submit' onClick={this.props.formSubmit}>Ajouter ce spot</button>
+                        <button type='submit' name='submit' onClick={this.props.formSubmit}>Ajouter ce spot</button>
                     </div>
 
                 </form>

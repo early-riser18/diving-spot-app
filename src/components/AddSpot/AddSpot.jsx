@@ -8,13 +8,34 @@ import myAPI from '../../util/myAPI';
 export class AddSpot extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            spotImgFile: {}
+
+        };
         this.formToJSON = this.formToJSON.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
         this.validateForm = this.validateForm.bind(this);
         this.appendAuxInfo = this.appendAuxInfo.bind(this);
         this.displayFormInfo = this.displayFormInfo.bind(this);
+        this.handleImgUpload = this.handleImgUpload.bind(this);
+        this.handleImgDelete = this.handleImgDelete.bind(this);
+
     }
+
+    handleImgUpload(newName, newFile) {
+        console.log('in Add Spot - newFile: ',newFile);
+        this.setState(prevState => ({
+            spotImgFile: { ...prevState.spotImgFile, [newName]: newFile }
+        }));
+    }
+
+    handleImgDelete(imgKey) {
+        let newUrlObj = new Object;
+        newUrlObj = this.state.spotImgFile;
+        delete newUrlObj[imgKey];
+        this.setState({ spotImgFile: newUrlObj });
+    }
+
 
     // from https://www.learnwithjason.dev/blog/get-form-values-as-json/ 
     // Used to extract values from the form and make an array
@@ -34,11 +55,11 @@ export class AddSpot extends React.Component {
 
             } else { data[element.name] = { [element.value]: element.checked }; }
 
-        } else if (element.type == 'submit') {
+        } else if (element.type == 'submit' || element.type == 'file') {
 
-        } else { data[element.name] = element.value; }
-
-
+        } else {
+            data[element.name] = element.value;
+        }
         return data;
     }, {});
 
@@ -47,15 +68,31 @@ export class AddSpot extends React.Component {
         const form = document.getElementById('addSpotForm');
         event.preventDefault();  // Stop the form from submitting since we’re handling that with AJAX.
         let data = this.formToJSON(form.elements); // Call our function to get the form data.
-        //  delete data['submit']; // Remove the submit
 
         // if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
-        //     this.appendAuxInfo(data);
-        //     let dataAsJSON = JSON.stringify(data, null, "  ");// turns it into a JSON string
-        //     console.log('DATA sent to API', dataAsJSON);
-        //     myAPI.postNewSpot(dataAsJSON);
+            // this.appendAuxInfo(data);
+            let dataAsJSON = JSON.stringify(data, null, "  ");// turns it into a JSON string
+            let spotImgFileForJSON = {};
+        
+
+            // Reassign File Object as a regular object so it can be stringified
+            for (var i = 0; i < Object.keys(this.state.spotImgFile).length; i++){
+               let file = {
+                    lastModified: Object.values(this.state.spotImgFile)[i].lastModified,
+                    lastModifiedDate: Object.values(this.state.spotImgFile)[i].lastModifiedDate,
+                    name: Object.values(this.state.spotImgFile)[i].name,
+                    size: Object.values(this.state.spotImgFile)[i].size,
+                    type: Object.values(this.state.spotImgFile)[i].type,
+                    webkitRelativePath: Object.values(this.state.spotImgFile)[i].webkitRelativePath
+                };
+                spotImgFileForJSON[Object.keys(this.state.spotImgFile)[i]] = file;
+            }
+
+            let spotImgFileAsJSON = JSON.stringify(spotImgFileForJSON, null, "  ")
+            console.log('DATA sent to API', dataAsJSON);
+            myAPI.postNewSpot(dataAsJSON, spotImgFileAsJSON);
         // }
-    }
+     }
 
     validateForm(formVal) {
         // Used to check if all fields have been filled in 
@@ -67,13 +104,10 @@ export class AddSpot extends React.Component {
         }
         console.log('form_Validated')
         return true;
-    }
+ }
 
     appendAuxInfo(formVal) {
 
-        /*   for (let i = 0; i < Object.values(userInf).length; i++) {
-               formVal[Object.keys(userInf)[i]] = Object.values(userInf)[i];
-           } */
         // Organize data already collected
         formVal['keywords'] = {};
         let addToKeywords = ['depth', 'caracteristics', 'recommendedAccess', 'adaptedFor'];
@@ -100,13 +134,16 @@ export class AddSpot extends React.Component {
         const form = document.getElementById('addSpotForm');
         console.log(form.elements);
         console.log(this.formToJSON(form.elements));
+        console.log('blob',);
 
     }
     render() {
-        console.log();
+        console.log('On Render current state is: ', this.state.spotImgFile);
         return (
             <div>
-                <AddSpotForm formSubmit={this.formSubmit} />
+                <AddSpotForm formSubmit={this.formSubmit}
+                    currentImgUploaded={this.state.spotImgFile} imgURLUpload={this.handleImgUpload} imgURLDelete={this.handleImgDelete}
+                />
                 <button onClick={this.displayFormInfo}>Check info </button>
 
             </div>

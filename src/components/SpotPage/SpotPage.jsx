@@ -36,7 +36,7 @@ export class SpotPage extends React.Component {
                     <img key="3" src={require('../../assets/spotImg3.jpg')} alt='' />
                 ],
                 comments: [
-                    
+
                     {
                         author: 'Vincent B.',
                         profilePic: '',
@@ -58,7 +58,7 @@ export class SpotPage extends React.Component {
                         cons: ["Trop d'algues", 'Du courant'],
                         comment: 'Dans l’ensemble, ce spot est vraiment top, j’ai beaucoup aimé les écrevisses et les poulpes qui viennent se faufiler entre mes pieds. Les étoiles sont de toutes les couleurs, j’en ai même ramené deux à la maison pour ma maman.'
 
-                    } 
+                    }
                 ]
             },
             diapoIndex: 1,
@@ -73,9 +73,9 @@ export class SpotPage extends React.Component {
         this.initializeSpot = this.initializeSpot.bind(this);
     }
 
-    initializeSpot(spotID){
+    initializeSpot(spotID) {
         myAPI.fetchSpot(spotID).then(spotData => {
-this.setState({spot: spotData});
+            this.setState({ spot: spotData });
         });
     }
 
@@ -117,7 +117,7 @@ this.setState({spot: spotData});
         console.log('updated index ' + this.state.diapoIndex);
     }
 
-    UNSAFE_componentWillMount(){
+    UNSAFE_componentWillMount() {
         this.initializeSpot('-MHCMh3xYn1ayEQw5v4R');
     }
 
@@ -134,8 +134,6 @@ this.setState({spot: spotData});
                     </div> :
                     <Diaporama index={this.state.diapoIndex} content={this.showSlide(this.state.diapoIndex)} onClickPlus={this.plusSlide} onClickMinus={this.minusSlide} onClickClose={this.handleDiapoClose} />
                 }
-
-        
             </div>
         )
     }

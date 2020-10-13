@@ -39,9 +39,9 @@
   font-family: $text-med;
   color: rgb(64, 64, 64);
   &::placeholder {
-    color:  rgb(179, 179, 179);
+    color: rgb(179, 179, 179);
   }
-// Removes side arrow on num field
+  // Removes side arrow on num field
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -80,7 +80,6 @@
 }
 
 .caption {
-  margin-top: 0.5rem;
   font-size: 0.8rem;
   font-family: $text-light;
 }
@@ -147,7 +146,7 @@
 
 .keywords {
   max-width: 25rem;
-
+  margin-top: 1.5rem;
   h4 {
     font-family: $text-bold;
   }
@@ -157,9 +156,7 @@
   input {
     margin-right: 0.4rem;
   }
-  & > label {
-    margin: 1.3rem 0;
-  }
+
   & > div {
     display: flex;
     flex-flow: row wrap;
@@ -177,14 +174,13 @@
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  
 }
 
 .submitContainer {
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  margin: 2rem 0;
+  margin: 2.5rem 0;
   flex: 1;
   align-items: flex-start;
   button {

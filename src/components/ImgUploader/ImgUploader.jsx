@@ -6,47 +6,52 @@ export default class ImgUploader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            file: null,
-            url: {}
+            spotImgUrl: {}
+            
         };
         this.handleChange = this.handleChange.bind(this);
         this.removeImg = this.removeImg.bind(this);
     }
+    
     handleChange(event) {
         if (event.target.files[0]) {
-            let newUrl = URL.createObjectURL(event.target.files[0]);
-            let newName = event.target.files[0].name;
-            this.setState(prevState => ({
-                url: { ...prevState.url, [newName]: newUrl }
-            }));
+            
+            if (event.target.files[0].size < 1000000) { // Check size < 1MB
+                let newFile = event.target.files[0];
+                let newUrl = URL.createObjectURL(event.target.files[0]);
+                let newName = event.target.files[0].name;
+                this.props.imgURLUpload(newName, newFile);
+                console.log('in ImgUploader - newFile: ', newFile);
+                this.setState(prevState => ({
+                    spotImgUrl: { ...prevState.spotImgUrl, [newName]: newUrl }
+                }));
+               
+            } else {
+                alert("Erreur: Veuillez choisir une image plus petit que 1MB");
+            }
         }
-
-
-        // this.setState({
-        //     file: event.target.files[0],
-        //     url: URL.createObjectURL(event.target.files[0])
-        // })
-
     }
     removeImg(event) {
         event.preventDefault();  // Stop the form from submitting since we’re handling that with AJAX.
 
-        let urlId = event.target.id.replace('btn', ''); // Enable to get key of the image in this.state.url
-        let newUrlObj = new Object;
-        newUrlObj = this.state.url;
-        delete newUrlObj[urlId];
-        this.setState({ url: newUrlObj });
+        this.props.imgURLDelete(event.target.id.replace('btn', '')); // Enable to get key of the image in this.state.url
+    
 
     }
     render() {
         return (
-            <div>
-                <input onChange={this.handleChange} type='file' name='image' />
-                <div>
-                    {Object.entries(this.state.url).map(e =>
-                        <div className={styles.imgPreviewCol}>
-                            <img id={e[0]} className={styles.imgPrev} src={e[1]} />
-                            <button id={`${e[0]}btn`} onClick={this.removeImg}>Remove</button>
+            <div className={styles.wrapper}>
+
+
+                <span className={styles.myInput}>Ajouter une photo:<input onChange={this.handleChange} type='file' accept=".jpg,.jpeg,.png" name='image' /></span>
+
+                <div className={styles.imgPreviewCol}>
+                    {Object.entries(this.state.spotImgUrl).map(e =>
+                        <div  key={e[0]} className={styles.inputFrame}>
+                            <div className={styles.imgFrame}>
+                                <img id={e[0]} className={styles.imgPrev} src={e[1]} />
+                            </div>
+                            <button className={styles.rmvBtn} id={`${e[0]}btn`} onClick={this.removeImg}>Supprimer</button>
                         </div>
                     )}
                 </div>

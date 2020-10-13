@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isHome: false,
+      isHome: true,
       isMobile: false,
       locationDetected: true,
       apiResponse: '',
@@ -32,7 +32,7 @@ class App extends React.Component {
     };
   this.whatSize = this.whatSize.bind(this);
   };
- 
+
  
   whatSize(){
     let wid = window.innerWidth;
@@ -49,11 +49,22 @@ class App extends React.Component {
   }
 
   componentDidUpdate(){
+    // console.log('mount towards: ',window.location.pathname, ' state is: ', this.state.isHome);
+
+    // if (window.location.pathname === '/' && this.state.isHome === false) {
+    //   this.setState({isHome: true});
+    // } else if (window.location.pathname !== '/' && this.state.isHome === true){
+    //   this.setState({isHome: false});
+    // }
   }
+
+
+ 
 
   render() {
 // To ally server and client side routing, please refer to https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually
-    return (
+  
+return (
       <div>
         
         <Header isMobile={this.state.isMobile}
@@ -71,7 +82,6 @@ class App extends React.Component {
             <Route component={Error} />
           </Switch>
         </main>
-        <p>{this.state.apiResponse}</p>
         <Footer />
       </div>
 

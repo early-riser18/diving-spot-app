@@ -1,5 +1,5 @@
 import { json } from "body-parser";
-const apiEndPoint = "http://localhost:5001/diving-app-eaabe/us-central1/app/";
+const apiEndPoint = "http://localhost:5001/diving-app-eaabe/us-central1/app";
 
 const myAPI = {
   async fetchSpot(spotID) {
@@ -14,22 +14,31 @@ const myAPI = {
     }
   },
 
-  async postNewSpot(newSpotInfo) {
-    const response = await fetch(`${apiEndPoint}write`, {
+  async postNewSpot(spotInfo, spotImg) {
+    let a = spotInfo;
+    // const response = await fetch(`${apiEndPoint}/writeInfo`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: spotInfo,
+    // });
+    // const jsonResponse = await response.json();
+    // console.log("jsonresponse", jsonResponse);
+    // if (jsonResponse) {
+    //   return jsonResponse;
+    // }
+    console.log('ImgObj Sent to API ', spotImg);
+    await fetch(`${apiEndPoint}/writeImg`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: newSpotInfo,
+      body: spotImg,
     });
-    const jsonResponse = await response.json();
-    console.log("jsonresponse", jsonResponse);
-
-    if (jsonResponse) {
-      return jsonResponse;
-    }
-
   }
+
+  
 };
 
 export default myAPI;

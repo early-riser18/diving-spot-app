@@ -4,6 +4,7 @@ import styles from './HomePage.module.scss';
 import { SpotList } from '../SpotList/SpotList';
 export class HomePage extends React.Component {
 
+
     render() {
         return (
             <div >

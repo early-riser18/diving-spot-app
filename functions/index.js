@@ -2,8 +2,10 @@ const firebase = require("firebase");
 const functions = require("firebase-functions");
 const auth = require("firebase/auth");
 const firebaseSetUp = require("../src/util/firebaseSetUp.js");
+const storage = require('firebase/storage');
 firebaseSetUp.firebaseConfig; // Make firebase identifiers available to initialize app
 firebase.initializeApp(firebaseConfig);
+
 
 const express = require("express");
 const app = express();
@@ -45,7 +47,7 @@ app.get("/spot", (req, res) => {
   res.send(data);
 });
 
-app.post("/write", (req, res) => {
+app.post("/writeInfo", (req, res) => {
   console.log(req.body);
   var newPostKey = db.ref().child("test").push().key;
   var updates = {};
@@ -53,6 +55,27 @@ app.post("/write", (req, res) => {
   console.log(updates);
   db.ref().update(updates);
   res.end();
+});
+
+
+
+app.post("/writeImg", (req, res) => {
+  console.log('Req body ', req.body);
+const uploadTask = firebase.storage().ref(`images/${Object.keys(req.body)[0]}`).put(Object.values(req.body)[0]);
+uploadTask.on(
+  "state_changed",
+  snapshot => {},
+  error => {
+    console.log(error);
+  },
+  () => {
+    storage.ref('images').child(Object.keys(req.body)[0]).getDownloadURL().then(url => console.log('Uploaded URL: ',url));
+  });
+
+  // var storageRef = firebase.storage().ref();
+  // var testImgRef = storageRef.child('TestImg.png');
+  // testImgRef.putString(values(req.body)[0]).then(console.log('successfully uploaded'));
+   res.end();
 });
 
 exports.app = functions.https.onRequest(app);
