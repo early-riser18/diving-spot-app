@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import styles from "./Header.module.scss";
-import { Button } from '../Button/Button';
 import { HomeHeader } from "../HomeHeader/HomeHeader";
 import SearchHeader from '../SearchHeader/SearchHeader';
 

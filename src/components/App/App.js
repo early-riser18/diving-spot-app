@@ -4,10 +4,12 @@ import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { HomePage } from '../HomePage/HomePage';
 import { AddSpot } from '../AddSpot/AddSpot';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import {  Route, Switch } from 'react-router-dom';
 import { SearchMenu } from '../SearchMenu/SearchMenu';
 import { Error } from '../Error/Error';
 import { SpotPage } from '../SpotPage/SpotPage';
+import { FormSuccessOverlay } from '../FormSuccessOverlay/FormSuccessOverlay';
+
 import '../root.scss';
 
 class App extends React.Component {
@@ -63,7 +65,7 @@ class App extends React.Component {
     } else if (window.location.pathname !== '/' && this.state.isHome === true){
       this.setState({isHome: false});
     }
-  console.log(window.location.pathname);
+  // console.log(window.location.pathname);
 return (
       <div>
         
@@ -74,7 +76,7 @@ return (
             <Route path='/' render={(props) =>
               <HomePage {...props} locationDetected={this.state.locationDetected} />}
               exact />
-              
+              <Route path='/form-successfully-submited' component={FormSuccessOverlay} />
             <Route path='/search' component={SearchMenu} />
             <Route path='/result' component={SpotPage} />
             <Route path='/add-spot' render={(props) =>

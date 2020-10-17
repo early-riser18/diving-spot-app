@@ -3,6 +3,7 @@ import React from 'react';
 export default function Map() {
     return (
         <iframe
+        title='myMap'
             width="100%"
             height="100%"
             frameBorder="0"

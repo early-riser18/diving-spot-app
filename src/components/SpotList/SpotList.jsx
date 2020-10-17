@@ -1,15 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styles from './SpotList.module.scss';
 import { SpotMiniature } from '../SpotMiniature/SpotMiniature';
-import { Link } from 'react-router-dom';
 
 
 var wid = 0.88 * window.innerWidth; // equals 2 times 6vw which is padding of container
 const spotToDisplay = [];
 
 function getSpotToDisplay(sectLength, blockLength) {
-    if (spotToDisplay.length == 0) {
+    if (spotToDisplay.length === 0) {
         var numberDisplay = Math.floor(sectLength / blockLength);
         if (numberDisplay <= 2) {
             numberDisplay = 2;

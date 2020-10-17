@@ -29,7 +29,7 @@ export class SearchMenu extends React.Component {
     }
 
     toggleMap() {
-        { this.state.fullMap ? this.setState({ fullMap: false }) : this.setState({ fullMap: true }) }
+         this.state.fullMap ? this.setState({ fullMap: false }) : this.setState({ fullMap: true }) 
         
     }
     
@@ -39,13 +39,13 @@ export class SearchMenu extends React.Component {
                 <div>
                     {SearchResultList()};
                          <button className={styles.showMap} onClick={this.toggleMap}>
-                        <img className={styles.mapIcon} src={MapIcon} />Map</button>
+                        <img className={styles.mapIcon} src={MapIcon} alt='' />Map</button>
                 </div>
                 <div id='sideMap' className={styles.sideMapContainer}>
                     {Map()}
                 </div>
                 <div className={this.state.fullMap ? styles.fullMapContainer : styles.notDisplayed}>
-                    <button className={styles.mapClose}><img className={styles.closeIcon} src={Close}
+                    <button className={styles.mapClose}><img className={styles.closeIcon} src={Close} alt=''
                         onClick={this.toggleMap} />
                     </button>
                     {Map()}

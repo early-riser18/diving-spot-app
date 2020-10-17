@@ -9,11 +9,7 @@ import translateLevel from '../../util/translateLevel';
 import dataToDisplay from '../../util/dataToDisplay';
 
 export class SpotMainInfo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-
+   
 
     render() {
         let spot = this.props.spot;
@@ -43,7 +39,7 @@ export class SpotMainInfo extends React.Component {
                     </div>
 
                     <div className={styles.imgAccess}>
-                        <div className={styles.tempPlace}> <DiapoTab onClickOpen={this.props.onClickOpen} /></div>
+                        <div className={styles.tempPlace}> <DiapoTab spotImg={spot.image} onClickOpen={this.props.onClickOpen} /></div>
                         <div className={styles.accessInfo}>
 
                             <h5>Rue la plus proche</h5>

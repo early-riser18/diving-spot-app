@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
-import ReCAPTCHA from "react-google-recaptcha";
 import styles from "./AddSpotForm.module.scss";
-import Map from '../../util/Map';
 import ImgUploader from '../ImgUploader/ImgUploader';
 import HintBox from '../HintBox/HintBox';
 
@@ -207,7 +204,7 @@ export class AddSpotForm extends React.Component {
 
 
 
-                    </div>
+                    </div> 
                     <div className={styles.imageContainer}>
                         <label className={styles.label} for="image" >Photo(s) du spot <HintBox icon={this.state.hintIcon} text={this.state.hintText.image} /></label>
                         <p className={styles.caption}>Jusqu’à 10 photos. Max 1MB</p>

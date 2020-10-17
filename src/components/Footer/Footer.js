@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styles from './Footer.module.scss';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export class Footer extends React.Component {
 
@@ -27,7 +26,7 @@ export class Footer extends React.Component {
                 <ul className={styles.list3}>
                     <li>©2020 How-To-Sea</li>
                     <li>Tous droits réservés</li>
-                    <li><img className={styles.footerLogo} src={require('../../assets/logo-sm.png')} /></li>
+                    <li><img className={styles.footerLogo} src={require('../../assets/logo-sm.png')} alt='' /></li>
                 </ul>
 
             </footer>

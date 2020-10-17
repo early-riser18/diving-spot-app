@@ -12,7 +12,7 @@ export default class Diaporama extends Component {
                     <p className={styles.imgCounter}>{this.props.index} / 3</p>
                 </div>
                 <div className={styles.imgSlideshow}>
-                   {this.props.content}
+                  <img src={this.props.content} alt='' />
 
                 </div>
                 <button className={`${styles.btnNav} ${styles.prev}`} onClick={this.props.onClickMinus}>&lt;</button>

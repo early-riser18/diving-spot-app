@@ -29,4 +29,4 @@ caracteristics(value){
     return toDisplay;
 }
 }
-export default dataToDisplay;
+module.exports = dataToDisplay;

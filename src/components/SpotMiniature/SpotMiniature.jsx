@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styles from './SpotMiniature.module.scss';
 
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ export class SpotMiniature extends React.Component {
         return (
            <Link className={styles.spotLink} to='/user' >
            <div className={styles.spot}>
-                <img className={styles.spotImg} src={require('../../assets/spotImg1png.jpg')} />
+                <img className={styles.spotImg} src={require('../../assets/spotImg1png.jpg')} alt='' />
                 <div className={styles.description}>
                     <h3>Calanques de Samena</h3>
                     <h4 className={styles.cutText}>Provences-Alpes-Côtes-D’Azur, France</h4>
