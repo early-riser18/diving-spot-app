@@ -216,7 +216,7 @@ export class AddSpotForm extends React.Component {
                     </div>
 
                 </form>
-
+ 
             </div>
         )
 
