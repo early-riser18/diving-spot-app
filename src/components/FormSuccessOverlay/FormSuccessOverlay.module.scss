@@ -3,19 +3,22 @@
 .wrapper {
     min-height: 80vh;
     width: 100%;
+    
     z-index: 10;
     background-color: white;
     display: flex;
     align-items: flex-start;
 
     .subwrapper {
+
+        width: 100%;
+        margin: 0 $small-gutter;
         margin-top: 10%;
         flex-flow: row wrap;
-        align-items: center;
+        // align-items: center;
         justify-content: center;
         display: flex;
         & > :first-child {
-            border: 1px solid red;
             margin-right: 1rem;
             margin-bottom: 1rem;
     }
@@ -26,7 +29,7 @@
         margin-bottom: 1rem;
     }
  img {
-     width: 8rem;
+     width: 7rem;
  }
 
  button {

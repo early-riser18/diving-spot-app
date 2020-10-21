@@ -13,8 +13,13 @@
     left: 0;
     z-index: 100;
     transition: box-shadow 0.3s ease;
-
     background-color: white;
+    display: flex;
+    justify-content: center;
+    & > :first-child {
+        max-width: 1500px;
+
+    }
 
 }
 

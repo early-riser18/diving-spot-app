@@ -6,7 +6,7 @@ adaptedFor(value) {
         case 'scubaDiving':
             return 'la plongée bouteille';
         case 'snorkeling':
-            return 'la plongée palme / tuba';
+            return 'la plongée palme/tuba';
         default: return 'tous';
     };
 },

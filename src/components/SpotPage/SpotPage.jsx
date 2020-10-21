@@ -5,6 +5,7 @@ import Diaporama from '../Diaporama/Diaporama';
 import SpotDescription from '../SpotDescription/SpotDescription';
 import CommentList from '../CommentList/CommentList';
 import myAPI from '../../util/myAPI';
+import { Redirect } from 'react-router-dom';
 // Will have states returned from the database
 
 // Compo sattelite view fix
@@ -14,6 +15,7 @@ export class SpotPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirectErr: null,
             spot: {
                 // NEED TO FIGURE OUT HOW TO PRESERVE LINEBREAK FROM JSON TO STRING
                 title: 'Calanques de Samena',
@@ -45,8 +47,7 @@ export class SpotPage extends React.Component {
                 description: 'Ce lieu de plongée est splendide. Il est habrité entre le port et la digue ce qui permet d’apprécier les algues et les poissons. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> <br/>Praesent at euismod sem, dictum dapibus ligula. Proin fringilla iaculis lorem, vel bibendum sapien gravida sit amet. Pellentesque vehicula pulvinar odio, in cursus dui semper ac.<br/><br/>Fusce nec laoreet arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
                 image: [
                     "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2FID%20Card%20Picture%20Justin%20Front.jpg?alt=media&token=72493acc-16ad-4eb0-b863-d898cc5483d9",
-                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",  
-                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2FPhoto_Portrain_Luca.jpeg?alt=media&token=407030de-a971-4bc4-bdbc-bd7e58d9f635"     
+                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",
                 ],
                 comments: [
 
@@ -88,7 +89,13 @@ export class SpotPage extends React.Component {
 
     initializeSpot(spotID) {
         myAPI.fetchSpot(spotID).then(spotData => {
-            this.setState({ spot: spotData });
+            console.log(spotData);
+            if (spotData) {
+                this.setState({ spot: spotData });
+
+            } else {
+                this.setState({ redirectErr: '/error' });
+            }
         });
     }
 
@@ -99,8 +106,6 @@ export class SpotPage extends React.Component {
         this.updateIndex(this.state.diapoIndex - 1);
     }
     updateIndex(n) {
-        console.log("asked to update index to " + n);
-        console.log("current index " + this.state.diapoIndex);
 
         let slides = this.state.spot.image;
         if (n > slides.length) {
@@ -126,15 +131,23 @@ export class SpotPage extends React.Component {
             this.setState({ isDiapoHidden: true });
         }
     }
-    componentDidUpdate(prevProps, prevState) {
-        console.log('updated index ' + this.state.diapoIndex);
-    }
+
 
     UNSAFE_componentWillMount() {
-        this.initializeSpot('-MHCMh3xYn1ayEQw5v4R');
+        this.initializeSpot('-MKAodqdu3aD4f2M5Rna'); // -MKAodqdu3aD4f2M5Rna
     }
 
+    componentWillUnmount() {
+        // this.setState({ redirectErr: null });
+    }
+
+
     render() {
+        if (this.state.redirectErr) {
+            return <Redirect to={this.state.redirectErr} />
+        }
+
+
         return (
             <div className={styles.wrapper}>
 
@@ -145,7 +158,7 @@ export class SpotPage extends React.Component {
                         <CommentList spot={this.state.spot} />
 
                     </div> :
-                    <Diaporama index={this.state.diapoIndex} content={this.showSlide(this.state.diapoIndex)} onClickPlus={this.plusSlide} onClickMinus={this.minusSlide} onClickClose={this.handleDiapoClose} />
+                    <Diaporama spot={this.state.spot} index={this.state.diapoIndex} content={this.showSlide(this.state.diapoIndex)} onClickPlus={this.plusSlide} onClickMinus={this.minusSlide} onClickClose={this.handleDiapoClose} />
                 }
             </div>
         )

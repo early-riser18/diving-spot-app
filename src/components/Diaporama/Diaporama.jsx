@@ -9,7 +9,7 @@ export default class Diaporama extends Component {
             <div className={styles.wrapper}>
                 <div className={styles.navBar}>
                     <button className={styles.btnClose} onClick={this.props.onClickClose}>Fermer</button>
-                    <p className={styles.imgCounter}>{this.props.index} / 3</p>
+                    <p className={styles.imgCounter}>{this.props.index} / {this.props.spot.image.length}</p>
                 </div>
                 <div className={styles.imgSlideshow}>
                   <img src={this.props.content} alt='' />

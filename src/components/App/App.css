@@ -31,3 +31,15 @@
 
 }
 
+
+main {
+  
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+main > :first-child {
+max-width: 2000px;  
+}
+

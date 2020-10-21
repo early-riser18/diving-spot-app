@@ -3,7 +3,8 @@
 .wrapper {
     display: flex;
     flex-flow: row nowrap;
-    max-height: 21rem;
+    min-height: 21rem;
+    height: calc(10rem + 15vw);
     position: relative;
     top: 0;
     left: 0;
@@ -12,15 +13,21 @@
 .mainPic {
     flex: 1 1.5 33rem;
     overflow: hidden;
+    display: flex;
+
     border-radius: 8px;
     img {
         width: 100%;
+        object-fit: cover;
+        height: 100%;
+
     }
 }
 
 .sidePic {
     flex: 1 1 20rem;
     margin-left: 1rem;
+    max-width: 37rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -34,7 +41,7 @@
         width: 100%;
         overflow: hidden;
         border-radius: 8px;
-
+        object-fit: cover;
 
     }
 }

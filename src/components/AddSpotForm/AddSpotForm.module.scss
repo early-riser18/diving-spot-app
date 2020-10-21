@@ -2,13 +2,30 @@
 .container {
   margin: $small-gutter;
   box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  h2 {
+    width: 100%;
+  }
+}
+
+.subWrapper {
+  max-width: 68rem;
+  
+  display: inline-flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 .formContainer {
+  display: flex;
+  flex-flow: row wrap;
+
   h3 {
     font-family: $text-bold;
   }
-  display: flex;
-  flex-flow: row wrap;
+ 
   & > :nth-child(1),
   & > :nth-child(2) {
     flex-basis: 50%;

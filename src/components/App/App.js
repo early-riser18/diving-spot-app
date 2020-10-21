@@ -67,7 +67,7 @@ class App extends React.Component {
     }
   // console.log(window.location.pathname);
 return (
-      <div>
+      <div >
         
         <Header isMobile={this.state.isMobile}
           isHome={this.state.isHome} />

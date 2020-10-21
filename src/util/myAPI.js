@@ -6,17 +6,30 @@ const storage = firebase.storage();
 
 const apiEndPoint = "http://localhost:5001/diving-app-eaabe/us-central1/app";
 
+let spotImgPath = "images";
+
 const myAPI = {
   async fetchSpot(spotID) {
-    const response = await fetch(`${apiEndPoint}spot?spotID=${spotID}`);
-    console.log("response", response);
+    console.log("fetchSpot called with: ", spotID);
+    let response = await fetch(`${apiEndPoint}/spot?spotID=${spotID}`)
+      .then((res) => {
+        if(res.ok) {
+         return res.json()
+        } else {
+         return undefined;
+        }
+      },
+      (err) => {
+        return err
+      });
+    return response;
 
-    const jsonResponse = await response.json(); // turns a JSON string into an Object
-    console.log("jsonresponse", jsonResponse);
+    // const jsonResponse = await response.json(); // turns a JSON string into an Object
+    // console.log("jsonresponse", jsonResponse);
 
-    if (jsonResponse) {
-      return jsonResponse;
-    }
+    // if (jsonResponse) {
+    //   return jsonResponse;
+    // }
   },
 
   async postNewSpot(spotInfo) {
@@ -25,20 +38,16 @@ const myAPI = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(spotInfo, null, "  "), 
-    })
+      body: JSON.stringify(spotInfo, null, "  "),
+    });
 
     let jsonRes = response;
 
-      if (jsonRes){
-        return jsonRes;
-       } else {
-         return 'No jsonRes available';
-       };
-   
-         
-     
-    
+    if (jsonRes) {
+      return jsonRes;
+    } else {
+      return "No jsonRes available";
+    }
   },
 
   async uploadSpotImage(fileArray = []) {
@@ -51,7 +60,7 @@ const myAPI = {
 
     function uploadImageAsPromise(file) {
       return new Promise(function (resolve, reject) {
-        var storageRef = storage.ref(`images/${file.name}`);
+        var storageRef = storage.ref(`${spotImgPath}/${file.name}`);
 
         var task = storageRef.put(file);
 
@@ -71,6 +80,32 @@ const myAPI = {
             });
           }
         );
+      });
+    }
+  },
+
+  async cancelUploadSpotImage(fileArray = []) {
+    console.log("FileArray is: ", fileArray);
+    const res = await Promise.all(
+      fileArray.map((val) => {
+        return cancelUploadImageAsPromise(val);
+      })
+    );
+    return res;
+
+    function cancelUploadImageAsPromise(file) {
+      return new Promise(function (resolve, reject) {
+        var storageRef = storage.ref(`${spotImgPath}/${file.name}`);
+
+        storageRef
+          .delete()
+          .then((res) => {
+            resolve("OK");
+          })
+          .catch((err) => {
+            console.log("error got triggered");
+            reject(err);
+          });
       });
     }
   },

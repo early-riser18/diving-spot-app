@@ -76,9 +76,9 @@ export class AddSpot extends React.Component {
                 this.appendAuxInfo(data, arrLink);
                 console.log('All the data sent to myAPI.postNewSpot(): ', data);
                 myAPI.postNewSpot(data).then(res =>
-                    res.ok ? 
-             this.handleSuccess()
-                    : alert('An error occured, error status: ', res.status, 'error body:', res.body)
+                    res.ok ?
+                        this.handleSubmitSuccess()
+                        : this.handleSubmitFailure(res, this.state.spotImgFile)
                 )
             })
         }
@@ -88,18 +88,33 @@ export class AddSpot extends React.Component {
         form.reset();
     }
 
-    handleSuccess(){
-        this.setState({redirect: '/form-successfully-submited'})
+    handleSubmitSuccess() {
+        this.setState({ redirect: '/form-successfully-submited' })
+    }
+
+    handleSubmitFailure(res, file) {
+        res.json().then(res =>
+            alert(res.message));
+        let dataImg = [];
+        
+            myAPI.cancelUploadSpotImage(file).then(res =>{
+                console.log(res);
+                if (typeof res === 'array'){
+                    console.log('deleted successfully');
+                } else {
+                    console.log('didn\'t delete successfully')
+                }
+            });
     }
     // Used to check if all fields have been filled in 
     validateForm(formVal) {
-        // for (let i = 0; i < Object.values(formVal).length; i++) {
+        for (let i = 0; i < Object.values(formVal).length; i++) {
         //     if (Object.values(formVal)[i] === '') {
         //         alert(`${Object.keys(formVal)[i]} must be filled out`);
         //         return false;
         //     }
-        // }
-        // console.log('form_Validated')
+         }
+        // console.log('form_Validated') 
         return true;
     }
 
@@ -132,7 +147,7 @@ export class AddSpot extends React.Component {
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
-          }
+        }
         console.log('On Render current state is: ', this.state.spotImgFile);
         return (
             <div className={styles.wrapper}>

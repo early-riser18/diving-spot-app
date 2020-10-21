@@ -45,9 +45,13 @@ app.get("/spot", (req, res) => {
 
   spotData.on("value", function (snapshot) {
     data = snapshot.val();
-    console.log(data);
   });
-  res.send(data);
+
+  if (data){
+    res.send(data);
+ } else{
+   res.status(404).send({body: 'unable to reach the spot'})
+ }
 });
 
 app.post("/writeInfo", (req, res) => {
@@ -57,8 +61,16 @@ app.post("/writeInfo", (req, res) => {
     var updates = {};
     updates["spot-list/" + newPostKey] = req.body;
     console.log(updates);
-    db.ref().update(updates);
-    res.status(200).send({ body: 'Data successfully submitted at:', newPostKey });
+    db.ref().update(updates,
+     (result) => {
+       if (result === null) {
+        res.send({ body: 'Data successfully submitted at:', newPostKey });
+
+       } else if (result !== null) {
+        res.status(400).send({message: 'Unable to submit your request, please make sure you are logged in'});
+  }; 
+     });
+    // res.send({ body: 'Data successfully submitted at:', newPostKey });
   } catch (error) {
     res.status(500).send({error: error});
   }

@@ -34,7 +34,7 @@ export class SpotMainInfo extends React.Component {
                     <div className={styles.subheader}>
                         <h4>Ajouté par:&nbsp;<span className={styles.bold}>{spot.author}</span></h4>
                    &nbsp;&nbsp;&nbsp;&nbsp; <h4>Dernière mise-à-jour le:&nbsp;<span className={styles.bold}>{spot.lastUpdated}&nbsp;&nbsp;&nbsp;</span></h4>
-                   <span><img className={styles.starRating} src={starFull} alt='' /><p className={styles.rating}>&nbsp;{spot.rating} sur 5 ({spot.totalRating})</p></span>
+                   <span><img className={styles.starRating} src={starFull} alt='' /><p className={styles.rating}>&nbsp;{spot.rating ? spot.rating : 0} sur 5 ({spot.totalRating})</p></span>
 
                     </div>
 
