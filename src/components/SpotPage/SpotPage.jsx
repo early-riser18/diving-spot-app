@@ -46,8 +46,9 @@ export class SpotPage extends React.Component {
                 parking: "Possibilité de se garer à un parking Lidl à proximité",
                 description: 'Ce lieu de plongée est splendide. Il est habrité entre le port et la digue ce qui permet d’apprécier les algues et les poissons. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> <br/>Praesent at euismod sem, dictum dapibus ligula. Proin fringilla iaculis lorem, vel bibendum sapien gravida sit amet. Pellentesque vehicula pulvinar odio, in cursus dui semper ac.<br/><br/>Fusce nec laoreet arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
                 image: [
-                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2FID%20Card%20Picture%20Justin%20Front.jpg?alt=media&token=72493acc-16ad-4eb0-b863-d898cc5483d9",
                     "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",
+                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",
+
                 ],
                 comments: [
 

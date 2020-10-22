@@ -22,14 +22,19 @@ h1, h2 {
     font-family: "Vision-Heavy";
     color: $primary-text;
     font-size:$big-font-size;
-    letter-spacing: -2px;
+    letter-spacing: -1.5px;
     margin-top: 3rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
+
 }
 
 h2 {
 font-size: $medbig-font-size;
+}
+h3, h4, h5 {
+    letter-spacing: 0.01rem;
+
 }
 
 h3 {
@@ -51,6 +56,7 @@ h5 {
 p {
     font-size: $sml-font-size;
     font-family: $text-med;
+    letter-spacing: 0.01rem;
 }
 .subtitle {
     font-size: $med-font-size;
@@ -74,4 +80,18 @@ p {
 
 .unavailable {
     color: #9b9a9a;
+}
+
+@media screen and (max-width: 500px) {
+    h1, h2 {
+        font-size:2rem;
+        font-family: 'vision-bold';
+        margin-top: 1rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    
 }

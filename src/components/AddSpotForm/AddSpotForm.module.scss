@@ -5,6 +5,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin: 0 1rem;
 
   h2 {
     width: 100%;
@@ -13,8 +14,8 @@
 
 .subWrapper {
   max-width: 68rem;
-  
-  display: inline-flex;
+
+  display: flex;
   flex-flow: row wrap;
   justify-content: center;
 }
@@ -25,17 +26,18 @@
   h3 {
     font-family: $text-bold;
   }
- 
+
   & > :nth-child(1),
   & > :nth-child(2) {
     flex-basis: 50%;
     max-width: 32rem;
-    padding-right: 3em;
+    // padding-right: 3rem;
+    min-width: 26rem;
   }
 }
 
 .label {
-  display: inline-flex;
+  display: flex;
   font-size: $sml-font-size;
   font-family: $text-med;
   color: rgb(64, 64, 64);
@@ -67,7 +69,7 @@
 }
 .textarea {
   min-height: 7rem;
-  min-width: 25rem;
+  min-width: 5rem;
   line-height: 1.4;
 }
 
@@ -103,9 +105,9 @@
 
 .levelSelector {
   display: flex;
-  flex-flow: row wrap;
-  max-width: 25rem;
+  flex-flow: row nowrap;
   justify-content: space-between;
+  max-width: 25rem;
 }
 
 // Radio Button
@@ -127,6 +129,7 @@
   justify-content: center;
   border-radius: 4px;
   font-size: $sml-font-size;
+
 }
 .radio input:checked + span {
   color: white;
@@ -182,6 +185,8 @@
     margin-bottom: 1.3rem;
 
     & > div {
+      display: inline-flex;
+      align-items: baseline;
       margin-right: 1.8rem;
     }
   }
@@ -213,5 +218,41 @@
     );
     border-radius: 8px;
     border: none;
+  }
+}
+
+@media screen and (max-width: 501px) {
+  .textarea {
+    max-width: 19rem;
+    min-height: 8rem;
+  }
+
+  .formContainer {
+    & > :nth-child(1),
+    & > :nth-child(2) {
+      min-width: 18rem;
+    }
+  }
+
+  .levelSelector {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+  }
+
+  // Radio Button
+  .radio {
+    // display: block;
+    padding: 0rem;
+    width: 100%;
+  }
+
+  .radio span {
+    border: 1px solid #ccc;
+    margin: 0.2rem 0;
+    border-radius: 4px;
+    font-size: $sml-font-size;  
+    width: 100%;
+
   }
 }

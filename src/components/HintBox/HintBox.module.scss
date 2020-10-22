@@ -1,4 +1,5 @@
 @import '../root.scss';
+@media screen and (min-width: 601px) {
 
 .hint {
     position: relative;
@@ -30,5 +31,43 @@
       opacity: 0;
       transition: opacity 0.2s ease;
 
+    }
+  }
+}
+  @media screen and (max-width: 600px) {
+    .hint {
+      display: none;
+      position: relative;
+      margin: 0 0.3rem;
+      top: 0;
+      left: 0;
+     
+      img {
+          cursor: pointer;
+          
+          width: 1.1rem;
+          &:hover + .hintBox{
+              opacity: 1;
+          }
+      }
+      & > .hintBox {
+          z-index: 10;
+          pointer-events: none;
+        width: 20rem;
+        border: 1px solid rgb(203, 212, 240);
+        box-shadow: 1px 1px 7px rgba(166, 158, 238, 0.274);
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+       transform: translate(-50%, 0);
+        border-radius: 4px;
+        background-color: rgb(246, 246, 255);
+        padding: 0.5rem;
+        font-size: $tiny-font-size;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+
+  
+      }
     }
   }

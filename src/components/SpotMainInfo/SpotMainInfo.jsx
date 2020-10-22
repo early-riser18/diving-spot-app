@@ -29,7 +29,7 @@ export class SpotMainInfo extends React.Component {
                 <div className={styles.wrapper}>
                     <div className={styles.header}>
                         <h2>{spot.title}</h2>
-                        <Button variant='secondary' text='Editer' /> {/* Need to add Edit Icon here */}
+                        {/* <Button variant='secondary' text='Editer' /> Need to add Edit Icon here */}
                     </div>
                     <div className={styles.subheader}>
                         <h4>Ajouté par:&nbsp;<span className={styles.bold}>{spot.author}</span></h4>
@@ -55,8 +55,8 @@ export class SpotMainInfo extends React.Component {
                             .map(e => {
                                 return <div>{e} -&nbsp;</div>
                             })}
-                           &nbsp;<p>{spot.keywords.depth} -</p>
-                          <p>&nbsp;Adapté pour {dataToDisplay.adaptedFor(spot.keywords.adaptedFor)} -&nbsp;</p>
+                           &nbsp;{spot.keywords.depth} -
+                          &nbsp;Adapté pour {dataToDisplay.adaptedFor(spot.keywords.adaptedFor)} -&nbsp;
                           
                           </p>
                             <p className={renderLevel(spot.level)}>{translateLevel(spot.level)}</p>

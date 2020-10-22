@@ -25,8 +25,8 @@ export class HomeHeader extends React.Component {
                     <span> <Link to={'/'}> <img className={styles.logo} src={require('../../assets/logo-sm.png')} alt=''/></Link>
                         <p className={styles.title}>How To Sea</p></span>
                     <span>
-                        <Button variant="secondary" text="Ajouter un spot" />
-                        <Button variant="primary" text="Se connecter" />
+                       <Link to={'/add-spot'}> <Button variant="secondary" text="Ajouter un spot" /></Link>
+                      <Link to={'/sign-in'}> <Button variant="primary" text="Se connecter" /></Link> 
                     </span>
                 </div>);
         }

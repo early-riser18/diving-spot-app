@@ -9,8 +9,8 @@ import { SearchMenu } from '../SearchMenu/SearchMenu';
 import { Error } from '../Error/Error';
 import { SpotPage } from '../SpotPage/SpotPage';
 import { FormSuccessOverlay } from '../FormSuccessOverlay/FormSuccessOverlay';
-
 import '../root.scss';
+import SignIn from '../SignIn/SignIn';
 
 class App extends React.Component {
 
@@ -73,11 +73,12 @@ return (
           isHome={this.state.isHome} />
         <main>
           <Switch>
-            <Route path='/' render={(props) =>
+            <Route exact path='/' render={(props) =>
               <HomePage {...props} locationDetected={this.state.locationDetected} />}
-              exact />
+               />
               <Route path='/form-successfully-submited' component={FormSuccessOverlay} />
             <Route path='/search' component={SearchMenu} />
+            <Route path='/sign-in' component={SignIn} />
             <Route path='/result' component={SpotPage} />
             <Route path='/add-spot' render={(props) =>
               <AddSpot {...props} userInfo={this.state.user} />} />

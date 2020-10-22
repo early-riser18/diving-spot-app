@@ -6,11 +6,13 @@ import App from './components/App/App';
 import { BrowserRouter } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
+import ScrollToTop from './util/ScrollToTop';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+    <ScrollToTop />
       <App />
     </BrowserRouter>
   </React.StrictMode>,

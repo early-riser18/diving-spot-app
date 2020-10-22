@@ -1,10 +1,16 @@
 import React from 'react';
+import styles from './Error.module.scss';
+import { Button } from '../Button/Button';
+import { Link } from 'react-router-dom';
+
 export class Error extends React.Component {
     render() {
 
-        return (<div>
+        return (<div className={styles.wrapper}>
     
-            <h1>Oops, no page was found.</h1>;
+            <h1>Page introuvable.</h1>
+            <Link to={'/'} ><Button text="Retour au menu" /></Link>
+
         </div>)
     }
 }

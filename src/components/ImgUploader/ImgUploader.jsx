@@ -14,7 +14,7 @@ export default class ImgUploader extends React.Component {
 
     handleChange(event) {
         if (event.target.files[0]) {
-            if (event.target.files[0].size < 1000000) { // Check size < 1MB
+            if (event.target.files[0].size < 2000000) { // Check size < 1MB
                 let newFile = event.target.files[0];
                 let newUrl = URL.createObjectURL(event.target.files[0]);
                 let newName = event.target.files[0].name;
@@ -24,7 +24,7 @@ export default class ImgUploader extends React.Component {
                     spotImgUrl: { ...prevState.spotImgUrl, [newName]: newUrl }
                 }));
             } else {
-                alert("Erreur: Veuillez choisir une image plus petit que 1MB");
+                alert("Erreur: Veuillez choisir une image plus petit que 2MB");
             }
         }
     }
@@ -45,7 +45,7 @@ export default class ImgUploader extends React.Component {
     render() {
         return (
             <div className={styles.wrapper}>
-                <span className={styles.myInput}>Ajouter une photo:<input onChange={this.handleChange} type='file' accept=".jpg,.jpeg,.png" name='image' /></span>
+                <span className={styles.myInput}>Ajouter une photo:<input onChange={this.handleChange} type='file' accept="image/*" name='image' /></span>
                 <div className={styles.imgPreviewCol}>
                     {Object.entries(this.state.spotImgUrl).map(e =>
                         <div key={e[0]} className={styles.inputFrame}>

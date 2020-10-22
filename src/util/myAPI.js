@@ -20,7 +20,7 @@ const myAPI = {
         }
       },
       (err) => {
-        return err
+        return undefined
       });
     return response;
 
@@ -39,7 +39,15 @@ const myAPI = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(spotInfo, null, "  "),
-    });
+    }).then((res) => {
+      console.log(res);
+      return res;
+    },
+    (err) => {
+      console.log(err.constructor.name);
+      return err;
+    }
+    );
 
     let jsonRes = response;
 

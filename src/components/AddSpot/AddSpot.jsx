@@ -93,18 +93,22 @@ export class AddSpot extends React.Component {
     }
 
     handleSubmitFailure(res, file) {
-        res.json().then(res =>
-            alert(res.message));
-        let dataImg = [];
+        if (res.constructor.name === 'TypeError'){
+            alert("Une erreur s'est produite. Veuillez réessayer plus tard.")
+        } else {
+            res.json().then(res =>
+                alert(res.message));
+            
+                myAPI.cancelUploadSpotImage(file).then(res =>{
+                    console.log(res);
+                    if (typeof res === 'array'){
+                        console.log('deleted successfully');
+                    } else {
+                        console.log('didn\'t delete successfully')
+                    }
+                });
+        }
         
-            myAPI.cancelUploadSpotImage(file).then(res =>{
-                console.log(res);
-                if (typeof res === 'array'){
-                    console.log('deleted successfully');
-                } else {
-                    console.log('didn\'t delete successfully')
-                }
-            });
     }
     // Used to check if all fields have been filled in 
     validateForm(formVal) {

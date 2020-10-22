@@ -209,7 +209,7 @@ export class AddSpotForm extends React.Component {
     </div> 
     <div className={styles.imageContainer}>
         <label className={styles.label} for="image" >Photo(s) du spot <HintBox icon={this.state.hintIcon} text={this.state.hintText.image} /></label>
-        <p className={styles.caption}>Jusqu’à 10 photos. Max 1MB</p>
+        <p className={styles.caption}>Jusqu’à 10 photos. Max 2MB</p>
         <ImgUploader currentImgUploaded={this.props.currentImgUploaded} imgURLUpload={this.props.imgURLUpload} imgURLDelete={this.props.imgURLDelete}/>
     </div>
     <div className={styles.submitContainer}>
