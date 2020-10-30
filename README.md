@@ -9,7 +9,7 @@ Internally, I decided to develop this platform to strengthen my competence with 
 
 ------ TIMELINE ------
 
-This project was initiated in early July 2020 and is due for completion by end-September 2020
+This project was initiated in early July 2020 and is due for completion by mid-November 2020
 
 
 ------ FEATURES ------

@@ -1,9 +1,9 @@
-const firebaseSetup = require('../src/util/firebaseSetUp');
-const firebase = require("firebase");
+// const firebase = require("firebase");
+const firebase = require('../src/util/firebaseSetUp');
+// firebase.initializeApp(firebaseSetup.firebaseConfig);
 const functions = require("firebase-functions");
 const storage = require('firebase/storage');
-firebase.initializeApp(firebaseSetup.firebaseConfig);
-
+// const storage = firebase.storage();
 
 const express = require("express"); 
 const app = express();

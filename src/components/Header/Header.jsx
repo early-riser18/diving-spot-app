@@ -18,11 +18,11 @@ export function Header(props) {
             window.removeEventListener('scroll', () => handleScroll);
         };
     }, []);
-
     return (
+
         <header className={styles.container}>
             <div ref={headerRef} className={`${styles.myHeader} ${isSticky ? styles.sticky : ''}`}>
-                {props.isHome ? <HomeHeader isMobile={props.isMobile} /> : <SearchHeader isMobile={props.isMobile} />
+                {props.props.isHome ? <HomeHeader props={props.props} /> : <SearchHeader props={props.props} />
                 } </div>
         </header>
 

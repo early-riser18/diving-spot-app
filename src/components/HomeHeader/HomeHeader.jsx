@@ -8,7 +8,7 @@ export class HomeHeader extends React.Component {
 
     render() {
 
-        if (this.props.isMobile) {
+        if (this.props.props.isMobile) {
             return (
                 <div className={` ${styles.mobile} ${styles.section}`}>
 
@@ -19,14 +19,16 @@ export class HomeHeader extends React.Component {
                 </div>
             );
         }
-        else if (this.props.isMobile === false) {
+        else if (this.props.props.isMobile === false) {
             return (
                 <div className={styles.section}>
                     <span> <Link to={'/'}> <img className={styles.logo} src={require('../../assets/logo-sm.png')} alt=''/></Link>
                         <p className={styles.title}>How To Sea</p></span>
                     <span>
                        <Link to={'/add-spot'}> <Button variant="secondary" text="Ajouter un spot" /></Link>
-                      <Link to={'/sign-in'}> <Button variant="primary" text="Se connecter" /></Link> 
+                      { this.props.props.isSignedIn ? <Link to={'/profile'}><Button variant="primary" text='Profil'></Button></Link>
+                      : <Link to={'/sign-in'}> <Button variant="primary" text="Se connecter" /></Link> 
+                    }
                     </span>
                 </div>);
         }

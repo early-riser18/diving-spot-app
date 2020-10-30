@@ -3,6 +3,7 @@ import { AddSpotForm } from '../AddSpotForm/AddSpotForm';
 import { Redirect } from 'react-router-dom';
 import myAPI from '../../util/myAPI';
 import styles from './AddSpot.module.scss';
+import formToJSON from '../../util/formToJSON';
 export class AddSpot extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,6 @@ export class AddSpot extends React.Component {
             redirect: null
 
         };
-        this.formToJSON = this.formToJSON.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
         this.validateForm = this.validateForm.bind(this);
         this.appendAuxInfo = this.appendAuxInfo.bind(this);
@@ -38,39 +38,12 @@ export class AddSpot extends React.Component {
     }
 
 
-    // from https://www.learnwithjason.dev/blog/get-form-values-as-json/ 
-    // Used to extract values from the form and make an array
-    // Loop through HTML Collection and apply array-method to it
-    // Create data object and assign key-value pairs based on form elements.
-    formToJSON = elements => [].reduce.call(elements, (data, element) => {
-
-        // To assign only radio elements with a checked value and disregard others
-        if (element.type === 'radio') {
-            if (element.checked === true) {
-                data[element.name] = element.value;
-            }
-            // to create an object and assign all checkbox values to it
-        } else if (element.type === 'checkbox') {
-            if (typeof data[element.name] === 'object') {
-                data[element.name][element.value] = element.checked;
-
-            } else { data[element.name] = { [element.value]: element.checked }; }
-
-        } else if (element.type === 'submit' || element.type === 'file') {
-
-        } else {
-            data[element.name] = element.value;
-        }
-        return data;
-    }, {});
-
 
     formSubmit(event) {
         event.preventDefault();
 
         const form = document.getElementById('addSpotForm');
-        let data = this.formToJSON(form.elements); // Call our function to get the form data.
-
+        let data = formToJSON(form.elements); // Call our function to get the form data.
         if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
             myAPI.uploadSpotImage(this.state.spotImgFile).then(arrLink => {
                 this.appendAuxInfo(data, arrLink);

@@ -1,9 +1,6 @@
 import { json } from "body-parser";
-import firebaseSetUp from "../util/firebaseSetUp";
-const firebase = require("firebase");
-firebase.initializeApp(firebaseSetUp.firebaseConfig);
+import firebase from "./firebaseSetUp.js";
 const storage = firebase.storage();
-
 const apiEndPoint = "http://localhost:5001/diving-app-eaabe/us-central1/app";
 
 let spotImgPath = "images";
@@ -44,7 +41,7 @@ const myAPI = {
       return res;
     },
     (err) => {
-      console.log(err.constructor.name);
+      console.error(err);
       return err;
     }
     );
@@ -111,7 +108,7 @@ const myAPI = {
             resolve("OK");
           })
           .catch((err) => {
-            console.log("error got triggered");
+            console.error("error got triggered");
             reject(err);
           });
       });
