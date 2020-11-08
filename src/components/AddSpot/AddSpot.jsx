@@ -41,20 +41,24 @@ export class AddSpot extends React.Component {
 
     formSubmit(event) {
         event.preventDefault();
-
-        const form = document.getElementById('addSpotForm');
-        let data = formToJSON(form.elements); // Call our function to get the form data.
-        if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
-            myAPI.uploadSpotImage(this.state.spotImgFile).then(arrLink => {
-                this.appendAuxInfo(data, arrLink);
-                console.log('All the data sent to myAPI.postNewSpot(): ', data);
-                myAPI.postNewSpot(data).then(res =>
-                    res.ok ?
-                        this.handleSubmitSuccess()
-                        : this.handleSubmitFailure(res, this.state.spotImgFile)
-                )
-            })
+        if (this.props.userInfo) {
+            const form = document.getElementById('addSpotForm');
+            let data = formToJSON(form.elements); // Call our function to get the form data.
+            if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
+                myAPI.uploadSpotImage(this.state.spotImgFile).then(arrLink => {
+                    this.appendAuxInfo(data, arrLink);
+                    console.log('All the data sent to myAPI.postNewSpot(): ', data);
+                    myAPI.postNewSpot(data).then(res =>
+                        res.ok ?
+                            this.handleSubmitSuccess()
+                            : this.handleSubmitFailure(res, this.state.spotImgFile)
+                    )
+                })
+            }
+        } else {
+            alert('Veuillez verifier que vous êtes connecté')
         }
+      
     }
     formReset() {
         const form = document.getElementById('addSpotForm');
@@ -86,12 +90,11 @@ export class AddSpot extends React.Component {
     // Used to check if all fields have been filled in 
     validateForm(formVal) {
         for (let i = 0; i < Object.values(formVal).length; i++) {
-        //     if (Object.values(formVal)[i] === '') {
-        //         alert(`${Object.keys(formVal)[i]} must be filled out`);
-        //         return false;
-        //     }
+            if (Object.values(formVal)[i] === '') {
+                alert(`${Object.keys(formVal)[i]} must be filled out`);
+                return false;
+            }
          }
-        // console.log('form_Validated') 
         return true;
     }
 
@@ -108,6 +111,7 @@ export class AddSpot extends React.Component {
 
         formVal['image'] = arrImgLink;
         // Used to add user info required + default publishing status 
+        
         formVal['author'] = this.props.userInfo.displayName;
         formVal['uid'] = this.props.userInfo.uid;
         formVal['ispublished'] = false;

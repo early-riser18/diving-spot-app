@@ -6,6 +6,7 @@ import SpotDescription from '../SpotDescription/SpotDescription';
 import CommentList from '../CommentList/CommentList';
 import myAPI from '../../util/myAPI';
 import { Redirect } from 'react-router-dom';
+import { ReactComponent as Loader } from '../../assets/Double Ring-1s-200px.svg';
 // Will have states returned from the database
 
 // Compo sattelite view fix
@@ -17,64 +18,9 @@ export class SpotPage extends React.Component {
         this.state = {
             redirectErr: null,
             spot: {
-                // NEED TO FIGURE OUT HOW TO PRESERVE LINEBREAK FROM JSON TO STRING
-                title: 'Calanques de Samena',
-                author: 'Vincent B.',
-                lastUpdated: '05/07/2020',
-                dateCreated: "13/9/2020",
-                rating: 4.8,
-                totalRating: 117,
-                keywords: {
-                    adaptedFor: 'scubaDiving',
-                    caracteristics: {
-                        fishy: false,
-                        reef: true,
-                        shipwreck: false,
-                        wall: true
-                    },
-                    depth: '0 to 9m',
-                    recommendedAccess: 'foot'
-                },
-                latitude: "4.232292",
-                longitude: "34.2032",
-                level: 'medium',
-                accessPoint: 'Départ à l’eau à 30m au sud de la capitainerie du port de Marseille Accès à pied en 5 minutes',
-                street: 'Rue de la capitainerie',
-                postalCode: '13000',
-                city: 'Marseille',
-                country: 'France',
-                parking: "Possibilité de se garer à un parking Lidl à proximité",
-                description: 'Ce lieu de plongée est splendide. Il est habrité entre le port et la digue ce qui permet d’apprécier les algues et les poissons. Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br/> <br/>Praesent at euismod sem, dictum dapibus ligula. Proin fringilla iaculis lorem, vel bibendum sapien gravida sit amet. Pellentesque vehicula pulvinar odio, in cursus dui semper ac.<br/><br/>Fusce nec laoreet arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-                image: [
-                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",
-                    "https://firebasestorage.googleapis.com/v0/b/diving-app-eaabe.appspot.com/o/images%2Fdesktop%20backgorund.jpg?alt=media&token=94e4d329-ca1e-4c10-bd1b-606064a449be",
-
-                ],
-                comments: [
-
-                    {
-                        author: 'Vincent B.',
-                        profilePic: '',
-                        memberSince: '02/02/2005',
-                        title: 'Un must-have!',
-                        rating: 5,
-                        pros: ['Beaucoup d’espèces de poisson', 'Peu de monde', 'Bien éclairé'],
-                        cons: ['Un peu pollué', 'Des fois un peu trop de courant'],
-                        comment: 'Dans l’ensemble, ce spot est vraiment top, j’ai beaucoup aimé les écrevisses et les poulpes qui viennent se faufiler entre mes pieds. Les étoiles sont de toutes les couleurs, j’en ai même ramené deux à la maison pour ma maman.'
-
-                    },
-                    {
-                        author: 'Patrick K.',
-                        profilePic: '',
-                        memberSince: '18/12/2012',
-                        title: 'Très joli',
-                        rating: 4,
-                        pros: ['Eau transparente', 'Beaux coraux'],
-                        cons: ["Trop d'algues", 'Du courant'],
-                        comment: 'Dans l’ensemble, ce spot est vraiment top, j’ai beaucoup aimé les écrevisses et les poulpes qui viennent se faufiler entre mes pieds. Les étoiles sont de toutes les couleurs, j’en ai même ramené deux à la maison pour ma maman.'
-
-                    }
-                ]
+                keywords: {},
+                image: [],
+                comments: []
             },
             diapoIndex: 1,
             isDiapoHidden: true
@@ -93,11 +39,29 @@ export class SpotPage extends React.Component {
             console.log(spotData);
             if (spotData) {
                 this.setState({ spot: spotData });
-
+                this.removeLoader();
             } else {
                 this.setState({ redirectErr: '/error' });
+
             }
         });
+    }
+
+    removeLoader() {
+        setTimeout(() => {
+            
+            let loader = document.getElementById('loader');
+            if (loader) {
+                loader.classList.add(`${styles.loaderOff}`)
+                document.body.style.overflow = 'visible';
+    
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1500)
+            }
+           
+        }, 800);
+
     }
 
     plusSlide() {
@@ -134,12 +98,15 @@ export class SpotPage extends React.Component {
     }
 
 
-    UNSAFE_componentWillMount() {
-        this.initializeSpot('-MKAodqdu3aD4f2M5Rna'); // -MKAodqdu3aD4f2M5Rna
+    componentDidMount() {
+        this.initializeSpot('-MKAodqdu3aD4f2M5Rna');
+        document.body.style.overflow = 'hidden';
     }
 
     componentWillUnmount() {
         // this.setState({ redirectErr: null });
+        document.body.style.overflow = 'visible';
+
     }
 
 
@@ -161,6 +128,11 @@ export class SpotPage extends React.Component {
                     </div> :
                     <Diaporama spot={this.state.spot} index={this.state.diapoIndex} content={this.showSlide(this.state.diapoIndex)} onClickPlus={this.plusSlide} onClickMinus={this.minusSlide} onClickClose={this.handleDiapoClose} />
                 }
+                <div className={styles.loader} id='loader'>
+                    <div className={styles.animation}>
+                        <Loader />
+                    </div>
+                </div>
             </div>
         )
     }

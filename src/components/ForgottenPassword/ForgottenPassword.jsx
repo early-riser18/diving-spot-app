@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import firebase from "../../util/firebaseSetUp";
 import formToJSON from '../../util/formToJSON';
+import styles from './ForgottenPassword.module.scss';
+import {Button} from '../Button/Button';
 
 export const ForgottenPassword = (props) => {
 
@@ -36,21 +38,29 @@ export const ForgottenPassword = (props) => {
     const onInit = <div>
         <h1>Mot de passe oublié?</h1>
         <form id='forgottenPWForm'>
-            <label for='email'>Veuillez entrer votre email</label>
-            <input type='text' name='email' />
-            <button onClick={handleForgottenPassword} >Soumettre la demande</button>
+            <label className={styles.label} for='email'>Veuillez entrer votre email</label>
+            <input className={styles.inputField} type='text' name='email' />
+            <br/><br/>
+            <Button variant='primary' text='Soumettre la demande' onClick={handleForgottenPassword} />
+
         </form>
     </div>;
 
     const onSuccess = <div><h2>Demande envoyée</h2>
         <p>Un email contenant un lien pour réinitialiser votre mot de passe vous a été envoyé</p>
-        <Link to={'/'}>Retour à la page d'accueil</Link>
+        <br/><br/>
+
+      <Button variant='primary' text={
+       <Link to={'/'}>Retour à la page d'accueil</Link> } />
+
 
     </div>;
 
-    return (<div>
+    return (<div className={styles.wrapper}>
         { redirect ? <Redirect to={redirect} /> : ''}
+        <div className={styles.contentWrapper}>
         { successful ? onSuccess : onInit}
+        </div>
     </div>
     )
 }

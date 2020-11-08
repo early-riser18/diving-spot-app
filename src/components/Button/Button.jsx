@@ -9,7 +9,7 @@ variantStyle(variant){
 render() {
 
     return (
-        <button className={`${styles.btn} ${styles[this.props.variant]}`}>{this.props.text}</button>
+        <button onClick={this.props.onClick} className={`${styles.btn} ${styles[this.props.variant]}`}>{this.props.text}</button>
     );
 }
 }

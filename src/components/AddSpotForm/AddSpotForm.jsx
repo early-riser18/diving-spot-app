@@ -59,11 +59,11 @@ export class AddSpotForm extends React.Component {
     <div >
         <h3>A propos du spot</h3>
         <div>
-            <label className={styles.label} for="title">Nom du spot</label><br />
+            <label className={styles.label} htmlFor="title">Nom du spot</label><br />
             <input className={styles.inputField} type='text' name='title' required />
         </div>
         <div>
-            <label className={styles.label} for="level">Niveau recommendé
+            <label className={styles.label} htmlFor="level">Niveau recommendé
             <HintBox icon={this.state.hintIcon} text={this.state.hintText.level}/>
             </label>
 
@@ -74,7 +74,7 @@ export class AddSpotForm extends React.Component {
 
             </div>
             <div>
-                <label className={styles.label} for="description">Description détaillé du spot
+                <label className={styles.label} htmlFor="description">Description détaillé du spot
                 <HintBox icon={this.state.hintIcon} text={this.state.hintText.description}/></label><br />
                 <textarea className={styles.textarea} type='text' name='description' placeholder="Ex: Plage à la sortie, zone ombragée, mise à l’eau facile, tombants, grottes, tunnels, épaves, organisme vivant remarquable…" />
 
@@ -85,19 +85,19 @@ export class AddSpotForm extends React.Component {
                 <div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='depth' id='depth0' value='0 to 9m' defaultChecked />
-                        <label className={styles.label} for="depth">0 à 9m</label>
+                        <label className={styles.label} htmlFor="depth">0 à 9m</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='depth' id='depth1' value='10 to 19m' />
-                        <label className={styles.label} for="depth">10 à 19m</label>
+                        <label className={styles.label} htmlFor="depth">10 à 19m</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='depth' id='depth2' value='20 to 39m' />
-                        <label className={styles.label} for="depth">20 à 39m</label>
+                        <label className={styles.label} htmlFor="depth">20 à 39m</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='depth' id='depth3' value='40m and more' />
-                        <label className={styles.label} for="depth">40m et plus</label>
+                        <label className={styles.label} htmlFor="depth">40m et plus</label>
                     </div>
                 </div>
 
@@ -105,16 +105,16 @@ export class AddSpotForm extends React.Component {
                 <div>
                     <div>
                         <input className={styles.inputBox} type='checkbox' name='caracteristics' id='fishy' value='fishy' />
-                        <label className={styles.label} for="caracteristics">Poissonneux</label>
+                        <label className={styles.label} htmlFor="caracteristics">Poissonneux</label>
 
                     </div>
                     <div>
                         <input className={styles.inputBox} type='checkbox' name='caracteristics' id='reef' value='reef' />
-                        <label className={styles.label} for="caracteristics">Récif</label>
+                        <label className={styles.label} htmlFor="caracteristics">Récif</label>
                     </div>
                     <div>
                         <input className={styles.inputBox} type='checkbox' name='caracteristics' id='shipwreck' value='shipwreck' />
-                        <label className={styles.label} for="caracteristics">Épave</label>
+                        <label className={styles.label} htmlFor="caracteristics">Épave</label>
                     </div>
                     <div>
                         <input className={styles.inputBox} type='checkbox' name='caracteristics' id='wall' value='wall' />
@@ -127,11 +127,11 @@ export class AddSpotForm extends React.Component {
                 <div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='recommendedAccess' id='recommendedAccess0' value='foot' defaultChecked onChange={this.accessByFoot} />
-                        <label className={styles.label} for="recommendedAccess">À pied</label>
+                        <label className={styles.label} htmlFor="recommendedAccess">À pied</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='recommendedAccess' id='recommendedAccess1' value='boat' onChange={this.accessByFoot} />
-                        <label className={styles.label} for="recommendedAccess">En bateau</label>
+                        <label className={styles.label} htmlFor="recommendedAccess">En bateau</label>
                     </div>
                 </div>
 
@@ -139,15 +139,15 @@ export class AddSpotForm extends React.Component {
                 <div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='adaptedFor' id='adaptedFor0' value='all' defaultChecked />
-                        <label className={styles.label} for="adaptedFor">Tous</label>
+                        <label className={styles.label} htmlFor="adaptedFor">Tous</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='adaptedFor' id='adaptedFor1' value='scubaDiving' />
-                        <label className={styles.label} for="adaptedFor">Plongée bouteille</label>
+                        <label className={styles.label} htmlFor="adaptedFor">Plongée bouteille</label>
                     </div>
                     <div>
                         <input className={styles.inputRadio} type='radio' name='adaptedFor' id='adaptedFor2' value='snorkeling' />
-                        <label className={styles.label} for="adaptedFor">Apnée/Snorkeling</label>
+                        <label className={styles.label} htmlFor="adaptedFor">Apnée/Snorkeling</label>
                     </div>
                 </div>
             </div>

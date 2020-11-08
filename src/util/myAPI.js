@@ -1,4 +1,5 @@
 import { json } from "body-parser";
+import { UserDimensions } from "firebase-functions/lib/providers/analytics";
 import firebase from "./firebaseSetUp.js";
 const storage = firebase.storage();
 const apiEndPoint = "http://localhost:5001/diving-app-eaabe/us-central1/app";
@@ -8,25 +9,21 @@ let spotImgPath = "images";
 const myAPI = {
   async fetchSpot(spotID) {
     console.log("fetchSpot called with: ", spotID);
-    let response = await fetch(`${apiEndPoint}/spot?spotID=${spotID}`)
-      .then((res) => {
-        if(res.ok) {
-         return res.json()
+    let response = await fetch(`${apiEndPoint}/spot?spotID=${spotID}`).then(
+      (res) => {
+        if (res.ok) {
+          return res.json();
         } else {
-         return undefined;
+          return undefined;
         }
       },
       (err) => {
-        return undefined
-      });
+        return undefined;
+      }
+    );
     return response;
 
-    // const jsonResponse = await response.json(); // turns a JSON string into an Object
-    // console.log("jsonresponse", jsonResponse);
-
-    // if (jsonResponse) {
-    //   return jsonResponse;
-    // }
+  
   },
 
   async postNewSpot(spotInfo) {
@@ -36,14 +33,15 @@ const myAPI = {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(spotInfo, null, "  "),
-    }).then((res) => {
-      console.log(res);
-      return res;
-    },
-    (err) => {
-      console.error(err);
-      return err;
-    }
+    }).then(
+      (res) => {
+        console.log(res);
+        return res;
+      },
+      (err) => {
+        console.error(err);
+        return err;
+      }
     );
 
     let jsonRes = response;
@@ -112,6 +110,49 @@ const myAPI = {
             reject(err);
           });
       });
+    }
+  },
+
+  async getUserData(userID) {
+    try {
+      const response = await fetch(`${apiEndPoint}/userdata?uid=${userID}`)
+      .then((res) => {
+        return res;
+      }).catch((e) => {
+        return e
+      })
+      return response;
+  
+       
+    
+    } catch (e) {
+      console.error(e);
+      return e;
+    }
+
+  },
+
+  async updateProfile(userUid, data, profileImg) {
+    try {
+      const response = await fetch(`${apiEndPoint}/updateProfile`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(
+          {
+            id: userUid,
+            data: data,
+          },
+          null,
+          "  "
+        ),
+      });
+      if (response) {
+        return;
+      }
+    } catch (e) {
+      return e;
     }
   },
 };

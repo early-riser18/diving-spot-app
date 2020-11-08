@@ -62,20 +62,29 @@ export default class SignIn extends React.Component {
 
     render() {
 
-        return (<div >
+        return (<div>
             {this.state.redirect ? <Redirect to={this.state.redirect} /> : ''}
             <h1>S'identifier</h1>
+
+
             <div className={styles.wrapper} >
                 <form id='signInForm'>
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" autoComplete></input>
-                    <label for="password">Mot de passe</label>
-                    <input type="password" name='password' autoComplete></input>
-                    <button onClick={this.handleForgottenPassword} >Mot de passe oublié?</button>
+                    <div>
+                        <label className={styles.label} htmlFor="email">E-mail</label>
+                        <input className={styles.inputField} type="text" name="email" autoComplete="true"></input>
+                    </div>
+                    <div>
+                        <label className={styles.label} htmlFor="password">Mot de passe</label>
+                        <input className={styles.inputField} type="password" name='password' autoComplete="true"></input>
+
+                    </div>
                     <button onClick={this.handleSubmit}>Se connecter</button>
+                    <button onClick={this.handleForgottenPassword} >Mot de passe oublié?</button>
                 </form>
-                <button onClick={this.props.handleNoAccount}>Créer un nouveau compte</button>
-                <h3>S'identifier avec:</h3>
+                <div className={styles.otherOption}>
+                    <button onClick={this.props.handleNoAccount}>Créer un nouveau compte</button>
+                </div>
+                {/* <h3>S'identifier avec:</h3> */}
 
             </div>
         </div>

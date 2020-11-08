@@ -10,11 +10,11 @@ import { Error } from "../Error/Error";
 import { SpotPage } from "../SpotPage/SpotPage";
 import { FormSuccessOverlay } from "../FormSuccessOverlay/FormSuccessOverlay";
 import "../root.scss";
-import SignIn from "../SignIn/SignIn";
 import { Signing } from "../Signing/Signing";
 import { ForgottenPassword } from "../ForgottenPassword/ForgottenPassword";
 import firebase from "../../util/firebaseSetUp";
 import { Profile } from "../Profile/Profile";
+import myAPI from "../../util/myAPI";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,26 +24,28 @@ class App extends React.Component {
       isMobile: false,
       locationDetected: true,
       isSignedIn: false,
-      user: {},
+      extraInfo: false,
+      user: null,
     };
     this.whatSize = this.whatSize.bind(this);
     this.onInit = this.onInit.bind(this);
   }
+
   onInit() {
+    let currUser = null;
+    console.log("OnInit triggered");
+
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log("runed");
         // User is signed in.
-        console.log(" user logged in");
-        let {
-          displayName,
-          email,
-          photoURL: profilePic,
-          providerId,
-          uid,
-        } = user;
 
-        let currUser = {
-          displayName,
+        let { email, photoURL: profilePic, providerId, uid } = user;
+
+        // let displayName = null;
+
+        currUser = {
+          // displayName,
           email,
           profilePic,
           providerId,
@@ -53,14 +55,13 @@ class App extends React.Component {
             lastSignInTime: user["metadata"]["lastSignInTime"],
           },
         };
-
         console.log("currUser: ", currUser);
         this.setState({ user: currUser, isSignedIn: true });
       } else {
         // User is signed out.
-
+        currUser = null;
         console.log("no user logged in");
-        this.setState({user : {}, isSignedIn: false});
+        this.setState({ user: currUser, isSignedIn: false, extraInfo: false });
       }
     });
   }
@@ -75,10 +76,28 @@ class App extends React.Component {
     }
   }
 
+  async getExtraUserData(user) {
+    let userData = await myAPI.getUserData(user.uid);
+    return userData;
+  }
+
   componentDidMount() {
     window.addEventListener("resize", this.whatSize);
     window.addEventListener("hashchange", this.onInit);
     this.onInit();
+  }
+
+  componentDidUpdate() {
+    if (this.state.user !== null && this.state.extraInfo === false) {
+      this.getExtraUserData(this.state.user).then((res) => {
+        if (res.ok) {
+          res.json().then((result) => {
+            let update = { ...this.state.user, ...result };
+            this.setState({ user: update, extraInfo: true });
+          });
+        }
+      });
+    }
   }
 
   render() {
