@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import styles from './SpotDescription.module.scss';
 
 export default class SpotDescription extends Component {
+    static defaultProps = {
+        spot: {
+            test: 'heyhey'
+        },
+        satViewSrc: require('../../assets/satelliteView1.jpg'),
+
+    }
     render() {
         let spot = this.props.spot;
         return (
@@ -18,14 +25,14 @@ export default class SpotDescription extends Component {
                     </div>
                     <div>
                         <h5>Coordonées géographiques</h5>
-                        <p>Longitude: {spot.longitude}  Latitude: {spot.latitude}</p>
+                        <p>Lat: {spot.latitude}  Lng: {spot.longitude}</p>
                     </div>
                 </div>
 
 
 
                 <div className={styles.satView}>
-                    <img src={require('../../assets/satelliteView1.jpg')} alt='' />
+                    <img src={this.props.spot.satViewSrc || this.props.satViewSrc} alt='' />
                 </div>
                 <div className="red">
 

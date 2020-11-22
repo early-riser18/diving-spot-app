@@ -29,7 +29,8 @@ export class SpotList extends React.Component {
         return (
             <div>
                 <div className={styles.header}>
-                    {this.props.locationDetected ? <h2>SPOTS TENDANCES PRÈS DE CHEZ TOI</h2> : <h2>SPOTS TENDANCES AUTOUR DE MARSEILLE</h2>}
+      <h2>NOS SPOTS À LA UNE</h2>
+                    {/* {this.props.locationDetected ? <h2>SPOTS TENDANCES PRÈS DE CHEZ TOI</h2> : <h2>SPOTS TENDANCES AUTOUR DE MARSEILLE</h2>} */}
                 </div>
                 <div className={styles.spotList}>
                     {spotToDisplay.map(spot => {

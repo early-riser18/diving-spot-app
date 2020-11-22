@@ -31,7 +31,6 @@ export default class SignIn extends React.Component {
         const form = document.getElementById('signInForm');
         let data = formToJSON(form.elements); // Call our function to get the form data.
 
-        console.log(data);
         if (data) {
             let email = data['email'];
             let password = data['password'];

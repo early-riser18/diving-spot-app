@@ -15,11 +15,9 @@ export class Footer extends React.Component {
               {" "}
               <li>Ajouter un spot</li>
             </Link>
-            <li>Mon Profil</li>
+            <Link to={"/profile"}><li>Mon Profil</li></Link> 
             <li>Nous contacter</li>
-            <Link to={"/result"}>
-              <li>Test spot page</li>
-            </Link>
+           
           </ul>
 
           <ul className={styles.list2}>

@@ -5,7 +5,7 @@ import starFull from '../../assets/starFull.svg';
 import { DiapoTab } from '../DiapoTab/DiapoTab';
 import renderLevel from '../../util/renderLevel';
 import { Link } from 'react-router-dom';
-import translateLevel from '../../util/translateLevel';
+import translateKeywords from '../../util/translateKeywords';
 import dataToDisplay from '../../util/dataToDisplay';
 
 export class SpotMainInfo extends React.Component {
@@ -34,7 +34,7 @@ export class SpotMainInfo extends React.Component {
                     <div className={styles.subheader}>
                         <h4>Ajouté par:&nbsp;<span className={styles.bold}>{spot.author}</span></h4>
                    &nbsp;&nbsp;&nbsp;&nbsp; <h4>Dernière mise-à-jour le:&nbsp;<span className={styles.bold}>{spot.lastUpdated}&nbsp;&nbsp;&nbsp;</span></h4>
-                   <span><img className={styles.starRating} src={starFull} alt='' /><p className={styles.rating}>&nbsp;{spot.rating ? spot.rating : 0} sur 5 ({spot.totalRating})</p></span>
+                   <span><img className={styles.starRating} src={starFull} alt='' /><p className={styles.rating}>&nbsp;{spot.rating ? `${spot.rating} sur 5 (${spot.totalRating})` : 'Aucun avis disponible'}</p></span>
 
                     </div>
 
@@ -59,7 +59,7 @@ export class SpotMainInfo extends React.Component {
                           &nbsp;Adapté pour {dataToDisplay.adaptedFor(spot.keywords.adaptedFor)} -&nbsp;
                           
                           </p>
-                            <p className={renderLevel(spot.level)}>{translateLevel(spot.level)}</p>
+                            <p className={renderLevel(spot.level)}>{translateKeywords.level(spot.level)}</p>
                         </span>
 
                       

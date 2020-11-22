@@ -117,8 +117,8 @@ export class AddSpotForm extends React.Component {
                         <label className={styles.label} htmlFor="caracteristics">Épave</label>
                     </div>
                     <div>
-                        <input className={styles.inputBox} type='checkbox' name='caracteristics' id='wall' value='wall' />
-                        <label className={styles.label} for="caracteristics">Plongée sur tombant</label>
+                        <input className={styles.inputBox}  type='checkbox' name='caracteristics' id='wall' value='wall' />
+                        <label className={styles.label} htmlFor="caracteristics">Plongée sur tombant</label>
                     </div>
                 </div>
 
@@ -161,14 +161,15 @@ export class AddSpotForm extends React.Component {
         <div className={styles.coGeo}>
             <label className={styles.label}>Coordonnées géographiques</label>
             <div className={styles.inputSplit1}>
+            <div>
+                    <label className={styles.label} for="latitude">Latitude</label><br />
+                    <input className={styles.inputField} placeholder="Ex: 52.354600" required type='text' name='latitude' />
+                </div>
                 <div>
                     <label className={styles.label} for="longitude">Longitude</label><br />
-                    <input className={styles.inputField} placeholder="Ex: 52.354600" required type='number' name='longitude' />
+                    <input className={styles.inputField} placeholder="Ex: 4.823405" required type='number' name='longitude' />
                 </div>
-                <div>
-                    <label className={styles.label} for="latitude">Latitude</label><br />
-                    <input className={styles.inputField} placeholder="Ex: 4.823405" required type='text' name='latitude' />
-                </div>
+                
             </div>
             <p className={styles.caption} >Cliquez droit et choisissez "Plus d'infos sur cet endroit" avec <a href="https://www.google.com/maps/" target="_blank">Google Maps</a> pour déterminer les coordonnées géographiques</p>
         </div>

@@ -41,11 +41,12 @@ export class AddSpot extends React.Component {
 
     formSubmit(event) {
         event.preventDefault();
-        if (this.props.userInfo) {
+        if (this.props.isSignedIn) {
             const form = document.getElementById('addSpotForm');
             let data = formToJSON(form.elements); // Call our function to get the form data.
-            if (this.validateForm(data) === true) { //To double check: Looks like browser required is working
-                myAPI.uploadSpotImage(this.state.spotImgFile).then(arrLink => {
+
+            if (this.validateForm(data) === true) { 
+                myAPI.uploadSpotImage(this.state.spotImgFile, data.latitude).then(arrLink => {
                     this.appendAuxInfo(data, arrLink);
                     console.log('All the data sent to myAPI.postNewSpot(): ', data);
                     myAPI.postNewSpot(data).then(res =>
@@ -91,7 +92,7 @@ export class AddSpot extends React.Component {
     validateForm(formVal) {
         for (let i = 0; i < Object.values(formVal).length; i++) {
             if (Object.values(formVal)[i] === '') {
-                alert(`${Object.keys(formVal)[i]} must be filled out`);
+                alert(`Veuillez remplir la case: ${Object.keys(formVal)[i]}`);
                 return false;
             }
          }

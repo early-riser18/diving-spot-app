@@ -2,7 +2,7 @@ $primary-text: rgb(0,145,255);
 $secondary-text: rgb(30, 227, 82);
 $tertiary-text: rgb(34,34,34);
 
-$big-font-size: 2.5rem;
+$big-font-size: 2.3rem;
 $medbig-font-size: 2rem;
 $med-font-size: 1.2rem;
 $sml-font-size: 1rem;
@@ -19,10 +19,10 @@ $medium-rating:rgb(255, 192, 0);
 $hard-rating:rgb(0,112,192);
 
 h1, h2 {
-    font-family: "Vision-Heavy";
+    font-family: "Tommy-soft-medium";
     color: $primary-text;
     font-size:$big-font-size;
-    letter-spacing: -1.5px;
+    letter-spacing: -0.03rem;
     margin-top: 3rem;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -85,7 +85,7 @@ p {
 @media screen and (max-width: 500px) {
     h1, h2 {
         font-size:2rem;
-        font-family: 'vision-bold';
+        font-family: 'Tommy-soft-regular';
         margin-top: 1rem;
     }
 

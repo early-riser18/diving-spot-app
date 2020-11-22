@@ -11,10 +11,12 @@ export class HomeHeader extends React.Component {
         if (this.props.props.isMobile) {
             return (
                 <div className={` ${styles.mobile} ${styles.section}`}>
-
-                    <Button variant="transparent" text={<img className={styles.addSpot} src={require('../../assets/plus-icon-green.png')} alt='' />} />
                    <Link to={'/'}> <img  className={`${styles.logo} ${styles.mob}`} src={require('../../assets/logo-sm.png')} alt='' /></Link>
-                    <Button variant='transparent' text={<img className={styles.profileIcon} src={require('../../assets/profile-icon.png')} alt=''/>} />
+
+                    <div >
+                    <Link to={'/add-spot'}>  <Button variant="primary" text={<img className={styles.addSpot} src={require('../../assets/plus-icon-green.png')} alt='' />} /></Link>
+                        </div>
+                        <Link to={'/sign-in'}>   <Button variant='transparent' text={<img className={styles.profileIcon} src={require('../../assets/profile-icon.png')} alt=''/>} /></Link>
 
                 </div>
             );

@@ -82,6 +82,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.whatSize(); 
     window.addEventListener("resize", this.whatSize);
     window.addEventListener("hashchange", this.onInit);
     this.onInit();
@@ -134,7 +135,7 @@ class App extends React.Component {
             <Route
               path="/add-spot"
               render={(props) => (
-                <AddSpot {...props} userInfo={this.state.user} />
+                <AddSpot {...props} userInfo={this.state.user} isSignedIn={this.state.isSignedIn}/>
               )}
             />
             <Route

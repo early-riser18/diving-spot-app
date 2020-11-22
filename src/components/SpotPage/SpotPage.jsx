@@ -34,17 +34,35 @@ export class SpotPage extends React.Component {
         this.initializeSpot = this.initializeSpot.bind(this);
     }
 
-    initializeSpot(spotID) {
-        myAPI.fetchSpot(spotID).then(spotData => {
-            console.log(spotData);
-            if (spotData) {
-                this.setState({ spot: spotData });
-                this.removeLoader();
-            } else {
-                this.setState({ redirectErr: '/error' });
+    initializeSpot(spotQuery, bool) {
+        // myAPI.fetchSpot(spotQuery).then(spotData => {
+        //     console.log(spotData);
+        //     if (spotData) {
+        //         this.setState({ spot: spotData });
+        //         this.removeLoader();
+        //     } else {
+        //         this.setState({ redirectErr: '/error' });
 
-            }
-        });
+        //     }
+        // });
+        // NEw
+        if (bool){
+            this.setState({ spot: spotQuery['queryData'] });
+            this.removeLoader();
+        } else {
+            let spotQueryURLParams = new URLSearchParams(spotQuery);
+            let spotQueryURLId = spotQueryURLParams.get('id');
+            myAPI.fetchSpot(spotQueryURLId).then(spotData => {
+                console.log(spotData);
+                if (spotData) {
+                    this.setState({ spot: spotData });
+                    this.removeLoader();
+                } else {
+                    this.setState({ redirectErr: '/error' });
+    
+                }
+            });
+        }
     }
 
     removeLoader() {
@@ -99,12 +117,17 @@ export class SpotPage extends React.Component {
 
 
     componentDidMount() {
-        this.initializeSpot('-MKAodqdu3aD4f2M5Rna');
+        if (this.props.location.state){
+            this.initializeSpot(this.props.location.state, true)
+        } else {
+            this.initializeSpot(this.props.location.search, false);
+
+        }
         document.body.style.overflow = 'hidden';
     }
 
     componentWillUnmount() {
-        // this.setState({ redirectErr: null });
+        this.setState({ redirectErr: null });
         document.body.style.overflow = 'visible';
 
     }
@@ -112,7 +135,7 @@ export class SpotPage extends React.Component {
 
     render() {
         if (this.state.redirectErr) {
-            return <Redirect to={this.state.redirectErr} />
+            return <Redirect  to={this.state.redirectErr} />
         }
 
 

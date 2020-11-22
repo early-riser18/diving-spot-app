@@ -23,6 +23,16 @@
   font-family: 'Vision-Heavy';
   src: local('Vision-Heavy'), url(../../fonts/Vision-Heavy.otf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Tommy-soft-medium';
+  src: local('Tommy-soft-medium'), url(../../fonts/Tommy-soft-medium.otf) format('truetype');
+}
+@font-face {
+  font-family: 'Tommy-soft-regular';
+  src: local('Tommy-soft-regular'), url(../../fonts/Tommy-soft-regular.otf) format('truetype');
+}
+
 *, body { /* Needs both to render properly, don't now why */
   box-sizing: border-box;
   font-size: 10px;

@@ -1,12 +1,16 @@
 @import '../root.scss'; 
 .listContainer {
     margin-left: $small-gutter;
-    width: 65vw;
-    min-width: 730px;
-    max-width: 800px;
+    padding-bottom: 3rem;
     margin-right: 2rem;
+    border-bottom: rgb(235, 235, 235) 1px solid;
+
 }
 
+.placeholder {
+    background-color: #EDF3F7;
+    color: transparent
+}
 @media screen and (max-width: 1020px) {
     .listContainer {
         min-width: 0;
@@ -15,7 +19,7 @@
     }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 680px) {
     .listContainer {
 margin: 0;
     }

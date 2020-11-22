@@ -22,8 +22,8 @@ export function Header(props) {
 
         <header className={styles.container}>
             <div ref={headerRef} className={`${styles.myHeader} ${isSticky ? styles.sticky : ''}`}>
-                {props.props.isHome ? <HomeHeader props={props.props} /> : <SearchHeader props={props.props} />
-                } </div>
+                {props.props.isHome ? <HomeHeader props={props.props} />
+                    : <SearchHeader props={props.props} />} </div>
         </header>
 
 
