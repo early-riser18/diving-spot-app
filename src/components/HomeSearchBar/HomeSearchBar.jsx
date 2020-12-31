@@ -10,7 +10,7 @@ export class HomeSearchBar extends React.Component {
                 <form id='searchBarBig'>
                     <div className={styles.searchBar}>
                         <div className={`${styles.fieldContainer} ${styles.first}`}>
-                            <label for="areaQuery">
+                            <label htmlFor="areaQuery">
                                 <div className={styles.fieldTitle} >Zone Géographique</div>
                                 <input className={styles.fieldInput} type="text" name='areaQuery' id='zoneQueryAutocomplete' placeholder='Où veux-tu plonger?' >
                                 </input>
@@ -19,7 +19,7 @@ export class HomeSearchBar extends React.Component {
 
 
                         <div className={`${styles.fieldContainer} ${styles.second}`}>
-                            <label for="keyWordQuery">
+                            <label htmlFor="keyWordQuery">
                                 <div className={styles.fieldTitle}>Niveau recommendé</div>
                                 <select className={styles.selectInput} name="keyWordQuery" >
                                     <option value="all">Tous niveaux</option>

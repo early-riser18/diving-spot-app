@@ -7,33 +7,27 @@ export default class SignUp extends React.Component {
 
     render() {
 
-        return (<div >
-            <h1>Créer un nouveau compte</h1>
+        return (<div className={styles.mainWrapper}>
+            <h2>Créer un compte</h2>
             <div className={styles.wrapper} >
                 <form id='signUpForm'>
                     <div>
-                    <label className={styles.label} htmlFor="email">E-mail</label>
-                    <input className={styles.inputField} type="text" name="email" ></input>
+                    <input className={styles.inputField} type="text" name="email" placeholder="E-mail"></input>
 
                     </div>
                     <div>
-                    <label className={styles.label} htmlFor="password">Mot de passe</label>
-                    <input className={styles.inputField} type="password" name='password' ></input>
+                    <input className={styles.inputField}  name='password' placeholder="Mot de passe"></input>
                     </div>
                     <div>
-                    <label className={styles.label} htmlFor="username">Nom d'utilisateur</label>
-                    <input className={styles.inputField} type="text" name='username' ></input>
+                    <input className={styles.inputField} type="text" name='username' placeholder="Nom d'utilisateur" ></input>
                     </div>
 
-                    {/* <label for='profilePic'>Photo de profil</label>
-                    <input type='file'></input> */}
+                    
 
 
-                    <button onClick={this.props.handleSignUpSubmit}>Créer un compte</button>
+                    <button className={styles.signUpBtn} onClick={this.props.handleSignUpSubmit}>Créer un compte</button>
                 </form>
-                <div>
-                <button onClick={this.props.handleHasAccount}>Déjà un compte? Se connecter</button>
-                </div>
+                
             </div>
         </div>
         )

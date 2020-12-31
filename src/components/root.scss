@@ -18,6 +18,13 @@ $easy-rating: rgb(0, 176, 80);
 $medium-rating:rgb(255, 192, 0);
 $hard-rating:rgb(0,112,192);
 
+// For google translate styling
+font {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit
+}
+
 h1, h2 {
     font-family: "Tommy-soft-medium";
     color: $primary-text;
@@ -82,6 +89,9 @@ p {
     color: #9b9a9a;
 }
 
+a:visited {
+    color: inherit;
+}
 @media screen and (max-width: 500px) {
     h1, h2 {
         font-size:2rem;

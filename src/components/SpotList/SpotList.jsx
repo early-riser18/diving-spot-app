@@ -1,30 +1,40 @@
 import React from 'react';
 import styles from './SpotList.module.scss';
 import { SpotMiniature } from '../SpotMiniature/SpotMiniature';
+import myAPI from '../../util/myAPI';
 
 
-var wid = 0.88 * window.innerWidth; // equals 2 times 6vw which is padding of container
-const spotToDisplay = [];
-
-function getSpotToDisplay(sectLength, blockLength) {
-    if (spotToDisplay.length === 0) {
-        var numberDisplay = Math.floor(sectLength / blockLength);
-        if (numberDisplay <= 2) {
-            numberDisplay = 2;
-        }
-        for (var i = 1; i <= numberDisplay * 2; i++) {
-            spotToDisplay.push(<SpotMiniature />);
-        }
-    };
-
-
-}
 export class SpotList extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = { spotData: {}}
+    }
 
+    getSpotToDisplay() {
+        let spotToDisplay = [];
+
+        if (Object.keys(this.state.spotData).length > 0 &&  typeof this.state.spotData === 'object') {
+            for (var i = 0; i < Object.keys(this.state.spotData).length; i++) {
+                spotToDisplay.push(<div key={i}>
+                    <SpotMiniature spotId={Object.keys(this.state.spotData)[i]} info={Object.values(this.state.spotData)[i]} />
+                </div>);
+            }
+            return spotToDisplay
+        };
+    
+    
+    }
+
+    componentDidMount(){
+        myAPI.fetchSpotRec().then((res)=> {
+            console.log(res)
+            this.setState({spotData : res});
+        }).catch(err => console.log(err))
+    }
+
+    
     render() {
-        getSpotToDisplay(wid, 300);
-
 
         return (
             <div>
@@ -33,15 +43,10 @@ export class SpotList extends React.Component {
                     {/* {this.props.locationDetected ? <h2>SPOTS TENDANCES PRÈS DE CHEZ TOI</h2> : <h2>SPOTS TENDANCES AUTOUR DE MARSEILLE</h2>} */}
                 </div>
                 <div className={styles.spotList}>
-                    {spotToDisplay.map(spot => {
-                        return <div key={spotToDisplay.indexOf(spot)}>{spot}</div>;
-                    })}
+                    {this.getSpotToDisplay()}
                 </div>
             </div>
         );
     }
 
-    componentWillUnmount() {
-       
-    }
 }

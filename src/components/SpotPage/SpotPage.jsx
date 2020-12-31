@@ -146,7 +146,7 @@ export class SpotPage extends React.Component {
                     <div>
                         <SpotMainInfo spot={this.state.spot} onClickOpen={this.handleDiapoOpen} />
                         <SpotDescription spot={this.state.spot} />
-                        <CommentList spot={this.state.spot} />
+                        {/* <CommentList spot={this.state.spot} /> */}
 
                     </div> :
                     <Diaporama spot={this.state.spot} index={this.state.diapoIndex} content={this.showSlide(this.state.diapoIndex)} onClickPlus={this.plusSlide} onClickMinus={this.minusSlide} onClickClose={this.handleDiapoClose} />

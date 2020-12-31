@@ -101,6 +101,9 @@
 .caption {
   font-size: 0.8rem;
   font-family: $text-light;
+  a {
+    text-decoration: underline;
+  }
 }
 
 .levelSelector {

@@ -68,7 +68,6 @@ class App extends React.Component {
 
   whatSize() {
     let wid = window.innerWidth;
-    console.log(wid);
     if (wid > 500 && this.state.isMobile === true) {
       this.setState({ isMobile: false });
     } else if (wid <= 500 && this.state.isMobile === false) {

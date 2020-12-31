@@ -10,7 +10,6 @@ import myAPI from '../../util/myAPI';
 
 
 export const Signing = () => {
-    const [newUser, setNewUser] = useState(false);
     const [signedIn, setSignedIn] = useState(false);
     const [redirect, setRedirect] = useState(null);
 
@@ -18,15 +17,7 @@ export const Signing = () => {
         console.log('Successful, so redirect')
         setRedirect('/') // to be changed to desired path
     }
-    const handleNoAccount = () => {
-        setNewUser(true);
-    };
-
-    const handleHasAccount = () => {
-        setNewUser(false);
-
-    }
-
+  
 
     const handleSignUpSubmit = (event) => {
         event.preventDefault();
@@ -85,9 +76,14 @@ export const Signing = () => {
         { redirect ? <Redirect to={redirect} /> : ''}
 
         <div className={styles.contentWrapper}>
-        {newUser ? <SignUp handleSignUpSubmit={handleSignUpSubmit} handleHasAccount={handleHasAccount} />
-            : <SignIn handleNoAccount={handleNoAccount} />}
-
+            {/* {newUser ? <SignUp handleSignUpSubmit={handleSignUpSubmit} handleHasAccount={handleHasAccount} />
+            : <SignIn handleNoAccount={handleNoAccount} />} */}
+            <div className={styles.signIn}>
+                <SignIn />
+            </div>
+            <div className={styles.signUp}>
+                <SignUp handleSignUpSubmit={handleSignUpSubmit}  />
+            </div>
         </div>
     </div>)
 }

@@ -38,13 +38,13 @@ export class ProfileResult extends React.Component {
                         </Carousel>
                     </div>
 
-                   
-                        <div className={styles.description}>
+
+                    <div className={styles.description}>
                         <Link to={{
-                        pathname: '/result',
-                        search: `?id=${queryRef}`,
-                        state: { queryData: queryData }
-                    }}>
+                            pathname: '/result',
+                            search: `?id=${queryRef}`,
+                            state: { queryData: queryData }
+                        }}>
                             <div className={styles.headings}>
                                 <h3>{queryData.title}</h3>
                                 <h4>{queryData.city}, {queryData.postalCode}</h4>
@@ -63,9 +63,9 @@ export class ProfileResult extends React.Component {
                                 </span>
 
                             </div>
-                            </Link>
-                        </div>
-                   
+                        </Link>
+                    </div>
+
                 </div>
             </div>
         );

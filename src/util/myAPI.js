@@ -1,5 +1,3 @@
-import { json } from "body-parser";
-import { UserDimensions } from "firebase-functions/lib/providers/analytics";
 import firebase from "./firebaseSetUp.js";
 const storage = firebase.storage();
 
@@ -165,31 +163,30 @@ const myAPI = {
       let swLng;
 
       // When no map loads at initialization (Phone/Tablet view )
-      if (!queryBounds){
+      if (!queryBounds) {
         let margin = 0.2;
         let params = new URLSearchParams(paramsURL);
-        let lat = params.get('lat')
-        let lng = params.get('lng')
+        let lat = params.get("lat");
+        let lng = params.get("lng");
 
-          neLat = parseFloat(lat) + margin;
-          neLng = parseFloat(lng) + margin;
-          nwLat = neLat;
-          nwLng = parseFloat(lng) - margin;
-          seLat = parseFloat(lat) - margin;
-          seLng = neLng;
-          swLat = seLat;
-          swLng = nwLng;
-    } else {
-         neLat = queryBounds.ne.lat;
-         neLng = queryBounds.ne.lng;
-         nwLat = queryBounds.nw.lat;
-         nwLng = queryBounds.nw.lng;
-         seLat = queryBounds.se.lat;
-         seLng = queryBounds.se.lng;
-         swLat = queryBounds.sw.lat;
-         swLng = queryBounds.sw.lng;
-    }
-     
+        neLat = parseFloat(lat) + margin;
+        neLng = parseFloat(lng) + margin;
+        nwLat = neLat;
+        nwLng = parseFloat(lng) - margin;
+        seLat = parseFloat(lat) - margin;
+        seLng = neLng;
+        swLat = seLat;
+        swLng = nwLng;
+      } else {
+        neLat = queryBounds.ne.lat;
+        neLng = queryBounds.ne.lng;
+        nwLat = queryBounds.nw.lat;
+        nwLng = queryBounds.nw.lng;
+        seLat = queryBounds.se.lat;
+        seLng = queryBounds.se.lng;
+        swLat = queryBounds.sw.lat;
+        swLng = queryBounds.sw.lng;
+      }
 
       const response = await fetch(
         `${apiEndPoint}/search?${paramsURL}&neLat=${neLat}&neLng=${neLng}&nwLat=${nwLat}&nwLng=${nwLng}&seLat=${seLat}&seLng=${seLng}&swLat=${swLat}&swLng=${swLng}&qty=${quantity}`
@@ -197,6 +194,19 @@ const myAPI = {
 
       if (response) {
         return response.json();
+      }
+    } catch (error) {
+      console.error(error);
+      return "err/connection_refused";
+    }
+  },
+
+  async fetchSpotRec() {
+    try {
+      const response = await fetch(`${apiEndPoint}/search/recommendation`);
+      if (response) {
+        return response.json();
+
       }
     } catch (error) {
       console.error(error);

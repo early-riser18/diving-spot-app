@@ -63,27 +63,25 @@ export default class SignIn extends React.Component {
 
         return (<div>
             {this.state.redirect ? <Redirect to={this.state.redirect} /> : ''}
-            <h1>S'identifier</h1>
+            <h2>S'identifier</h2>
 
 
             <div className={styles.wrapper} >
                 <form id='signInForm'>
                     <div>
-                        <label className={styles.label} htmlFor="email">E-mail</label>
-                        <input className={styles.inputField} type="text" name="email" autoComplete="true"></input>
+                        <input className={styles.inputField} placeholder="E-mail" type="text" name="email" autoComplete="true"></input>
                     </div>
                     <div>
-                        <label className={styles.label} htmlFor="password">Mot de passe</label>
-                        <input className={styles.inputField} type="password" name='password' autoComplete="true"></input>
-
+                        <input className={styles.inputField} placeholder="Mot de passe" type="password" name='password' autoComplete="true"></input>
+                        <button type="button" className={styles.forgotPw} onClick={this.handleForgottenPassword} >Mot de passe oublié?</button>
                     </div>
-                    <button onClick={this.handleSubmit}>Se connecter</button>
-                    <button onClick={this.handleForgottenPassword} >Mot de passe oublié?</button>
+
+                    <button type="submit" className={styles.signInBtn} onClick={this.handleSubmit}>Se connecter</button>
                 </form>
-                <div className={styles.otherOption}>
-                    <button onClick={this.props.handleNoAccount}>Créer un nouveau compte</button>
-                </div>
-                {/* <h3>S'identifier avec:</h3> */}
+                {/* <div className={styles.oAuthContainer}>
+                <p>S'identifier avec:</p>
+                <p>Aucune autre moyen d'identification n'est disponible pour le moment.</p>
+                </div> */}
 
             </div>
         </div>

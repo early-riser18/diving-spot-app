@@ -8,7 +8,7 @@
 
 .clickableContainer {
     cursor: pointer;
-    margin: 1.5rem 0;
+    padding: 1.5rem 0;
     display: flex;
     flex-direction: row;
     justify-content: stretch;
@@ -40,11 +40,16 @@
 .description {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
   margin-left: 1rem;
   flex: 1;
   line-height: 1.5;
-  height: 100%;
+  & > :first-child {
+    display: flex;
+    flex-flow:  column nowrap;
+    justify-content: space-between;
+    height: 100%;
+
+  }
 }
 
 .keyWordLevelRating {
@@ -79,8 +84,8 @@
       width: 100%;
   }
   .resultImgList {
-    width: 100%;
-    height: 100%;
+    flex: 0 0 15rem;
+
   }
   .carouselImg {
     height: 100%;

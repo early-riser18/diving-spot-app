@@ -9,6 +9,7 @@ export default function SearchResultList(props) {
     let loadingState;
     let resultList;
 
+
     useEffect(() => {
         if (props.queryResult === 'err/connection_refused') {
             alert('Erreur. Nous n\'avons pas pu établir de connexion avec le serveur');
@@ -32,6 +33,7 @@ export default function SearchResultList(props) {
             case 'empty':
                 return (<div>
                     <h3>Aucun résulat trouvé.</h3>
+                    <br />
                     <p>Pour obtenir plus de résultat, essayer d'ajuster la zone de recherche.</p>
                 </div>);
             case 'successful':
@@ -54,7 +56,7 @@ export default function SearchResultList(props) {
     return (
         <div className={styles.listContainer}>
 
-            {props.queryResult ? <h2>Spots de plongée à {props.locName}</h2> : <h2 className={styles.placeholder} >s</h2>}
+            {props.queryResult ? <h2>Spots de plongée {props.locName ? `à ${props.locName}` : `dans la zone recherchée`}</h2> : <h2 className={styles.placeholder} >s</h2>}
 
             {/* // to be changed */}
 
@@ -63,3 +65,4 @@ export default function SearchResultList(props) {
 
     );
 }
+

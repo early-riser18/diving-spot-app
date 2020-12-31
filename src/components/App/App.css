@@ -41,6 +41,9 @@
 
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 main {
   

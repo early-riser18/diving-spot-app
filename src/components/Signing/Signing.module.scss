@@ -1,19 +1,37 @@
 .wrapper {
-    min-height: 80vh;
-    display: flex;
-    flex-flow: column nowrap;
+    min-height: 70vh;
+    
     
 }
 .contentWrapper {
-    padding: 2rem;
+    display: flex;
+    flex-flow: row nowrap;
     box-shadow: 1px 1px 10px rgba(65, 65, 65, 0.212);
-    border-radius: 8px;
     min-height: 10rem;
-    margin: 0 0.5rem;
-    margin-top: 10rem;
-
-        h1{
+    margin: 5rem 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+        h2{
         margin-top: 1rem;
     }
+
 }
 
+.signIn, .signUp {
+flex:  1 1 auto;
+padding: 1rem 2rem;
+
+}
+
+.signUp {
+    background-color: #0091FF;
+    h2, p {color: white;}
+    
+}
+
+@media screen and (max-width: 750px) {
+    .contentWrapper {
+        flex-flow: column nowrap;
+
+    }
+}

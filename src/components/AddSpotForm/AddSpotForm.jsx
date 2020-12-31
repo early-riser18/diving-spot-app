@@ -171,7 +171,7 @@ export class AddSpotForm extends React.Component {
                 </div>
                 
             </div>
-            <p className={styles.caption} >Cliquez droit et choisissez "Plus d'infos sur cet endroit" avec <a href="https://www.google.com/maps/" target="_blank">Google Maps</a> pour déterminer les coordonnées géographiques</p>
+            <p className={styles.caption} >Cliquez droit et choisissez "Plus d'infos sur cet endroit" avec <a href="https://www.google.com/maps/" rel="noopener noreferrer"  target="_blank">Google Maps</a> pour déterminer les coordonnées géographiques</p>
         </div>
         <div>
             <label className={styles.label} for="street">Rue la plus proche</label><br />

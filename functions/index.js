@@ -35,7 +35,6 @@ app.get("/read", (req, res) => {
 
   testLoc.on("value", (snapshot) => {
     data = snapshot.val();
-    console.log(data);
   });
   res.send(data);
 });
@@ -55,14 +54,12 @@ app.get("/spot", (req, res) => {
 });
 
 app.get("/userdata", (req, res) => {
-  console.log(req.query);
   let userData = db.ref(`users/${req.query.uid}`);
   let data;
 
   userData.on("value", (snapshot) => {
     data = snapshot.val();
     if (data) {
-      console.log(data);
       res.send(data);
     } else {
       res.status(404).send({ body: "unable to find the requested resource" });
@@ -71,12 +68,10 @@ app.get("/userdata", (req, res) => {
 });
 
 app.post("/writeInfo", (req, res) => {
-  console.log(req.body);
   try {
     var newPostKey = db.ref().child("test").push().key;
     var updates = {};
     updates["spot-list/" + newPostKey] = req.body;
-    console.log(updates);
     db.ref().update(updates, (result) => {
       if (result === null) {
         res.send({ body: "Data successfully submitted at:", newPostKey });
@@ -112,26 +107,8 @@ app.post("/updateProfile", (req, res, next) => {
   }
 });
 
-// app.post("/writeImg", (req, res) => {
-//   // const uploadTask = firebase.storage().ref(`images/${Object.keys(req.body)[0]}`).put(Object.values(req.body)[0]);
-//   // uploadTask.on(
-//   //   "state_changed",
-//   //   snapshot => {},
-//   //   error => {
-//   //     console.log(error);
-//   //   },
-//   //   () => {
-//   //     storage.ref('images').child(Object.keys(req.body)[0]).getDownloadURL().then(url => console.log('Uploaded URL: ',url));
-//   //   });
-
-//   // var storageRef = firebase.storage().ref();
-//   // var testImgRef = storageRef.child("images/testImg.png");
-//   // testImgRef.putString(values(req.body)[0]).then(console.log('successfully uploaded'));
-//   res.end();
-// });
 
 app.get("/search", (req, res) => {
-  console.log(req.query);
   let queryLocX = parseFloat(req.query.lat);
   let queryLocY = parseFloat(req.query.lng);
   let queryQty = parseFloat(req.query.qty);
@@ -145,7 +122,7 @@ app.get("/search", (req, res) => {
     se: { lat: req.query.seLat, lng: req.query.seLng },
     sw: { lat: req.query.swLat, lng: req.query.swLng },
   };
-  let bias = 0.015;
+  let bias = 0; //Inactive for now
   let biasLat = (queryBounds.ne.lat - queryBounds.se.lat) * bias;
   let biasLng = (queryBounds.ne.lng - queryBounds.nw.lng) * bias;
 
@@ -162,14 +139,15 @@ app.get("/search", (req, res) => {
       // Assumes map is a rectangle and check if obj position is within boundaries
       let isInLatRange =
         (dataLat - queryBounds.ne.lat) * (dataLat - queryBounds.se.lat) +
-          biasLat < 0;
+          biasLat <
+        0;
 
       let isInLngRange =
         (dataLng - queryBounds.ne.lng) * (dataLng - queryBounds.nw.lng) +
-          biasLng < 0;
+          biasLng <
+        0;
 
       if (isInLatRange && isInLngRange) {
-        
         //Calculate distance from location query
         let dist = Math.sqrt(
           Math.pow(dataLat - queryLocX, 2) + Math.pow(dataLng - queryLocY, 2)
@@ -203,10 +181,45 @@ app.get("/search", (req, res) => {
     });
     //Slice result according to query request
     let outputArr = refArr.slice(0, queryQty);
-    // console.log(outputArr);
 
     res.send(JSON.stringify(outputArr));
   });
 });
 
+//Not able to wait for the end of the for loop before returning array;
+app.get("/search/recommendation", async (req, res) => {
+  try {
+    const getSpotData = (spotID) => {
+      return new Promise((resolve, reject) => {
+        let myRef = db.ref(`spot-list/${spotID}`);
+        myRef
+          .once("value")
+          .then(function (snapshot) {
+            dataToReturn[spotID] = snapshot.val();
+            resolve();
+          })
+          .catch((err) => reject(err));
+      });
+    };
+
+    let spotIds = [
+      "-MMRvbOYbCq0cirH3gaS",
+      "-MMCk8SezWTvHiV_fR-L",
+      "-MMCgDDVGXJ3R2PvpUY8",
+    ];
+    let dataToReturn = {};
+
+    let r = await Promise.all(
+      spotIds.map((val) => {
+        return getSpotData(val);
+      })
+    );
+
+
+    res.send(JSON.stringify(dataToReturn, null, " "));
+  } catch (error) {
+    console.error(error);
+    res.end();
+  }
+});
 exports.app = functions.https.onRequest(app);

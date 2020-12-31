@@ -48,7 +48,6 @@ export class AddSpot extends React.Component {
             if (this.validateForm(data) === true) { 
                 myAPI.uploadSpotImage(this.state.spotImgFile, data.latitude).then(arrLink => {
                     this.appendAuxInfo(data, arrLink);
-                    console.log('All the data sent to myAPI.postNewSpot(): ', data);
                     myAPI.postNewSpot(data).then(res =>
                         res.ok ?
                             this.handleSubmitSuccess()

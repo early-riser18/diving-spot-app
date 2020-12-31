@@ -3,7 +3,8 @@
     margin-left: $small-gutter;
     padding-bottom: 3rem;
     margin-right: 2rem;
-    border-bottom: rgb(235, 235, 235) 1px solid;
+    border-bottom: #ebebeb 1px solid;
+    min-height: calc(100vh - 75px);
 
 }
 
@@ -16,12 +17,8 @@
         min-width: 0;
         max-width: 1000px; // to cancel the max width above
         width: 90vw;
-    }
-}
+        margin: 0;
 
-@media screen and (max-width: 680px) {
-    .listContainer {
-margin: 0;
     }
 }
 

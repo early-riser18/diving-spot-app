@@ -1,0 +1,7 @@
+.pin {
+    width: 1.3rem;
+    transition: transform .15s ease;
+    &:hover {
+        transform: scale(1.2);
+    }
+}

@@ -1,36 +1,35 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styles from './SearchMenu.module.scss'
 import MapIcon from '../../assets/map-icon.svg';
 import Close from '../../assets/close-icon.svg';
 import GMap from '../../util/GMap';
 import SearchResultList from '../SearchResultList/SearchResultList';
 import myAPI from '../../util/myAPI';
+import { SpotPreviewMini } from '../SpotPreviewMini/SpotPreviewMini';
 
 export class SearchMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { fullMap: false, queryResult: null, lastUpdatedMap: null, currMapDetails: null };
+        this.state = { fullMap: false, queryResult: null, lastUpdatedMap: null, currMapDetails: null, isFetching: true, markerSelected: null};
         this.toggleMap = this.toggleMap.bind(this);
-        this.handleMapChange = this.handleMapChange.bind(this)
+        this.handleMapChange = this.handleMapChange.bind(this);
+       this.handleMarkerClick = this.handleMarkerClick.bind(this);
+       this.handleClosePreviewMini = this.handleClosePreviewMini.bind(this);
+
     }
 
 
     componentDidMount() {
-
         window.addEventListener('scroll', this.setFixMap);
-
         this.setMapWidth();
         window.addEventListener('resize', this.setMapWidth);
-
         this.SearchInit();
     }
 
     componentWillUnmount() {
-
         window.removeEventListener('scroll', this.setFixMap);
-
         window.removeEventListener('resize', this.setMapWidth);
-
     }
 
     SearchInit() {
@@ -80,25 +79,30 @@ export class SearchMenu extends React.Component {
     handleMapChange(event) {
         let mapDetails = event;
         console.log(mapDetails)
+
+        // Checks if map just initialized
         if (this.state.currMapDetails === null) {
             this.setState({ currMapDetails: mapDetails }, () => {
                 this.execSearch();
             });
+            // Otherwise checks if query was made in the last 3 seconds
         } else {
-
             if (this.state.lastUpdatedMap === null) {
                 let x = new Date();
                 this.setState({ lastUpdatedMap: x });
             }
 
             var now = new Date();
-            var timeout = now.setSeconds(now.getSeconds() - 2);
+            var timeout = now.setSeconds(now.getSeconds() - 1);
 
             if (this.state.lastUpdatedMap < timeout) {
+                // If not then
                 console.log('timout')
-                this.setState({ currMapDetails: mapDetails }, () => {
+                this.setState({ currMapDetails: mapDetails, locPos: mapDetails.center, locName: null }, () => {
                     this.execSearch();
                 });
+
+                // Reset timer to current time
                 let y = new Date();
                 this.setState({ lastUpdatedMap: y })
             }
@@ -106,7 +110,7 @@ export class SearchMenu extends React.Component {
     }
 
     execSearch() {
-        console.log('Called fetch')
+        this.setState({ isFetching: true });
         let search = window.location.search.substring(1);
         let mapBounds;
         if (!this.state.currMapDetails.size.width || !this.state.currMapDetails.size.height) {
@@ -117,7 +121,7 @@ export class SearchMenu extends React.Component {
         }
 
         myAPI.fetchSpotList(search, mapBounds, 10).then((res) => {
-            this.setState({ queryResult: res, })
+            this.setState({ queryResult: res, isFetching: false })
         });
     }
 
@@ -150,10 +154,33 @@ export class SearchMenu extends React.Component {
         this.state.fullMap ? this.setState({ fullMap: false }) : this.setState({ fullMap: true })
     }
 
+    handleMarkerClick(event) {
+        event.persist();
+        console.log(event)
+        if (!this.state.fullMap) {
+            //Scroll to right spot
+            
+            let el = event.target.id.substring(1);
+           let matchingel =  document.getElementById(el);
+            matchingel.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            matchingel.classList.add(styles.markerClickAnimation);
+            setTimeout(() => matchingel.classList.remove(styles.markerClickAnimation), 2000);
+        } else {
+            // Spawn a Spot Preview
+        // ReactDOM.render(<SpotPreviewMini />, el); 
+        this.setState({ markerSelected: event.target.id});
+        }
 
+    }
+
+    handleClosePreviewMini(event){
+        // event.preventDefault();
+        this.setState({markerSelected: null});
+
+    }
     loadMap() {
         if (this.state.locPos) {
-            return (<GMap onChange={this.handleMapChange} queryResult={this.state.queryResult} center={this.state.locPos} />)
+            return (<GMap handleClosePreviewMini={this.handleClosePreviewMini} markerSelected={this.state.markerSelected} onMarkerClick={this.handleMarkerClick} onChange={this.handleMapChange} isFetching={this.state.isFetching} queryResult={this.state.queryResult} center={this.state.locPos} />)
         }
     }
 
@@ -165,13 +192,12 @@ export class SearchMenu extends React.Component {
         return (
             <div id="list-container" className={styles.searchContainer}>
                 <div className={styles.resultList}>
-                    <SearchResultList queryResult={this.state.queryResult} locName={this.state.locName} />
+                    <SearchResultList isFetching={this.state.isFetching} queryResult={this.state.queryResult} locName={this.state.locName} />
                     <button className={styles.showMap} onClick={this.toggleMap}>
-                        <img className={styles.mapIcon} src={MapIcon} alt='' />Map</button>
+                        <img className={styles.mapIcon} src={MapIcon} alt='' />Carte</button>
                 </div>
                 <div className={styles.placeholderWrapper} id="placeholderSideMap">
                     <div id='sideMap' className={styles.sideMapContainer}>
-
                         {this.loadMap()}
                     </div>
                 </div>
@@ -182,6 +208,9 @@ export class SearchMenu extends React.Component {
                         onClick={this.toggleMap} />
                     </button>
                     {this.loadMap()}
+                    <div>
+                        {/* Here make space to show the content of a one-item array that display the miniature */}
+                    </div>
                 </div>
             </div>
         );
