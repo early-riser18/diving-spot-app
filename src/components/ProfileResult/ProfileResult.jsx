@@ -43,7 +43,7 @@ export class ProfileResult extends React.Component {
                         <Link to={{
                             pathname: '/result',
                             search: `?id=${queryRef}`,
-                            state: { queryData: queryData }
+                            state: { queryData: queryData, lastQuery: window.location.search }
                         }}>
                             <div className={styles.headings}>
                                 <h3>{queryData.title}</h3>
@@ -59,7 +59,8 @@ export class ProfileResult extends React.Component {
                                 </div>
 
                                 <span><img className={styles.starRating} src={starFull} alt='' /><p>&nbsp;
-                            {queryData.rating ? `queryData.ratingAvg 4.8 (${queryData.totalRating})` : ''}</p>
+                            {/* {queryData.rating ? `${queryData.totalRating}` : ''} */}
+                            </p>
                                 </span>
 
                             </div>

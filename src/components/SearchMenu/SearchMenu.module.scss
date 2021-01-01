@@ -97,10 +97,10 @@
   .fullMapContainer {
     display: flex;
     position: fixed;
-    top: 75px;
+    top: 4.2rem;
     left: 0;
     width: 99vw;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 4.2rem);
     z-index: 100;
   }
   .mapClose {

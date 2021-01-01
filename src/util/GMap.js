@@ -9,7 +9,7 @@ class GMap extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = { isLoaded: false };
+    this.state = { isLoaded: false};
   }
 
   static defaultProps = {
@@ -17,8 +17,13 @@ class GMap extends Component {
     zoom: 11,
   };
 
+  componentWillMount() {
+    let center = this.validateCenter();
+    this.setState({ center: center});
+
+  }
   componentDidMount() {
-    this.setState({ isLoaded: true });
+    this.setState({ isLoaded: true});
   }
   validateCenter() {
     let validatedCenter;
@@ -94,7 +99,7 @@ class GMap extends Component {
         <GoogleMapReact
           onMarkerClick={this.props.onMarkerClick}
           bootstrapURLKeys={{ key: "AIzaSyAddqyJJRGL9vCNBS8IARse91gKkEhMgYM" }}
-          defaultCenter={this.validateCenter()}
+          defaultCenter={this.state.center}
           defaultZoom={this.props.zoom}
           options={this.createMapOptions}
           onChange={this.handleChange}

@@ -52,17 +52,30 @@
 
 }
 .closeBtn {
-    background-color: white;
-    padding: 0.35rem 0.5rem;
+    background-color: transparent;
     position: absolute;
-    top: 0.2rem;
-    left: 0.2rem;
+    top: 0;
+    left: 0;
     z-index: 10;
-    background-color: white;
-    border-radius: 8px;
-    border: 1px solid #dddddd;
-    transition: box-shadow 0.2s ease;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+width: 2.5rem;
+height: 2.5rem;
+padding: 0rem;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+    span {
+        width: 90%;
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #dddddd;
+        transition: box-shadow 0.2s ease;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
 }
 .closeIcon {
     width: 0.7rem;
@@ -74,7 +87,7 @@
 .infoBox {
     cursor: pointer;
 
-    padding: 0.5rem;
+    padding: 0.6rem 0.7rem;
     height: calc(100% - 12rem);
     display: flex;
     flex-flow: column nowrap;

@@ -4,9 +4,10 @@ import Script from 'react-load-script';
 import formToJSON from '../../util/formToJSON';
 import myAPI from '../../util/myAPI';
 import { Redirect } from 'react-router-dom';
+
 export const HomeSearchBarHOC = () => {
 
-    const [query, setQuery] = useState({ lat: 43.335698, lng: 5.270670, level: 'all', locationName: 'Marseille, France', startSearch: false });
+    const [query, setQuery] = useState({ lat: 43.335698, lng: 5.270670, level: 'all', locName: 'Marseille, France', startSearch: false });
     const [redirect, setRedirect] = useState(null);
 
     let autocomplete;
@@ -21,34 +22,29 @@ export const HomeSearchBarHOC = () => {
         autocomplete = new google.maps.places.Autocomplete(
             document.getElementById('zoneQueryAutocomplete'), options);
         // Pay only for data you need
-        autocomplete.setFields(['address_components', 'geometry']);
+        autocomplete.setFields(['address_components']);
         // Fire Event when a suggested name is selected
         autocomplete.addListener('place_changed',
             handlePlaceSelect);
+
     }
 
     const handlePlaceSelect = () => {
-
-        // Extract Address From Address Object
         const addressObject = autocomplete.getPlace();
-        const address = addressObject.geometry.location;
-
-        // *** To obtain address from getplace and not value in form ***
-        // let addressCity = `${addressObject.address_components[0].long_name}`;
-        // let addressCountry;
-        // for (let i = 0; i < addressObject.address_components.length; i++) {
-        //     if (addressObject.address_components[i].types[0] === 'country') {
-        //         addressCountry = addressObject.address_components[i].long_name;
-        //         break;
-        //     }
-        // };
-
-        if (address) {
-            setQuery({
-                ...query, lat: address.lat(), lng: address.lng(),
-                //  locationName: { city: addressCity, country: addressCountry }
-            });
+        console.log(addressObject);
+        let locCity, locCountry;
+        if (addressObject.address_components) {
+            addressObject.address_components.forEach((val) => {
+                if (val.types[0] === "locality") {
+                    locCity = val.long_name;
+                } else if (val.types[0] === "country") {
+                    locCountry = val.long_name;
+                }
+            })
+            console.log(`${locCity}, ${locCountry}`);
+            setQuery({ ...query, locName: `${locCity}, ${locCountry}` })
         }
+
     }
 
     const handleSubmit = (event) => {
@@ -56,24 +52,82 @@ export const HomeSearchBarHOC = () => {
         let myForm = document.getElementById('searchBarBig');
         let data = formToJSON(myForm);
 
-        if (data['areaQuery'] === ''){
-            data['areaQuery'] = query.locationName;
+        if (!data['areaQuery']) {
+            setQuery({ ...query, startSearch: true })
+            // Then will query with initial/last state
+        } else {
+            // Check if data has been formatted (most likely to be correct then)
+            if (data['areaQuery'].includes(',')) {
+                getPlaceLocation(data['areaQuery']).then((res) => {
+                    console.log('in handle submit: ', res);
+                    setQuery({ ...query, locName: data['areaQuery'], lat: res.lat, lng: res.lng, startSearch: true })
+                });
+
+            } else {
+                console.log(data['areaQuery'])
+                getPlaceAutoComp(data['areaQuery']).then(res => {
+                    console.log(res)
+                    let predictedPlaceName = res.name;
+                    getPlaceLocation(res.name).then((res) => {
+                        setQuery({ ...query, locName: predictedPlaceName, lat: res.lat, lng: res.lng, startSearch: true })
+
+                    });
+                });
+            }
+
+
+
         }
-        console.log(data);
-        setQuery({ ...query, locationName: data['areaQuery'], level: data['keyWordQuery'], startSearch: true });
     }
 
     const handleRedirect = () => {
-        let urlRedirect = `/search?lat=${query.lat}&lng=${query.lng}&locName=${query.locationName}&lvl=${query.level}`;
+        let urlRedirect = `/search?lat=${query.lat}&lng=${query.lng}&locName=${query.locName}&lvl=${query.level}`;
         setRedirect(urlRedirect);
     }
 
-
     useEffect(() => {
-        if (query.startSearch === true) {
+        if (query.startSearch) {
             handleRedirect();
         }
-    });
+    })
+
+
+    const getPlaceAutoComp = (place) => {
+        console.log('Supplied Place: ', place);
+        var autoCompService = new google.maps.places.AutocompleteService();
+
+        // Bounds from France
+        let sw = new google.maps.LatLng(41.34, 9.84);
+        let ne = new google.maps.LatLng(50.64, -5.15);
+        let frBounds = new google.maps.LatLngBounds(sw, ne);
+
+        return new Promise((resolve) => {
+            autoCompService.getPlacePredictions({
+                input: place, bounds: frBounds, types: ['(cities)']
+            }, (res) => {
+                let predictionName = res[0].description;
+                let predictionId = res[0].place_id;
+                console.log(predictionId, predictionName);
+                resolve({ name: predictionName, place_id: predictionId })
+            })
+        })
+    }
+
+    const getPlaceLocation = (address, placeId) => {
+        var getDetailService = new google.maps.Geocoder;
+
+        if (address) {
+            return new Promise(resolve => getDetailService.geocode({ address: address }, (res) => {
+                let resLoc = res[0].geometry.location;
+                resolve({ lat: resLoc.lat(), lng: resLoc.lng() })
+            }))
+        } else {
+            return new Promise(resolve => getDetailService.geocode({ placeId: placeId }, (res) => {
+                let resLoc = res[0].geometry.location;
+                resolve({ lat: resLoc.lat(), lng: resLoc.lng() })
+            }))
+        }
+    }
 
 
     return (<div>
@@ -83,5 +137,8 @@ export const HomeSearchBarHOC = () => {
             onLoad={handleScriptLoad}
         />
         <HomeSearchBar onClick={handleSubmit} />
+
+
+
     </div>)
-}
+} 

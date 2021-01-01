@@ -31,8 +31,8 @@ export const SpotPreviewMini = (props) => {
 
 
     return (<div id='markerSelection' className={`${styles.wrapper} ${styles.popTop}`}>
-        <button className={styles.closeBtn}><img className={styles.closeIcon} src={Close} alt=''
-            onClick={props.handleClosePreviewMini} /></button>
+        <button className={styles.closeBtn}><span><img className={styles.closeIcon} src={Close} alt=''
+            onClick={props.handleClosePreviewMini} /></span></button>
       
         <div className={styles.carousel}>
 

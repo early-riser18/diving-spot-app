@@ -10,8 +10,8 @@ import dataToDisplay from '../../util/dataToDisplay';
 
 export class SpotMainInfo extends React.Component {
    
-
     render() {
+        let redirectLink;
         let spot = this.props.spot;
         let recommendedAccess;
         if (spot.keywords.recommendedAccess === 'foot') {
@@ -20,9 +20,15 @@ export class SpotMainInfo extends React.Component {
             recommendedAccess = "Port le plus proche";
         }
 
+        
+        if(this.props?.location?.state?.lastQuery){
+            redirectLink = `/search?${this.props.location.state.lastQuery}`;
+        } else {
+            redirectLink = `/search?lat=${spot.latitude}&lng=${spot.longitude}&locName=${spot.city}, ${spot.country}&lvl=all`;
+        }
         return (
             <div>
-                <Link to='/search'>
+                <Link to={redirectLink} >
                     <Button variant='fourth' text='Retour aux résultats' />
 
                 </Link>

@@ -7,15 +7,26 @@ import GMap from '../../util/GMap';
 import SearchResultList from '../SearchResultList/SearchResultList';
 import myAPI from '../../util/myAPI';
 import { SpotPreviewMini } from '../SpotPreviewMini/SpotPreviewMini';
+import { Redirect } from 'react-router-dom';
 
 export class SearchMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { fullMap: false, queryResult: null, lastUpdatedMap: null, currMapDetails: null, isFetching: true, markerSelected: null};
+        this.state = {
+            fullMap: false,
+            queryResult: null,
+            lastUpdatedMap: null,
+            currMapDetails: null,
+            query: null,
+            isFetching: true,
+            markerSelected: null,
+            redirect: null
+        };
+
         this.toggleMap = this.toggleMap.bind(this);
         this.handleMapChange = this.handleMapChange.bind(this);
-       this.handleMarkerClick = this.handleMarkerClick.bind(this);
-       this.handleClosePreviewMini = this.handleClosePreviewMini.bind(this);
+        this.handleMarkerClick = this.handleMarkerClick.bind(this);
+        this.handleClosePreviewMini = this.handleClosePreviewMini.bind(this);
 
     }
 
@@ -33,45 +44,67 @@ export class SearchMenu extends React.Component {
     }
 
     SearchInit() {
-        let search = window.location.search.substring(1);
 
-        // Ensure query params are present before fetching data
-        if (!search) {
-            // Apply a default string
-            window.location.search = 'lat=43.335698&lng=5.27067&locName=Marseille,France&lvl=all';
-        } else {
-            var searchParams = new URLSearchParams(search);
-            const preUpdate = new URLSearchParams(search);
-            // ADD REMAINING PARAMETERS LATER
-            searchParams.forEach((value, key) => {
-                if (value === '') {
-                    switch (key) {
-                        case 'lat':
-                            return searchParams.set(key, 43.335698);
-                        case 'lng':
-                            return searchParams.set(key, 5.27067);
-                        case 'locName':
-                            return searchParams.set(key, 'Marseille, France');
-                        case 'lvl':
-                            return searchParams.set(key, 'all');
+        //Will evaluate to true during initialisation
+        if (!this.state.query) {
+            console.log('this.state.query is falsy');
+            let search = window.location.search.substring(1);
+            let searchParams = new URLSearchParams(search);
+            let preUpdate = new URLSearchParams(search);
+
+
+            // Ensure query params are present before fetching data
+            if (!search) {
+                // Apply a default string
+                window.location.search = 'lat=43.335698&lng=5.27067&locName=Marseille,France&lvl=all';
+            } else {
+                // ADD REMAINING PARAMETERS LATER
+                searchParams.forEach((value, key) => {
+                    if (value === '') {
+                        switch (key) {
+                            case 'lat':
+                                return searchParams.set(key, 43.335698);
+                            case 'lng':
+                                return searchParams.set(key, 5.27067);
+                            case 'locName':
+                                return searchParams.set(key, 'Marseille, France');
+                            case 'lvl':
+                                return searchParams.set(key, 'all');
+                        }
                     }
+                });
+
+                // After URL check done, if any change then assign new params
+                if (preUpdate.toString() !== searchParams.toString()) {
+                    window.location.search = searchParams.toString();
                 }
-            });
-            // After URL check done, if any change then assign new params
-            if (preUpdate.toString() !== searchParams.toString()) {
-                window.location.search = searchParams.toString();
             }
+            // Extract states value from URL Params
+            let locName = searchParams.get('locName');
+            console.log(locName);
+            let queryLat = searchParams.get('lat');
+            let queryLng = searchParams.get('lng');
+            let querylvl = searchParams.get('lvl')
+            this.setState({ query: { lat: queryLat, lng: queryLng, locName: locName, lvl: querylvl } })
+        } else {
 
-            search = searchParams.toString();
+            console.log('execSearch running')
+            this.setState({ isFetching: true });
+
+            let search = window.location.search.substring(1);
+
+
+            let mapBounds;
+            if (this.state.query.bounds === 0 || this.state.query.bounds === undefined) {
+                mapBounds = undefined;
+            } else {
+                mapBounds = this.state.query.bounds;
+            }
+            myAPI.fetchSpotList(search, mapBounds, 10).then((res) => {
+                this.setState({ queryResult: res, isFetching: false })
+            });
+
         }
-
-        let locName = searchParams.get('locName');
-        let queryLat = searchParams.get('lat');
-        let queryLng = searchParams.get('lng')
-
-        // Load map with right center before api fetch returns values
-        this.setState({ locPos: { lat: queryLat, lng: queryLng }, locName: locName })
-
     }
 
     // Try to get map bounds on init, so you can query only spots within bounds, 
@@ -80,50 +113,44 @@ export class SearchMenu extends React.Component {
         let mapDetails = event;
         console.log(mapDetails)
 
+        var now = new Date();
+        var timeout = now.setSeconds(now.getSeconds() - 1);
+
+        // // Checks if map just initialized
+        // if (this.state.currMapDetails === null) {
+        //     this.setState({ currMapDetails: mapDetails }, () => {
+        //         this.SearchInit();
+        //     });
+        //     // this.setState({ currMapDetails: mapDetails });
+        // } 
+        // else { 
+
+
         // Checks if map just initialized
-        if (this.state.currMapDetails === null) {
-            this.setState({ currMapDetails: mapDetails }, () => {
-                this.execSearch();
+        // Checks if query was made in the last 1 second
+
+        if (this.state.lastUpdatedMap === null) {
+            let x = new Date();
+            this.setState({ lastUpdatedMap: x });
+            this.setState( prevState => ({ query: { ...prevState.query, lat: mapDetails.center.lat, lng: mapDetails.center.lng, bounds: mapDetails.bounds } }), () => {
+                this.SearchInit();
             });
-            // Otherwise checks if query was made in the last 3 seconds
-        } else {
-            if (this.state.lastUpdatedMap === null) {
-                let x = new Date();
-                this.setState({ lastUpdatedMap: x });
-            }
 
-            var now = new Date();
-            var timeout = now.setSeconds(now.getSeconds() - 1);
+        } else if (this.state.lastUpdatedMap < timeout) {
+            console.log('timout')
+            this.setState( prevState => ({ query: { ...prevState.query, lat: mapDetails.center.lat, lng: mapDetails.center.lng, bounds: mapDetails.bounds, locName: null },  
+                redirect: { pathname: '/search', search: `?lat=${this.state.query.lat}&lng=${this.state.query.lng}&lvl=all` }
+            }), () => {
+                console.log(this.state.redirect);
+                this.SearchInit();
+            });
 
-            if (this.state.lastUpdatedMap < timeout) {
-                // If not then
-                console.log('timout')
-                this.setState({ currMapDetails: mapDetails, locPos: mapDetails.center, locName: null }, () => {
-                    this.execSearch();
-                });
-
-                // Reset timer to current time
-                let y = new Date();
-                this.setState({ lastUpdatedMap: y })
-            }
+            // Reset timer to current time
+            let y = new Date();
+            this.setState({ lastUpdatedMap: y })
         }
     }
 
-    execSearch() {
-        this.setState({ isFetching: true });
-        let search = window.location.search.substring(1);
-        let mapBounds;
-        if (!this.state.currMapDetails.size.width || !this.state.currMapDetails.size.height) {
-            mapBounds = undefined;
-
-        } else {
-            mapBounds = this.state.currMapDetails.bounds;
-        }
-
-        myAPI.fetchSpotList(search, mapBounds, 10).then((res) => {
-            this.setState({ queryResult: res, isFetching: false })
-        });
-    }
 
     // Dynamically change map width - to offset fixed positioning side effetcs
     setMapWidth() {
@@ -159,40 +186,51 @@ export class SearchMenu extends React.Component {
         console.log(event)
         if (!this.state.fullMap) {
             //Scroll to right spot
-            
+
             let el = event.target.id.substring(1);
-           let matchingel =  document.getElementById(el);
+            let matchingel = document.getElementById(el);
             matchingel.scrollIntoView({ behavior: 'smooth', block: 'end' });
             matchingel.classList.add(styles.markerClickAnimation);
             setTimeout(() => matchingel.classList.remove(styles.markerClickAnimation), 2000);
         } else {
             // Spawn a Spot Preview
-        // ReactDOM.render(<SpotPreviewMini />, el); 
-        this.setState({ markerSelected: event.target.id});
+            // ReactDOM.render(<SpotPreviewMini />, el); 
+            this.setState({ markerSelected: event.target.id });
         }
 
     }
 
-    handleClosePreviewMini(event){
+    handleClosePreviewMini(event) {
         // event.preventDefault();
-        this.setState({markerSelected: null});
+        this.setState({ markerSelected: null });
 
     }
     loadMap() {
-        if (this.state.locPos) {
-            return (<GMap handleClosePreviewMini={this.handleClosePreviewMini} markerSelected={this.state.markerSelected} onMarkerClick={this.handleMarkerClick} onChange={this.handleMapChange} isFetching={this.state.isFetching} queryResult={this.state.queryResult} center={this.state.locPos} />)
+        if (this.state.query) {
+            return (<GMap handleClosePreviewMini={this.handleClosePreviewMini} markerSelected={this.state.markerSelected} onMarkerClick={this.handleMarkerClick} onChange={this.handleMapChange} isFetching={this.state.isFetching} queryResult={this.state.queryResult} center={this.state.query} />)
         }
     }
 
-
-
+  
 
     render() {
+        // quick and dirty buffer while this.state.query is initialized
+let k;
+if (!this.state.query) {
+    k = 'test';
+    
+} else {
+    k =this.state.query.locName;
+    
+}
 
         return (
+
             <div id="list-container" className={styles.searchContainer}>
+                { this.state.redirect ? <Redirect to={this.state.redirect} /> : ''}
+
                 <div className={styles.resultList}>
-                    <SearchResultList isFetching={this.state.isFetching} queryResult={this.state.queryResult} locName={this.state.locName} />
+                    <SearchResultList isFetching={this.state.isFetching} queryResult={this.state.queryResult} locName={k} />
                     <button className={styles.showMap} onClick={this.toggleMap}>
                         <img className={styles.mapIcon} src={MapIcon} alt='' />Carte</button>
                 </div>
