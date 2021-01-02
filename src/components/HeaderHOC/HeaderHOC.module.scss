@@ -1,0 +1,37 @@
+.container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    z-index: 100;
+    margin-bottom: 5.5rem;
+    // border-bottom: 1px solid rgb(230, 230, 230);
+
+}
+.myHeader {
+        box-shadow: 1px 1px 6px rgb(238, 238, 238);
+
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: box-shadow 0.3s ease;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    & > :first-child {
+        max-width: 1500px;
+
+    }
+
+}
+
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 10px #00000025;
+
+}

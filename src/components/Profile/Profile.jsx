@@ -23,19 +23,19 @@ export const Profile = (props) =>{
         console.log(props.props.isSignedIn)
 
         // Make it work 
-        if (props.props.isSignedIn === false) {
+        if (!props.props.user) {
             setRedirect('/sign-in');
-            toReturn = '';
     }}
   
   return (<div className={styles.wrapper}>
-        { redirect ? <Redirect to={redirect} /> : (<div className={styles.contentWrapper}>
+      { redirect ? <Redirect to={redirect} /> : ''}
+         { props.props.user ? (<div className={styles.contentWrapper}>
                     <h2>Bonjour {props.props.user.displayName}</h2>
 
                     <h3>Vous êtes connecté avec l'adresse: {props.props.user.email}</h3>
                     <br></br>
                     <Button variant="primary" onClick={handleSignOut} text='Se déconnecter' />
-                </div>)}
+                </div>) : '' }
     </div>
     )
 }

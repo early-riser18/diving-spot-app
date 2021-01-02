@@ -12,10 +12,10 @@ export class Footer extends React.Component {
               <li>Accueil</li>
             </Link>
             <Link to={"/add-spot"}>
-              {" "}
+         
               <li>Ajouter un spot</li>
             </Link>
-            <Link to={"/profile"}><li>Mon Profil</li></Link> 
+            {this.props.user ?  <Link to={"/profile"}><li>Mon Profil</li></Link> : <Link to={'/sign-in'}><li>Se connecter</li></Link>}
             <li>Nous contacter</li>
            
           </ul>

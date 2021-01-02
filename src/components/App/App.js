@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Header } from "../Header/Header";
+import { HeaderHOC } from "../HeaderHOC/HeaderHOC";
 import { Footer } from "../Footer/Footer";
 import { HomePage } from "../HomePage/HomePage";
 import { AddSpot } from "../AddSpot/AddSpot";
@@ -110,7 +110,7 @@ class App extends React.Component {
     // console.log(window.location.pathname);
     return (
       <div>
-        <Header props={this.state} />
+        <HeaderHOC props={this.state} />
         <main>
           <Switch>
             <Route
@@ -150,7 +150,7 @@ class App extends React.Component {
             <Route component={Error} />
           </Switch>
         </main>
-        <Footer />
+        <Footer user={this.state.user} />
       </div>
     );
   }
